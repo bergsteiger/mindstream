@@ -7,3 +7,5 @@ BOOLEAN FUNCTION .IsNotNil
  aValue .IsNil !
  >>> Result 
 ; // .IsNotNil
+
+WordAlias .NotIsNil .IsNotNil

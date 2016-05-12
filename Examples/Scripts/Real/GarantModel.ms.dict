@@ -62,6 +62,7 @@ USES
 ;
 
 WordAlias GarantModel::TtfwClassRef(Proxy) ME_561F9F9400BC // TtfwClassRef (Proxy)
+WordAlias GarantModel::TtfwTypeRegistrator(Proxy) ME_572C98D2039D // TtfwClassRef (Proxy)
 
 USES
  540EE231015D.pas.ms.script // Logging
@@ -134,8 +135,18 @@ USES
  4DAF19F600C5.pas.ms.script // tfwScriptingInterfaces
 ;
 
+WordAlias GarantModel::TtfwContext ME_4DB0091E033E
+
+WordAlias GarantModel::TtfwWordPrim ME_52EA594400DD
+WordAlias GarantModel::TtfwWordPrim.DoDoIt ME_4DAEEDE10285
+
 WordAlias GarantModel::TtfwWord ME_4DAEED140007
 WordAlias GarantModel::TtfwWord.IsImmediate ME_4DB6D7F70155
+WordAlias GarantModel::TtfwWord.GetResultTypeInfo ME_551544E2001A
+WordAlias GarantModel::TtfwWord.GetAllParamsCount ME_559687E6025A
+WordAlias GarantModel::TtfwWord.RightParamsCount ME_52E9282B0271
+WordAlias GarantModel::TtfwWord.ParamsTypes ME_5617F4D00243
+WordAlias GarantModel::TtfwWord.SetValuePrim ME_52D00B00031A
 
 USES
  4F3E3F5F0160.pas.ms.script // PrimitiveWords
@@ -164,6 +175,17 @@ WordAlias GarantModel::TtfwAxiomaticsResNameGetter ME_55B7A33101AF
 WordAlias GarantModel::TtfwAxiomaticsResNameGetter.ResName ME_55B7A3AF0359
 
 USES
+ 55CCADD2013D.pas.ms.script // ClassLikeMapping
+;
+
+WordAlias GarantModel::TtfwClassLike ME_55CCAE000335
+WordAlias GarantModel::TtfwClassLike.BindParams ME_5617C8A30023
+
+WordAlias GarantModel::TtfwGlobalKeyWord ME_561BAC4B0005
+
+WordAlias GarantModel::TtfwPropertyLike ME_5619169603BE
+
+USES
  4F69DF560034.pas.ms.script // ControlsProcessing
 ;
 
@@ -174,6 +196,18 @@ USES
 ;
 
 WordAlias GarantModel::TtfwScriptEngineEX ME_4DEF306102FF
+
+USES
+ 54F079B5035C.pas.ms.script // CompiledWords
+;
+
+WordAlias GarantModel::TtfwAnonimousWord ME_4DB9BB43017B
+WordAlias GarantModel::TtfwAnonimousWord.DoRun ME_5512949D0048
+
+WordAlias GarantModel::TtfwCompilingWord ME_4DB6C8F30161
+WordAlias GarantModel::TtfwCompilingWord.SuppressNextImmediate ME_4F3AB3B101FC
+
+WordAlias GarantModel::TtfwWordWorkerEx ME_5512E4070106
 
 USES
  4B2A0D6A0077.pas.ms.script // Source TestFrameWork

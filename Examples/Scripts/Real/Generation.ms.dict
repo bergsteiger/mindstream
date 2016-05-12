@@ -362,12 +362,22 @@ USES
  CountIt.ms.dict
 ;
 
+STRING elem_func LUID
+ VAR l_UID
+ Self .UID >>> l_UID
+ RULES
+  DEFAULT
+   l_UID
+ ; // RULES
+ >>> Result
+; // LUID
+
 BOOLEAN elem_func IsSameModelElement
   ModelElement IN anOther
  RULES
   ( Self anOther ?== )
    true
-  ( Self .UID anOther .UID == )
+  ( Self .LUID anOther .LUID == )
    true
   DEFAULT
    false 
@@ -484,8 +494,92 @@ BOOLEAN elem_func IsSameType
  >>> Result 
 ; // IsSameType
 
+USES
+ GarantModel.ms.dict
+;
+
+BOOLEAN elem_func IsScriptKeyword
+ Self .IsStereotype st_ScriptKeyword 
+ >>> Result
+; // IsScriptKeyword
+
+WordAlias [[ [
+%REMARK 'Начинает определение константного массива. Пока просто мапируется на неконстантный.'
+WordAlias ]] ]
+%REMARK 'Заканчивает определение константного массива. Пока просто мапируется на неконстантный.'
+
+USES
+ axiom:WordBox
+;
+
+ModelElement elem_func WeakRef
+ %SUMMARY 
+  'Возвращает СЛАБУЮ ссылку на элемент.'
+ ;
+ RULES
+  ( Self IsIntf )
+   ( Self pop:WordBox:Boxed )
+  DEFAULT
+   Self 
+ ; // RULES
+ >>> Result
+; // WeakRef
+
+ARRAY elem_func ElementToArray
+ RULES
+  ( Self .IsNil )
+   [empty]
+  DEFAULT
+   begin
+    Cached:
+    (
+     [[ Self .WeakRef ]]
+    ) 
+   end // DEFAULT
+ ; // RULES
+ >>> Result 
+; // ElementToArray
+
+WordAlias .ToArray .ElementToArray
+
+ARRAY elem_func ElementToArray:
+  ^ IN aLambda
+ Self aLambda DO .ElementToArray
+ >>> Result 
+; // ElementToArray:
+
+WordAlias .ToArray: .ElementToArray:
+
+ARRAY FUNCTION ToArray:
+  ^ IN Self
+ VAR l_Value 
+ Self DO >>> l_Value 
+ RULES
+  ( l_Value IsIntf )
+   [[ l_Value ]]
+  DEFAULT
+   ( l_Value .ToArray )
+ ; // RULES  
+ >>> Result 
+; // ToArray:
+
 elem_iterator InheritsEx
- Self .Inherits
+ Cached:
+ (
+  VAR l_Inherits
+  Self .Inherits >>> l_Inherits
+  RULES
+   ( l_Inherits .IsEmpty )
+    RULES
+     ( Self .IsScriptKeyword )
+      ( ToArray: GarantModel::TtfwRegisterableWord )
+     DEFAULT
+      [empty]
+    ; // RULES 
+   DEFAULT
+    l_Inherits
+  ; // RULES
+ )
  >>> Result
 ; // InheritsEx
 
@@ -544,10 +638,6 @@ BOOLEAN elem_func IsUtilityPack
  >>> Result
 ; // IsUtilityPack
 
-USES
- GarantModel.ms.dict
-;
-
 BOOLEAN elem_func UseNewGenExcluded
  RULES
   ( Self .IsControllerInterfaces )
@@ -578,7 +668,7 @@ BOOLEAN elem_func UseNewGenExcluded
    g_UseNewGenExcluded .IsNil ?FAIL 'Не инициализирован g_UseNewGenExcluded'
    
    g_UseNewGenExcluded
-   .filter> ( Self .UID == )
+   .filter> ( Self .LUID == )
    .NotEmpty
   end // DEFAULT 
  ; // RULES  
@@ -763,11 +853,6 @@ elem_proc DeleteWordFile
    end // ( g_RealFileName sysutils:FileExists )
   ) // TF g_RealFileName 
 ; // DeleteWordFile
-
-BOOLEAN elem_func IsScriptKeyword
- Self .IsStereotype st_ScriptKeyword 
- >>> Result
-; // IsScriptKeyword
 
 BOOLEAN elem_func IsServiceImplementation
  Self .IsStereotype st_ServiceImplementation 
@@ -1599,16 +1684,367 @@ BOOLEAN elem_func IsLocalMethod
  Self .IsStereotype st_localmethod >>> Result
 ; // IsLocalMethod
 
+ModelElement elem_func KeywordOperation
+ Self .SpelledFor
+ >>> Result
+; // KeywordOperation
+
+ModelElement elem_func KeywordImplementationMethod
+ Self .Stub
+ >>> Result
+; // KeywordImplementationMethod
+
+ModelElement elem_func KeywordObjectToOperate
+ Self .Speller
+ >>> Result
+; // KeywordObjectToOperate
+
+BOOLEAN elem_func IsKeyWord
+ Self .IsStereotype st_keyword::Operation 
+ >>> Result
+; // IsKeyWord
+
+BOOLEAN elem_func IsGlobalKeyWord
+ Self .IsStereotype st_globalkeyword::Operation 
+ >>> Result
+; // IsGlobalKeyWord
+
+BOOLEAN elem_func IsSomeKeyWord
+ RULES
+  ( Self .IsKeyWord )
+   true
+  ( Self .IsGlobalKeyWord )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // IsSomeKeyWord
+
+USES
+ axiom:CompiledProcedure
+ axiom:KeyValues
+;
+
+: KeyValuesCreateAndDo:
+  ^ IN aLambda
+ VAR l_Param 
+ KeyValues:Create >>> l_Param
+ TRY 
+  l_Param aLambda DO
+ FINALLY
+  l_Param pop:Word:DecRef 
+ END // TRY..FINALLY
+; // KeyValuesCreateAndDo:
+
+elem: DecorateMethodAndDo:
+  ^ IN aLambda
+ KeyValuesCreateAndDo: ( 
+   IN aMethod
+  aMethod -> Original := ( Self .WeakRef )
+  aMethod aLambda DO
+ ) // KeyValuesCreateAndDo:
+; // DecorateMethodAndDo:
+
+INTERFACE elem_func DecorateMethod:
+  ^ IN aLambda
+ Self .DecorateMethodAndDo: (
+   IN aMethod
+  aMethod pop:Word:Box >>> Result
+  aMethod aLambda DO
+ ) // Self .DecorateMethodAndDo:
+; // DecorateMethod:
+
+INTERFACE FUNCTION MakeParam:
+  STRING IN aName
+  ModelElement IN aType
+  ^ IN aLambda
+ 
+ KeyValuesCreateAndDo: ( 
+   IN l_Param
+  
+  l_Param pop:Word:Box >>> Result
+  
+  l_Param -> Name := aName
+  if ( aType .IsNotNil ) then
+  begin
+   l_Param -> Target := aType
+  end // ( aType .IsNotNil )
+  
+  l_Param aLambda DO
+ ) // KeyValuesCreateAndDo:
+ 
+; // MakeParam:
+
+INTERFACE FUNCTION MakeParam
+  STRING IN aName
+  ModelElement IN aType
+ 
+ aName aType MakeParam: DROP
+ >>> Result
+; // MakeParam
+
+WordAlias MakeFunction MakeParam
+WordAlias MakeFunction: MakeParam:
+
+WordAlias MakeField MakeParam
+WordAlias MakeField: MakeParam:
+
+WordAlias MakeProperty MakeParam
+WordAlias MakeProperty: MakeParam:
+
+: MakeProcedure
+ nil MakeFunction
+; // MakeProcedure
+
+MACRO MakeProcedure:
+ 'nil' Ctx:Parser:PushSymbol
+ 'MakeFunction:' Ctx:Parser:PushSymbol
+; // MakeProcedure:
+
+STRING elem_func SelfName
+ Self .GetUP 'extprop:rc:SelfName' >>> Result
+ if ( Result .IsNil ) then
+ begin
+  Self .TypeName >>> Result
+ end 
+; // SelfName
+
+INTERFACE elem_func ValueParam
+ Cached:
+ (
+  'aValue' Self MakeParam
+ ) >>> Result
+; // ValueParam
+
+BOOLEAN FUNCTION .HasSomeOf:
+  ARRAY IN anArray
+  ^ IN aCompareFunc
+ anArray 
+ .filter> ( aCompareFunc DO )
+ .NotEmpty
+ >>> Result
+; // .HasSomeOf:
+
+BOOLEAN elem_func HasName
+  STRING IN aName
+ Self .Name aName == 
+ >>> Result
+; // HasName
+
+BOOLEAN FUNCTION .HasModelElementWithName
+  ARRAY IN anArray
+  STRING IN aName
+ anArray .HasSomeOf: ( aName .HasName )
+ >>> Result
+; // .HasModelElementWithName
+
+ModelElement elem_func OpSelfParam
+ Cached:
+ (
+  'a' Self .SelfName Cat Self MakeParam
+ )
+ >>> Result
+; // OpSelfParam
+
+ModelElement elem_func CtxParam
+ Cached:
+ (
+  'aCtx' Self MakeParam
+ )
+ >>> Result
+; // CtxParam
+
+BOOLEAN elem_func IsCreator
+ Self .IsStereotype st_creator::Operation 
+ >>> Result
+; // IsCreator
+
+BOOLEAN elem_func IsVarWorker
+ RULES
+  ( Self .IsStereotype st_varworker::Operation )
+   true
+  ( Self .IsStereotype st_globalvarworker::Operation )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // IsVarWorker
+
+BOOLEAN elem_func IsWordWorker
+ RULES
+  ( Self .IsStereotype st_wordworker::Operation )
+   true
+  ( Self .IsStereotype st_globalwordworker::Operation )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // IsWordWorker
+
+STRING elem_func NameForScript
+ Self .GetUP "NameForScript" ToPrintable
+ >>> Result
+; // NameForScript
+
+elem_iterator OperationsEx
+ Cached:
+ (
+  VAR l_Operations
+  Self .Operations >>> l_Operations
+  l_Operations
+  
+  RULES
+   ( Self .IsScriptKeyword )
+    begin
+     VAR l_Op
+     Self .KeywordOperation >>> l_Op
+     if (
+         ( l_Op .IsNotNil ) 
+         AND ( l_Op .IsSomeKeyWord )
+        ) then
+     begin
+      if ( 
+          ( l_Op .GetUP 'extprop:prop_stereo' .IsValueValid )
+          OR ( l_Op .UPisTrue "lvalue" )
+         ) then
+      begin
+       if (
+           ( l_Op .UPisTrue "mapped" ! )
+           AND ( l_Op .GetUP 'extprop:prop_stereo' 'readonly' ?!= )
+          ) then
+       begin
+        if ( l_Operations 'DoSetValue' .HasModelElementWithName ! ) then
+        begin
+         .join> ToArray: (
+          'DoSetValue' MakeProcedure: (
+            IN aMade
+           VAR l_Self
+           Self .KeywordObjectToOperate >>> l_Self
+           aMade -> UID := ( Self .LUID '_DoSetValue' Cat ) 
+           aMade -> %SUM := ( 'Метод установки значения свойства ' l_Op .Name Cat )
+           aMade -> Stereotype := st_static::Operation
+           aMade -> Visibility := ProtectedAccess
+           aMade -> Abstraction := at_final
+           aMade -> Parameters := ( 
+            ToArray: ( l_Self .OpSelfParam )
+            .join> ( l_Op .Parameters )
+            .join> ToArray: ( l_Op .Target .ValueParam )
+           ) // aMade -> Parameters
+          ) // MakeProcedure:
+         ) // .join> ToArray:
+        end // ( l_Operations 'DoSetValue' .HasModelElementWithName ! )
+       end // ( l_Op .UPisTrue "mapped" ! )
+      end // ( l_Op .GetUP 'extprop:prop_stereo' .IsValueValid )
+      
+      VAR l_Self
+      Self .KeywordObjectToOperate >>> l_Self
+      if (
+          ( l_Op .UPisTrue "mapped" )
+          OR ( l_Self .NotIsNil )
+          OR ( l_Op .Parameters .NotEmpty )
+          OR ( l_Op .Target .NotIsNil )
+          OR ( l_Op .IsVarWorker )
+         ) then
+      begin
+       VAR l_Name
+       l_Op .Name >>> l_Name
+       if ( l_Operations l_Name .HasModelElementWithName ! ) then
+       begin
+        .join> ToArray: (
+         l_Name 
+         if ( l_Op .IsCreator ) then
+         begin
+          l_Self
+         end // ( l_Op .IsCreator )
+         else
+         begin
+          l_Op .Target
+         end // ( l_Op .IsCreator )
+         MakeFunction: (
+           IN aMade
+          aMade -> UID := ( l_Op .LUID ) 
+          // - пусть лучше мапируется на порождащую операцию, чтобы при переносе класса - не переделывать
+          aMade -> %SUM := ( 'Реализация слова скрипта ' Self .NameForScript Cat )
+          aMade -> Visibility := PrivateAccess
+          aMade -> Abstraction := at_final
+          aMade -> IsSummoned := true
+          // - это можно убрать, если перенести сюда вот что:
+/*{
+   (
+    ( Self .OpKind opkind_Normal == ) // - метод новый, а не перекрытый
+    AND ( l_Op .IsNotNil )
+    AND ( l_Self .IsNotNil )
+    AND ( l_Implementor .IsSummoned )
+    AND ( l_Op .UPisTrue "mapped" )
+   )
+     Code:
+       ( 
+        [ 
+         ' '
+         if ( Self .Target .IsNotNil ) then
+         begin
+          'Result := ' 
+         end
+         'a' l_Self .SelfName cDot l_Op .Name l_Op .ParametersList ';' 
+        ] .Out 
+       )
+    
+}*/          
+          aMade -> SpelledFor := l_Op
+          aMade -> Parameters := (
+           ToArray: ( GarantModel::TtfwContext .CtxParam )
+           if ( l_Op .IsVarWorker ) then
+           begin
+            .join> [ 
+             if ( l_Op .IsWordWorker ) then
+              'aWord'
+             else
+              'aVar' 
+             GarantModel::TtfwWord MakeParam 
+            ] // .join>
+           end // ( l_Op .IsVarWorker )
+           if ( l_Op .IsCreator ! ) then
+           begin
+            if ( l_Self .NotIsNil ) then
+            begin
+             .join> ToArray: ( l_Self .OpSelfParam )
+            end // ( l_Self .NotIsNil )
+           end // ( l_Op .IsCreator ! )
+           .join> ( l_Op .Parameters )
+          ) // aMade -> Parameters
+          VAR l_Ref
+          Self .WeakRef >>> l_Ref
+          l_Ref -> Stub := aMade
+          // - обратная ссылка для l_Call
+          // %{Class_Inst}%f_set_var(Stub,{Op_Instance})\
+         ) // MakeFunction:
+        ) // .join> ToArray:
+       end // ( l_Operations l_Name .HasModelElementWithName ! )
+      end // ( l_Op .UPisTrue "mapped" )
+      
+     end // ( l_Op .IsNotNil )
+    end // ( Self .IsScriptKeyword )
+  ; // RULES
+ )
+ >>> Result
+; // OperationsEx
+
 ModelElement elem_func FirstOperation
  Cached:
  (
-  Self .Operations .filter> ( .IsLocalMethod ! ) .FirstElement
+  Self .OperationsEx
+  .filter> ( .IsLocalMethod ! ) 
+  .FirstElement
  )
  >>> Result
 ; // FirstOperation
 
 BOOLEAN elem_func IsFacetIterator
- Self .IsStereotype st_facetiterator >>> Result
+ Self .IsStereotype st_facetiterator 
+ >>> Result
 ; // IsFacetIterator
 
 BOOLEAN elem_func IsMixInMirror
@@ -1617,7 +2053,8 @@ BOOLEAN elem_func IsMixInMirror
 ; // IsMixInMirror
 
 BOOLEAN elem_func IsVCMOperations
- Self .IsStereotype st_VCMOperations >>> Result
+ Self .IsStereotype st_VCMOperations 
+ >>> Result
 ; // IsVCMOperations
 
 BOOLEAN elem_func IsClassImplementable
@@ -1814,15 +2251,6 @@ BOOLEAN elem_func SomeAncestorImplements
  >>> Result 
 ; // SomeAncestorImplements
 
-BOOLEAN FUNCTION .HasSomeOf:
-  ARRAY IN anArray
-  ^ IN aCompareFunc
- anArray 
- .filter> ( aCompareFunc DO )
- .NotEmpty
- >>> Result
-; // .HasSomeOf:
-
 elem_iterator ClassImplements
  (
   Self .ClassImplementsPrim
@@ -1832,57 +2260,6 @@ elem_iterator ClassImplements
  array:Copy
  >>> Result
 ; // ClassImplements
-
-USES
- axiom:CompiledProcedure
- axiom:KeyValues
-;
-
-: KeyValuesCreateAndDo:
-  ^ IN aLambda
- VAR l_Param 
- KeyValues:Create >>> l_Param
- TRY 
-  l_Param aLambda DO
- FINALLY
-  l_Param pop:Word:DecRef 
- END // TRY..FINALLY
-; // KeyValuesCreateAndDo:
-
-USES
- axiom:WordBox
-;
-
-ModelElement elem_func WeakRef
- %SUMMARY 
-  'Возвращает СЛАБУЮ ссылку на элемент.'
- ;
- RULES
-  ( Self IsIntf )
-   ( Self pop:WordBox:Boxed )
-  DEFAULT
-   Self 
- ; // RULES
- >>> Result
-; // WeakRef
-
-elem: DecorateMethodAndDo:
-  ^ IN aLambda
- KeyValuesCreateAndDo: ( 
-   IN aMethod
-  aMethod -> Original := ( Self .WeakRef )
-  aMethod aLambda DO
- ) // KeyValuesCreateAndDo:
-; // DecorateMethodAndDo:
-
-INTERFACE elem_func DecorateMethod:
-  ^ IN aLambda
- Self .DecorateMethodAndDo: (
-   IN aMethod
-  aMethod pop:Word:Box >>> Result
-  aMethod aLambda DO
- ) // Self .DecorateMethodAndDo:
-; // DecorateMethod:
 
 INTERFACE elem_func OverrideMethod
  Cached:
@@ -1920,35 +2297,6 @@ INTERFACE elem_func DecorateType
  >>> Result
 ; // DecorateType
 
-INTERFACE FUNCTION MakeParam:
-  STRING IN aName
-  ModelElement IN aType
-  ^ IN aLambda
- 
- KeyValuesCreateAndDo: ( 
-   IN l_Param
-  
-  l_Param pop:Word:Box >>> Result
-  
-  l_Param -> Name := aName
-  if ( aType .IsNotNil ) then
-  begin
-   l_Param -> Target := aType
-  end // ( aType .IsNotNil )
-  
-  l_Param aLambda DO
- ) // KeyValuesCreateAndDo:
- 
-; // MakeParam:
-
-INTERFACE FUNCTION MakeParam
-  STRING IN aName
-  ModelElement IN aType
- 
- aName aType MakeParam: DROP
- >>> Result
-; // MakeParam
-
 INTERFACE FUNCTION MakeInOutParam
   STRING IN aName
   ModelElement IN aType
@@ -1984,15 +2332,6 @@ INTERFACE FUNCTION MakeClass
  aName anAncestor MakeClass: DROP 
  >>> Result
 ; // MakeClass
-
-WordAlias MakeFunction MakeParam
-WordAlias MakeFunction: MakeParam:
-
-WordAlias MakeField MakeParam
-WordAlias MakeField: MakeParam:
-
-WordAlias MakeProperty MakeParam
-WordAlias MakeProperty: MakeParam:
 
 CONST cImplementationUserCodeSuffix '_impl'
 CONST cVarUserCodeSuffix '_var'
@@ -2041,49 +2380,8 @@ BOOLEAN elem_func IsStaticMethod
  >>> Result
 ; // IsStaticMethod
 
-WordAlias [[ [
-%REMARK 'Начинает определение константного массива. Пока просто мапируется на неконстантный.'
-WordAlias ]] ]
-%REMARK 'Заканчивает определение константного массива. Пока просто мапируется на неконстантный.'
-
-ARRAY elem_func ElementToArray
- RULES
-  DEFAULT
-   begin
-    Cached:
-    (
-     [[ Self .WeakRef ]]
-    ) 
-   end // DEFAULT
- ; // RULES
- >>> Result 
-; // ElementToArray
-
-WordAlias .ToArray .ElementToArray
-
-ARRAY elem_func ElementToArray:
-  ^ IN aLambda
- Self aLambda DO .ElementToArray
- >>> Result 
-; // ElementToArray:
-
-WordAlias .ToArray: .ElementToArray:
-
-ARRAY FUNCTION ToArray:
-  ^ IN Self
- VAR l_Value 
- Self DO >>> l_Value 
- RULES
-  ( l_Value IsIntf )
-   [[ l_Value ]]
-  DEFAULT
-   ( l_Value .ToArray )
- ; // RULES  
- >>> Result 
-; // ToArray:
-
 elem_iterator InterfaceOwnOperations
- Self .Operations 
+ Self .OperationsEx
  .filter> ( .IsStaticMethod ! )
  .joinWithLambded> ( Self .InterfaceForClassImplements ) .ToArray: .CastMethod
  >>> Result
@@ -2142,7 +2440,7 @@ BOOLEAN elem_func SomeMethodImplementsThisIterator
   ModelElement IN anIterator
  RULES
   (
-   Self .Operations
+   Self .OperationsEx
    .filter> .IsMethodAndImplementsIterator
    .map> .MainImplements
    .filter> ( anIterator .IsSameModelElement )
@@ -2232,26 +2530,17 @@ STRING elem_func UIDforUserCode
      ( Self .MainAncestor .IsNotNil )
      AND ( Self .MainAncestor .IsIterator )
     ) 
-     ( Self .MainAncestor .UID )
+     ( Self .MainAncestor .LUID )
     DEFAULT
-     ( Self .UID )
+     ( Self .LUID )
    ; // RULES
   ( Self .IsMethodAndImplementsIterator )
-   ( Self .MainImplements .UID )
+   ( Self .MainImplements .LUID )
   DEFAULT
-   ( Self .UID )
+   ( Self .LUID )
  ; // RULES
  >>> Result
 ; // UIDforUserCode
-
-: MakeProcedure
- nil MakeFunction
-; // MakeProcedure
-
-MACRO MakeProcedure:
- 'nil' Ctx:Parser:PushSymbol
- 'MakeFunction:' Ctx:Parser:PushSymbol
-; // MakeProcedure:
 
 BOOLEAN elem_func IsResultType
  Self .IsStereotype st_result_type::Attribute
@@ -2286,6 +2575,27 @@ INTERFACE elem_func IndexParam
  ) >>> Result
 ; // IndexParam
 
+BOOLEAN elem_func IsControlOverride
+ Self .IsStereotype st_ControlOverride >>> Result
+; // IsControlOverride
+
+BOOLEAN elem_func IsOverride
+ RULES
+  ( Self .IsControlOverride )
+   true
+  ( Self .IsIterator )
+   RULES
+    ( Self .MainAncestor .IsNil )
+     false
+    DEFAULT
+     true 
+   ; // RULES 
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // IsOverride
+
 ModelElement elem_func IteratorAction
  Cached:
  (
@@ -2294,13 +2604,15 @@ ModelElement elem_func IteratorAction
   RULES
    ( l_Action .IsNotNil )
     l_Action
+   ( Self .IsOverride )
+    ( Self .MainAncestor call.me )
    DEFAULT
     begin
-     [ Self .Parent .Name '_' Self .Name '_Action' ] strings:Cat 
+     [ Self .Parent .Name cUnderline Self .Name '_Action' ] strings:Cat 
      nil
      MakeFunction: (
        IN aMade
-      aMade -> UID := ( Self .UID '_Action' Cat )  
+      aMade -> UID := ( Self .LUID '_Action' Cat )  
       aMade -> Parent := ( Self .Parent .WeakRef ) 
       aMade -> Stereotype := st_Function
       aMade -> %SUM := ( [ 
@@ -2315,7 +2627,7 @@ ModelElement elem_func IteratorAction
         aMadeOp -> Parameters := [ 
          Self .Attributes
          .filter> .IsElementType
-         .map> .Target
+         .mapToTarget>
          .FirstElement
          .ItemParam
          
@@ -2324,7 +2636,7 @@ ModelElement elem_func IteratorAction
           VAR l_IndexType
           Self .Attributes
           .filter> .IsIndexType
-          .map> .Target
+          .mapToTarget>
           .FirstElement >>> l_IndexType
           
           if ( l_IndexType .IsNil ) then
@@ -2357,46 +2669,46 @@ INTERFACE elem_func ActionParam
  ) >>> Result
 ; // ActionParam
 
-INTERFACE elem_func LocalStub
+ModelElement elem_func IteratorStub
  Cached:
  (
-  [ 'L2_' Self .Parent .Name '_' Self .Name '_Action' ] strings:Cat Self .IteratorAction MakeFunction: (
-    IN aMade
-   aMade -> UID := ( Self .UID '_Stub' Cat )  
-   aMade -> Parent := ( Self .Parent .WeakRef ) 
-   aMade -> Stereotype := st_static::Operation
-   aMade -> %SUM := ( [ 
-    'Функция формирования заглушки для ЛОКАЛЬНОЙ подитеративной функции для ' Self .Parent .Name '.' Self .Name
-    ] strings:Cat 
-   )
-   aMade -> Parameters := [ GarantModel::Pointer .ActionParamPrim ]
-   aMade -> Visibility := PublicAccess
-   aMade -> 'extprop:isGlobal' := true
-   aMade -> 'extprop:isAsm' := true
-  ) // MakeFunction: 
- ) >>> Result
-; // LocalStub
-
-ModelElement elem_func IteratorStub
- Self .Stub >>> Result
- if ( Result .IsNil ) then
- begin
+  VAR l_Stub
+  Self .Stub >>> l_Stub
   RULES
+   ( l_Stub .IsNotNil )
+    l_Stub
    ( Self .IsServiceIterator )
     begin
      VAR l_MixIn
      Self .Parent .MixIn >>> l_MixIn
-     l_MixIn .Operations
+     l_MixIn .OperationsEx
      .filter> .IsIterator
      .filter> ( .IsServiceIterator ! )
      .filter> ( .Name Self .Name 'F' Cat ?== )
      .FirstElement 
-     call.me >>> Result
+     call.me
     end // ( Self .IsServiceIterator )
+   ( Self .IsOverride )
+    ( Self .MainAncestor call.me )
    DEFAULT
-    ( Self .LocalStub >>> Result )
+    begin
+     [ 'L2_' Self .Parent .Name cUnderline Self .Name '_Action' ] strings:Cat Self .IteratorAction MakeFunction: (
+       IN aMade
+      aMade -> UID := ( Self .LUID '_Stub' Cat )  
+      aMade -> Parent := ( Self .Parent .WeakRef ) 
+      aMade -> Stereotype := st_static::Operation
+      aMade -> %SUM := ( [ 
+       'Функция формирования заглушки для ЛОКАЛЬНОЙ подитеративной функции для ' Self .Parent .Name '.' Self .Name
+       ] strings:Cat 
+      )
+      aMade -> Parameters := [ GarantModel::Pointer .ActionParamPrim ]
+      aMade -> Visibility := PublicAccess
+      aMade -> 'extprop:isGlobal' := true
+      aMade -> 'extprop:isAsm' := true
+     ) // MakeFunction: 
+    end // DEFAULT
   ; // RULES  
- end // ( Result .IsNil )
+ ) >>> Result
 ; // IteratorStub
 
 BOOLEAN elem_func IsInParam
@@ -2406,10 +2718,6 @@ BOOLEAN elem_func IsInParam
 BOOLEAN elem_func IsControlPrim
  Self .IsStereotype st_ControlPrim >>> Result
 ; // IsControlPrim
-
-BOOLEAN elem_func IsControlOverride
- Self .IsStereotype st_ControlOverride >>> Result
-; // IsControlOverride
 
 BOOLEAN elem_func IsContract
  Self .IsStereotype st_Contract >>> Result
@@ -2888,7 +3196,7 @@ elem_proc OutUserCode:
   g_RealFileName '.uc.txt' Cat >>> l_RealFileName
   
   STRING VAR l_CurrentGeneratedElementPrefix
-  [ cUserCodePrefix g_CurrentGeneratedElement .UID cPalka ] strings:Cat >>> l_CurrentGeneratedElementPrefix
+  [ cUserCodePrefix g_CurrentGeneratedElement .LUID cPalka ] strings:Cat >>> l_CurrentGeneratedElementPrefix
   
   l_RealFileName l_CurrentGeneratedElementPrefix ReadUCFromFile
   g_FinalFileNameForUC l_CurrentGeneratedElementPrefix ReadUCFromFile
@@ -2939,11 +3247,14 @@ elem_proc OutUserCode:
 ; // OutUserCode:
 
 elem_proc DefaultUserCodePrim:
+  STRING IN aSuffix
   STRING IN aKey
   ^ IN aOutNew
   
- Self .UIDforUserCode aKey Cat >>> aKey
+ VAR l_KeyStart 
+ Self .UIDforUserCode >>> l_KeyStart
  
+ l_KeyStart aKey Cat >>> aKey
  aKey '*' Cat >>> aKey
  
  Self aKey .OutUserCode: (
@@ -2953,14 +3264,43 @@ elem_proc DefaultUserCodePrim:
   aValue .for> ( g_OutFile File:WriteWStrLn )
   [ cUCEnd aKey ] .Out
  ) (
-  aOutNew DO
+   IN aKey
+  VAR l_Field
+  nil >>> l_Field 
+  
+  if ( aSuffix .NotIsNil ) then
+  begin
+   // - вообще говоря тут затычка для переноса слов скрипта в новый генератор
+   if ( [ l_KeyStart cUnderline l_KeyStart ] strings:Cat aKey StartsStr ) then
+   // - проверяем, что это слово скрипта у которого родитель поменял UID
+   // - тут ещё надо KeywordObjectToOperate проверять
+   begin
+    g_CurrentGenerator MembersIterator 
+    .filter> ( .WordName l_KeyStart SWAP StartsStr )
+    .filter> ( .WordName aSuffix '*' Cat SWAP EndsStr )
+    .FirstElement >>> l_Field
+   end
+  end // ( aSuffix .NotIsNil )
+  
+  if ( l_Field .IsNil ) then
+  begin
+   aKey aOutNew DO
+  end // ( l_Field .IsNil )
+  else
+  begin
+   [ cUCStart aKey ] .Out
+   l_Field DO .for> ( g_OutFile File:WriteWStrLn )
+   [ cUCEnd aKey ] .Out
+   //l_Field .WordName Msg
+  end // ( l_Field .IsNil )
  ) // Self aKey .OutUserCode:
 ; // DefaultUserCodePrim:
 
 elem_proc DefaultUserCode
+  STRING IN aSuffix
   STRING IN aKey
   TtfwWord IN aCode
- Self aKey .DefaultUserCodePrim: (
+ Self aSuffix aKey .DefaultUserCodePrim: (
    IN aKey
   [ cUCStart aKey ] .Out
   [ aCode DO ] .Out
@@ -2973,7 +3313,7 @@ elem_proc PredefinedUserCode:
   STRING IN aKey
   ^ IN aOutLambda
   ^ IN aCode
- Self aKey .DefaultUserCodePrim: (
+ Self aSuffix aKey .DefaultUserCodePrim: (
    IN aKey
   [ aCode DO ] aOutLambda DO
  ) // Self aKey .OutUserCode:
@@ -2991,7 +3331,7 @@ elem_proc PredefinedMethodUserCode:
   ( aSuffix cImplementationUserCodeSuffix == )
    ( Self aSuffix aKey .PredefinedUserCode: ( IN aValue Indented: ( aValue .Out ) ) ( aImplCode DO ) )
   DEFAULT 
-   ( Self aKey aCode .DefaultUserCode )
+   ( Self aSuffix aKey aCode .DefaultUserCode )
  ; // RULES
 ; // PredefinedMethodUserCode:
 
@@ -3066,24 +3406,11 @@ STRING elem_func FieldName
  >>> Result
 ; // FieldName
 
-BOOLEAN elem_func HasName
-  STRING IN aName
- Self .Name aName == 
- >>> Result
-; // HasName
-
 BOOLEAN elem_func HasFieldName
   STRING IN aName
  Self .FieldName aName == 
  >>> Result
 ; // HasFieldName
-
-BOOLEAN FUNCTION .HasModelElementWithName
-  ARRAY IN anArray
-  STRING IN aName
- anArray .HasSomeOf: ( aName .HasName )
- >>> Result
-; // .HasModelElementWithName
 
 elem_iterator Properties
  Cached:
@@ -3167,23 +3494,6 @@ BOOLEAN elem_func WritesField
  ; // RULES 
  >>> Result
 ; // elem_func WritesField
-
-BOOLEAN elem_func IsOverride
- RULES
-  ( Self .IsControlOverride )
-   true
-  ( Self .IsIterator )
-   RULES
-    ( Self .MainAncestor .IsNil )
-     false
-    DEFAULT
-     true 
-   ; // RULES 
-  DEFAULT
-   false 
- ; // RULES
- >>> Result
-; // IsOverride
 
 BOOLEAN elem_func NeedsField
  RULES
@@ -3282,7 +3592,9 @@ BOOLEAN elem_func IsSingleton
 BOOLEAN elem_func HasFactory
  Cached:
  (
-  Self .Operations .filter> .IsFactory .NotEmpty
+  Self .OperationsEx
+  .filter> .IsFactory 
+  .NotEmpty
  ) 
  >>> Result
 ; // HasFactory
@@ -3321,7 +3633,7 @@ BOOLEAN elem_func IsGlobalVar
 elem_iterator InnerGlobalVars
  Self .Attributes
  .filter> .IsGlobalVar
- .joinWithLambded> ( Self .Operations ) call.me
+ .joinWithLambded> ( Self .OperationsEx ) call.me
  >>> Result
 ; // InnerGlobalVars
 
@@ -3838,7 +4150,7 @@ elem_proc MethodUserCode
       cUnderline 
       if ( Self .IsLocalMethod ! ) then
       begin
-       l_Implementor .UID 
+       l_Implementor .LUID
       end // ( Self .IsLocalMethod ! )
       l_Key 
      ] strings:Cat >>> l_Key
@@ -3854,8 +4166,8 @@ elem_proc MethodUserCode
  ; // IsSingletonExists
  
  : WithoutVar:
-   ^ IN aCode
-  Self aKey l_Key aCode .PredefinedMethodUserCodeWithoutVar: ( aCode DO ) 
+   ^ IN aImplCode
+  Self aKey l_Key aCode .PredefinedMethodUserCodeWithoutVar: ( aImplCode DO ) 
  ; // WithoutVar:
  
  RULES
@@ -3880,7 +4192,7 @@ elem_proc MethodUserCode
    ) // Self .Name 'Alien' ==
    
   ( 
-   ( Self .UID GarantModel::TComponent.Loaded .UID == ) // TComponent.Loaded
+   ( Self .LUID GarantModel::TComponent.Loaded .LUID == ) // TComponent.Loaded
    AND ( l_Implementor .IsVCMApplication )
   ) 
    (
@@ -3890,40 +4202,40 @@ elem_proc MethodUserCode
     )
    )
   
-  ( Self .UID '4C937013031D' == ) // GetFolder
+  ( Self .LUID '4C937013031D' == ) // GetFolder
    (
     WithoutVar:
     (
      'Result := ' cQuote l_Implementor .Parent .Name cQuote ';'
     )
    )
-  ( Self .UID '4DAED6F60146' == ) // GetModelElementGUID
+  ( Self .LUID '4DAED6F60146' == ) // GetModelElementGUID
    (
     WithoutVar:
     (
-     'Result := ' cQuote l_Implementor .UID cQuote ';'
+     'Result := ' cQuote l_Implementor .LUID cQuote ';'
     )
    )
   ( 
-   Self .UID '4EE1DC8903BB' == // GetInteger
+   Self .LUID '4EE1DC8903BB' == // GetInteger
    AND ( l_Implementor .Parent .IsUserType )
   ) 
    WithoutVar: ( 'Result := ' l_Implementor .Parent .Name ';' )
    
-  ( Self .UID GarantModel::TtfwAxiomaticsResNameGetter.ResName .UID == ) // ResName
+  ( Self .LUID GarantModel::TtfwAxiomaticsResNameGetter.ResName .LUID == ) // ResName
    WithoutVar: ( 'Result := ' cQuote l_Implementor .EffectiveUnitName cQuote ';' )
-  ( Self .UID '4DB079E00084' == ) // GetModuleOperationCode
+  ( Self .LUID '4DB079E00084' == ) // GetModuleOperationCode
    ( 
     WithoutVar:
     (
      'Result := TdmStdRes.mod_opcode_' 
      l_Implementor .Name 
       'Tkw_' .CutPrefix
-       '_op' '_' string:ReplaceFirst
+       '_op' cUnderline string:ReplaceFirst
      ';'
     )
    ) 
-  ( Self .UID '4DB0614603C8' == ) // GetWordNameForRegister
+  ( Self .LUID GarantModel::TtfwRegisterableWord.GetWordNameForRegister .LUID == ) // GetWordNameForRegister
    ( 
     WithoutVar:
     ( 
@@ -3932,7 +4244,7 @@ elem_proc MethodUserCode
      cQuote
       
      VAR l_NameForScript
-     l_Implementor .GetUP "NameForScript" >>> l_NameForScript
+     l_Implementor .NameForScript >>> l_NameForScript
      if ( l_NameForScript .IsValueValid ) then
      begin
      
@@ -3965,7 +4277,7 @@ elem_proc MethodUserCode
      ';' 
     ) // ( Self .Name 'GetWordNameForRegister' == )
    )
-  ( Self .UID GarantModel::l3UnknownPrim.ClearFields .UID == ) // ClearFields
+  ( Self .LUID GarantModel::l3UnknownPrim.ClearFields .LUID == ) // ClearFields
    (
     WithoutVar:
     ( 
@@ -4031,7 +4343,7 @@ elem_proc MethodUserCode
       ' System.FillChar(Result, SizeOf(Result), 0);' .Out
      end // ( aKey cImplementationUserCodeSuffix == )
     end // ( Self .IsStaticConstructor )
-    Self l_Key aCode .DefaultUserCode 
+    Self aKey l_Key aCode .DefaultUserCode 
    )
  ; // RULES 
 ; // MethodUserCode
@@ -4503,7 +4815,7 @@ PRINTABLE elem_func GetUserCode
 BOOLEAN elem_func IsConstructorsHolder
  ( Self .MainAncestor .IsNotNil )
  AND ( Self .Attributes .IsEmpty )
- AND ( Self .Operations .filter> ( .IsConstructor ! ) .IsEmpty )
+ AND ( Self .OperationsEx .filter> ( .IsConstructor ! ) .IsEmpty )
  >>> Result
 ; // IsConstructorsHolder
 
@@ -4537,7 +4849,7 @@ ModelElement elem_func MethodType
         VAR l_Type
         Self .Attributes 
         .filter> .IsResultType
-        .map> .Target
+        .mapToTarget>
         .FirstElement >>> l_Type
         RULES
          ( l_Type .IsNotNil )
@@ -4614,32 +4926,9 @@ ModelElement elem_func MethodType
  >>> Result
 ; // MethodType
 
-BOOLEAN elem_func IsKeyWord
- Self .IsStereotype st_keyword::Operation >>> Result
-; // IsKeyWord
-
-BOOLEAN elem_func IsGlobalKeyWord
- Self .IsStereotype st_globalkeyword::Operation >>> Result
-; // IsGlobalKeyWord
-
-BOOLEAN elem_func IsSomeKeyWord
- RULES
-  ( Self .IsKeyWord )
-   true
-  ( Self .IsGlobalKeyWord )
-   true
-  DEFAULT
-   false 
- ; // RULES
- >>> Result
-; // IsSomeKeyWord
-
-BOOLEAN elem_func IsCreator
- Self .IsStereotype st_creator::Operation >>> Result
-; // IsCreator
-
 BOOLEAN elem_func IsAcceptableForScripts
- Self .UPisTrue 'extprop:rc:isAcceptableForScripts' >>> Result
+ Self .UPisTrue 'extprop:rc:isAcceptableForScripts' 
+ >>> Result
 ; // IsAcceptableForScripts
 
 BOOLEAN elem_func InheritsOrImplementsAcceptableForScripts
@@ -4671,18 +4960,6 @@ BOOLEAN elem_func HasSelf
  >>> Result
 ; // HasSelf
 
-BOOLEAN elem_func IsVarWorker
- RULES
-  ( Self .IsStereotype st_varworker::Operation )
-   true
-  ( Self .IsStereotype st_globalvarworker::Operation )
-   true
-  DEFAULT
-   false 
- ; // RULES
- >>> Result
-; // IsVarWorker
-
 BOOLEAN elem_func IsOutParam
  Self .IsStereotype st_out >>> Result
 ; // IsOutParam
@@ -4694,6 +4971,29 @@ ARRAY FUNCTION .filterOutParam>
  >>> Result
 ; // .filterOutParam>
 
+STRING FUNCTION .UpperFirstChar
+  STRING IN aSubstr
+ RULES
+  ( aSubstr .IsNil )
+   ''
+  DEFAULT
+   begin
+   [ 
+    1 0 aSubstr string:Substring string:Upper
+    VAR l_Len
+    aSubstr string:Len 1 - >>> l_Len
+    l_Len < 0 ?FAIL 'l_Len < 0'
+    VAR l_Tail
+    l_Len
+     1 aSubstr string:Substring >>> l_Tail
+    l_Tail .IsNil ?FAIL 'l_Tail .IsNil'
+    l_Tail  
+   ] strings:Cat 
+  end // DEFAULT
+ ; // RULES 
+ >>> Result 
+; // .UpperFirstChar
+
 STRING FUNCTION .FromTie
   STRING IN aValue
  '' >>> Result
@@ -4704,15 +5004,7 @@ STRING FUNCTION .FromTie
    aSubstr .IsNil ?FAIL 'aSubstr .IsNil' 
    [ 
     Result 
-    1 0 aSubstr string:Substring string:Upper
-    VAR l_Len
-    aSubstr string:Len 1 - >>> l_Len
-    l_Len < 0 ?FAIL 'l_Len < 0'
-    VAR l_Tail
-    l_Len
-     1 aSubstr string:Substring >>> l_Tail
-    l_Tail .IsNil ?FAIL 'l_Tail .IsNil'
-    l_Tail  
+    aSubstr .UpperFirstChar
    ] strings:Cat >>> Result 
   ) // aValue cUnderline string:Split:for>
  end // ( aValue .IsNotNil )
@@ -4804,14 +5096,6 @@ STRING elem_func MethodName
  >>> Result
 ; // MethodName
 
-STRING elem_func SelfName
- Self .GetUP 'extprop:rc:SelfName' >>> Result
- if ( Result .IsNil ) then
- begin
-  Self .TypeName >>> Result
- end 
-; // SelfName
-
 elem_proc UserCode:
  ^ IN aSuffix
  ^ IN aCode
@@ -4834,7 +5118,7 @@ elem_proc UserCode:
  begin
  
   : AsDefault
-   Self l_Key aCode .DefaultUserCode
+   Self l_Key l_Key aCode .DefaultUserCode
   ; // AsDefault
   
   : AsMethod
@@ -4846,7 +5130,7 @@ elem_proc UserCode:
   
   BOOLEAN FUNCTION IsUID
     STRING IN anUID
-   ( Self .UID anUID == ) 
+   ( Self .LUID anUID == ) 
    AND ( l_Implementor .IsSummoned ) >>> Result
   ; // IsUID
   
@@ -4869,13 +5153,14 @@ elem_proc UserCode:
   ; // Code:
   
   VAR l_Call
-  l_Implementor .Stub >>> l_Call
+  // - метод, который собственно надо звать из DoDoIt или DoRun.
+  l_Implementor .KeywordImplementationMethod >>> l_Call
   
   VAR l_Op
-  l_Implementor .SpelledFor >>> l_Op
+  l_Implementor .KeywordOperation >>> l_Op
   
   VAR l_Self
-  l_Implementor .Speller >>> l_Self
+  l_Implementor .KeywordObjectToOperate >>> l_Self
   
   elem_iterator ParametersWithoutContext
    Self .Parameters
@@ -4955,14 +5240,14 @@ elem_proc UserCode:
      ) 
     )
    (
-    ( Self .UID '4DB6D7F70155' == ) // IsImmediate
+    ( Self .LUID '4DB6D7F70155' == ) // IsImmediate
     AND ( l_Implementor .GetUP "is immediate" IsBool )
    ) 
     Code: ( [ ' Result := ' l_Implementor .GetUP "is immediate" ';' ] .Out )
     
    ( 
     ( l_Op .IsNotNil )
-    AND ( '4F3AB3B101FC' IsUID ) // SuppressNextImmediate
+    AND ( GarantModel::TtfwCompilingWord.SuppressNextImmediate .LUID IsUID ) // SuppressNextImmediate
    ) 
     Code: ( [ ' Result := ' 'tfw_sni' l_Op .GetUP "SupressNextImmediate" ';' ] .Out )
     
@@ -4985,7 +5270,7 @@ elem_proc UserCode:
    (
     ( l_Op .IsNotNil )
     AND ( l_Self .IsNotNil )
-    AND ( '52D00B00031A' IsUID ) // SetValuePrim
+    AND ( GarantModel::TtfwWord.SetValuePrim .LUID IsUID ) // SetValuePrim
    ) 
      Pair:
        (
@@ -5095,8 +5380,8 @@ elem_proc UserCode:
     ( l_Call .IsNotNil )
     AND 
     (
-     ( '4DAEEDE10285' IsUID ) // DoDoIt
-     OR ( '5512949D0048' IsUID ) // DoRun
+     ( GarantModel::TtfwWordPrim.DoDoIt .LUID IsUID ) // DoDoIt
+     OR ( GarantModel::TtfwAnonimousWord.DoRun .LUID IsUID ) // DoRun
     ) 
    )
      Pair:
@@ -5199,7 +5484,7 @@ elem_proc UserCode:
    
    ( 
     ( l_Op .IsNotNil )
-    AND ( '4DAEEDE10285' IsUID ) // DoDoIt
+    AND ( GarantModel::TtfwWordPrim.DoDoIt .LUID IsUID ) // DoDoIt
     AND ( l_Implementor GarantModel::TkwBynameControlPush .InheritsFrom )
    ) 
      Code:
@@ -5210,7 +5495,7 @@ elem_proc UserCode:
         ] .Out
        )
    
-   ( '5617F4D00243' IsUID ) // ParamsTypes
+   ( GarantModel::TtfwWord.ParamsTypes .LUID IsUID ) // ParamsTypes
      Code:
        ( 
         VAR l_NeedComma
@@ -5239,7 +5524,7 @@ elem_proc UserCode:
          ';' 
         ] .Out 
        ) // ( l_Key cImplementationUserCodeSuffix == )
-   ( '551544E2001A' IsUID ) // GetResultTypeInfo
+   ( GarantModel::TtfwWord.GetResultTypeInfo .LUID IsUID ) // GetResultTypeInfo
      Code:
        ( 
         [ 
@@ -5255,7 +5540,7 @@ elem_proc UserCode:
          ';' 
         ] .Out 
        ) // ( l_Key cImplementationUserCodeSuffix == )
-   ( '559687E6025A' IsUID ) // GetAllParamsCount
+   ( GarantModel::TtfwWord.GetAllParamsCount .LUID IsUID ) // GetAllParamsCount
      Code:
        ( 
         [ 
@@ -5268,12 +5553,16 @@ elem_proc UserCode:
          ';' 
         ] .Out 
        ) // ( l_Key cImplementationUserCodeSuffix == )
-   ( '52E9282B0271' IsUID ) // RightParamsCount
+   ( GarantModel::TtfwWord.RightParamsCount .LUID IsUID ) // RightParamsCount
      Code:
        ( ' Result := 1;' .Out )
+       
+   ( GarantModel::TtfwClassLike.BindParams .LUID IsUID )
+     Code:
+       ( ' Result := true;' .Out )
    
    (
-    ( Self .UID '4B7AB0B6016E' == ) // TTestResultsPlace.CommandLineKey
+    ( Self .LUID '4B7AB0B6016E' == ) // TTestResultsPlace.CommandLineKey
     AND ( Self .OpKind opkind_Normal != )
    ) 
      Code:
@@ -5486,7 +5775,7 @@ elem_iterator AttributesAndOperations
  Cached:
  (
   Self .Attributes
-  .join> ( Self .Operations )
+  .join> ( Self .OperationsEx )
   .filter> ( .IsSomeKeyWord ! )
   .filter> ( .IsStereotype st_link::Attribute ! )
  )
@@ -5521,6 +5810,106 @@ elem_iterator FriendInDependencies
  >>> Result
 ; // FriendInDependencies
 
+BOOLEAN elem_func NeedsScript
+ RULES
+  ( Self .UPisTrue "needs script" )
+   true
+  DEFAULT
+   RULES
+    ( Self .IsScriptKeywordsPack )
+     RULES
+      ( Self .IsSummoned )
+       false
+      ( Self .Parent .IsVCMForm )
+       false
+      ( Self .Parent .IsVCMFormsPack )
+       false
+      ( Self .UPisTrue "no class name" )
+       true
+      ( Self .UPisTrue "no_pop" )
+       true
+      DEFAULT
+       false
+     ; // RULES
+    DEFAULT
+     false
+   ; // RULES  
+ ; // RULES    
+ >>> Result
+; // NeedsScript
+
+ModelElement elem_func ClassForKeywordImplementation
+  IN aKeywordSelf
+  
+ VAR l_ClassName
+ Self .Name
+ >>> l_ClassName  
+ 
+ l_ClassName
+ RULES
+  ( Self .IsVarWorker )
+   GarantModel::TtfwWordWorkerEx
+  ( Self .IsGlobalKeyWord )
+   GarantModel::TtfwGlobalKeyWord
+  ( Self .GetUP 'extprop:prop_stereo' .IsValueValid ) 
+   GarantModel::TtfwPropertyLike 
+  DEFAULT
+   GarantModel::TtfwClassLike
+ ; // RULES 
+ MakeClass: (
+   IN aMade
+  VAR l_WordName
+  Self .NameForScript >>> l_WordName
+  if ( l_WordName .IsNil ) then
+  begin
+   l_ClassName cUnderline ':' string:Replace >>> l_WordName
+  end // ( l_WordName .IsNil )
+  aMade -> UID := ( 
+   [ 
+    Self .LUID 
+    if ( aKeywordSelf .NotIsNil ) then
+    begin
+     cUnderline aKeywordSelf .LUID
+    end // ( aKeywordSelf .NotIsNil )
+    '_Word' 
+   ] strings:Cat 
+  )
+  aMade -> %SUM := ( 'Слово скрипта ' l_WordName Cat ) 
+  aMade -> Parent := ( Self .Parent .WeakRef )
+  aMade -> Stereotype := st_ScriptKeyword
+  aMade -> Visibility := PrivateAccess
+  aMade -> Abstraction := at_final
+  aMade -> SpelledFor := Self
+  aMade -> Speller := aKeywordSelf
+  aMade -> "is immediate" := ( Self .GetUP "is immediate" )
+  aMade -> "ifdef" := ( Self .IfDefStr )
+  aMade -> "ifndef" := ( Self .IfNDefStr )
+  aMade -> "NameForScript" := l_WordName
+  aMade -> 'extprop:pas:TypeName' := ( 
+   [ 
+    'T' 'kw'
+    //l_ClassName 'kw' .CutPrefix cUnderline '' string:Replace .UpperFirstChar
+    l_ClassName 'kw' .CutPrefix .FromTie
+   ] strings:Cat 
+  )
+  aMade -> IsSummoned := true
+  // - это вообще говоря "времянка", чтобы Override методы выводили код
+ ) // MakeClass:
+ 
+ VAR l_Made
+ >>> l_Made
+ 
+ if ( Self .Speller .IsNil ) then
+ // - здесь вообще говоря надо массив Speller'ов, и учесть его ниже, где алиасы выводятся
+ begin
+  Self -> Speller := l_Made
+ end // ( Self .Speller .IsNil )
+ 
+ l_Made
+ 
+ >>> Result
+; // ClassForKeywordImplementation
+
 elem_iterator ChildrenEx
  Cached:
  (
@@ -5531,16 +5920,29 @@ elem_iterator ChildrenEx
   .filter> ( .IsEvdSchemaElement ! )
   .filter> ( .IsInterface ! )
   .map> .FriendClass
+  .filter> ( l_Children SWAP .Name .HasModelElementWithName ! )
   .for> (
     IN aFriend
-    if ( l_Children aFriend .Name .HasModelElementWithName ! ) then
-    begin
-     l_Children 
-     .join> ToArray: aFriend
-     array:Copy
-     >>> l_Children
-    end // ( l_Children aFriend .Name .HasModelElementWithName ! )
+   l_Children 
+   .join> ToArray: aFriend
+   array:Copy
+   >>> l_Children
   ) // .for>
+  
+  if ( Self .IsScriptKeywordsPack ) then
+  begin
+   Self .OperationsEx 
+   .filter> .IsGlobalKeyWord
+   .map> ( nil .ClassForKeywordImplementation )
+   .filter> ( l_Children SWAP .Name .HasModelElementWithName ! )
+   .for> (
+     IN aClass
+    l_Children 
+    .join> ToArray: aClass
+    array:Copy
+    >>> l_Children
+   ) // .for>
+  end // ( Self .IsScriptKeywordsPack )
     
   l_Children
   if ( Self .IsTestClass ) then
@@ -5551,7 +5953,7 @@ elem_iterator ChildrenEx
    end // ( Self .UPisTrue "is friend" )
   end // ( Self .IsTestClass )
   
-  if ( Self .UPisTrue "needs script" ) then
+  if ( Self .NeedsScript ) then
   begin
    STRING VAR l_ClassName
    [ 'T' Self .UnitName 'ResNameGetter' ] strings:Cat >>> l_ClassName
@@ -5561,7 +5963,7 @@ elem_iterator ChildrenEx
     [
      l_ClassName GarantModel::TtfwAxiomaticsResNameGetter MakeClass: (
        IN aMade
-      aMade -> UID := ( Self .UID '_ResNameGetter' Cat ) 
+      aMade -> UID := ( Self .LUID '_ResNameGetter' Cat ) 
       aMade -> Parent := ( Self .WeakRef ) 
       aMade -> Stereotype := st_SimpleClass
       aMade -> %SUM := 'Регистрация скриптованой аксиоматики'
@@ -5586,10 +5988,10 @@ elem_iterator ChildrenEx
      ) // l_ClassName GarantModel::TtfwAxiomaticsResNameGetter MakeClass:
     ] // .join>
    end // ( l_Children l_ClassName .HasModelElementWithName ! )
-  end // ( Self .UPisTrue "needs script" )
+  end // ( Self .NeedsScript )
   
   .joinWithLambded> (
-  Self .Operations
+  Self .OperationsEx
   .filter> .IsIterator
   .filter> ( .IsServiceIterator ! )
   .filter> ( .IsOverride ! )
@@ -5806,77 +6208,187 @@ BOOLEAN FUNCTION .HasModelElement
 ; // .HasModelElement
 
 elem_iterator OverriddenEx
- VAR l_Overridden
- Self .Overridden >>> l_Overridden
- 
- l_Overridden
- 
- if ( Self .IsClassOrMixIn ) then
- begin
-  if ( Self .HasManagedAttributes ) then
-  begin
-   if ( Self GarantModel::l3UnknownPrim .InheritsFromOrSomeAncestorImplements ) then
-   begin
-    if ( l_Overridden GarantModel::l3UnknownPrim.ClearFields .HasModelElement ! ) then
-    begin     
-     .join> ToArray: ( GarantModel::l3UnknownPrim.ClearFields .OverrideMethod )
-    end // ( l_Overridden GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
-   end // ( Self GarantModel::l3UnknownPrim .InheritsFromOrSomeAncestorImplements )
-  end // ( Self .HasManagedAttributes )
+ Cached:
+ (
+  VAR l_Overridden
+  Self .Overridden >>> l_Overridden
   
-  if ( Self .IsScriptKeyword ) then
+  l_Overridden
+  
+  if ( Self .IsClassOrMixIn ) then
   begin
-   if ( Self .IsMixIn ! ) then
+   if ( Self .HasManagedAttributes ) then
    begin
-    if ( Self .Abstraction at_abstract != ) then
+    if ( Self GarantModel::l3UnknownPrim .InheritsFromOrSomeAncestorImplements ) then
     begin
-     if ( Self GarantModel::TtfwRegisterableWord .InheritsFromOrSomeAncestorImplements ) then
-     begin
-      if ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement ! ) then
-      begin     
-       .join> ToArray: ( GarantModel::TtfwRegisterableWord.GetWordNameForRegister .OverrideMethod )
-      end // ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement )
-     end // ( Self GarantModel::TtfwRegisterableWord .InheritsFromOrSomeAncestorImplements ) 
-    end // ( Self .Abstraction at_abstract != )
-   end // ( Self .IsMixIn ! )
-  end // ( Self .IsScriptKeyword )
-  
-  if ( Self .GetUP "is immediate" IsBool ) then
-  begin
-   if ( Self GarantModel::TtfwWord .InheritsFromOrSomeAncestorImplements ) then
-   begin
-    if ( l_Overridden GarantModel::TtfwWord.IsImmediate .HasModelElement ! ) then
-    begin     
-     .join> ToArray: ( GarantModel::TtfwWord.IsImmediate .OverrideMethod )
-    end // ( l_Overridden GarantModel::TtfwWord.IsImmediate .HasModelElement )
-   end // ( Self GarantModel::TtfwWord .InheritsFromOrSomeAncestorImplements ) 
-  end // ( Self .GetUP "is immediate" IsBool )
-  
- end // ( Self .IsClassOrMixIn )
- 
- if ( Self .IsTestCase ) then
- begin
-  if ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements ) then
-  begin
-   if ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement ! ) then
-   begin     
-    .join> ToArray: ( GarantModel::TAbstractTest.GetFolder .OverrideMethod )
-   end // ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement )
+     if ( l_Overridden GarantModel::l3UnknownPrim.ClearFields .HasModelElement ! ) then
+     begin     
+      .join> ToArray: ( GarantModel::l3UnknownPrim.ClearFields .OverrideMethod )
+     end // ( l_Overridden GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
+    end // ( Self GarantModel::l3UnknownPrim .InheritsFromOrSomeAncestorImplements )
+   end // ( Self .HasManagedAttributes )
    
-   if ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement ! ) then
-   begin     
-    .join> ToArray: ( GarantModel::TAbstractTest.GetModelElementGUID .OverrideMethod )
-   end // ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement )
-  end // ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements )
- end // ( Self .IsTestCase )
- 
- if ( Self .IsVCMApplication ) then
- begin
-  .join> ToArray: ( GarantModel::TComponent.Loaded .OverrideMethod )
- end // ( Self .IsVCMApplication )
- 
+   if ( Self .IsScriptKeyword ) then
+   begin
+    if ( Self .IsMixIn ! ) then
+    begin
+     if ( Self .Abstraction at_abstract != ) then
+     begin
+      if ( Self GarantModel::TtfwRegisterableWord .InheritsFromOrSomeAncestorImplements ) then
+      begin
+       if ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement ! ) then
+       begin     
+        .join> ToArray: ( GarantModel::TtfwRegisterableWord.GetWordNameForRegister .OverrideMethod )
+       end // ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement )
+      end // ( Self GarantModel::TtfwRegisterableWord .InheritsFromOrSomeAncestorImplements ) 
+     end // ( Self .Abstraction at_abstract != )
+    end // ( Self .IsMixIn ! )
+
+    BOOLEAN VAR l_HasDoIt
+    ( l_Overridden 
+      .join> ( Self .ImplementedEx ) 
+      GarantModel::TtfwWordPrim.DoDoIt .HasModelElement )
+    >>> l_HasDoIt
+    
+    VAR l_Op
+    Self .KeywordOperation >>> l_Op
+    if (
+        ( l_Op .IsNotNil ) 
+        AND ( l_Op .IsSomeKeyWord )
+       ) then
+    begin
+     if (
+          ( l_Op .GetUP "SupressNextImmediate" .IsNotNil )
+          AND ( l_Op .GetUP "SupressNextImmediate" 'None' != )
+        ) then
+     begin
+      if ( l_Overridden GarantModel::TtfwCompilingWord.SuppressNextImmediate .HasModelElement ! ) then
+      begin     
+       .join> ToArray: ( GarantModel::TtfwCompilingWord.SuppressNextImmediate .OverrideMethod )
+      end // ( l_Overridden GarantModel::TtfwCompilingWord.SuppressNextImmediate .HasModelElement ! )
+     end // ( l_Op .GetUP "SupressNextImmediate" .IsNotNil )
+     
+     if ( l_Overridden GarantModel::TtfwWord.GetResultTypeInfo .HasModelElement ! ) then
+     begin     
+      .join> ToArray: ( GarantModel::TtfwWord.GetResultTypeInfo .OverrideMethod )
+     end // ( l_Overridden GarantModel::TtfwWord.GetResultTypeInfo .HasModelElement ! )
+     
+     if ( l_Overridden GarantModel::TtfwWord.GetAllParamsCount .HasModelElement ! ) then
+     begin     
+      .join> ToArray: ( GarantModel::TtfwWord.GetAllParamsCount .OverrideMethod )
+     end // ( l_Overridden GarantModel::TtfwWord.GetAllParamsCount .HasModelElement ! )
+     
+     if ( l_Op .IsVarWorker ) then
+     begin
+      if ( l_Overridden GarantModel::TtfwWord.RightParamsCount .HasModelElement ! ) then
+      begin     
+       .join> ToArray: ( GarantModel::TtfwWord.RightParamsCount .OverrideMethod )
+      end // ( l_Overridden GarantModel::TtfwWord.RightParamsCount .HasModelElement ! )
+     end // ( l_Op .IsVarWorker )
+     
+     if ( l_Op .UPisTrue "bind params" ) then
+     begin
+      if ( l_Overridden GarantModel::TtfwClassLike.BindParams .HasModelElement ! ) then
+      begin     
+       .join> ToArray: ( GarantModel::TtfwClassLike.BindParams .OverrideMethod )
+      end // ( l_Overridden GarantModel::TtfwClassLike.BindParams .HasModelElement ! )
+     end // ( l_Op .UPisTrue "bind params" )
+     
+     if ( l_Overridden GarantModel::TtfwWord.ParamsTypes .HasModelElement ! ) then
+     begin     
+      .join> ToArray: ( GarantModel::TtfwWord.ParamsTypes .OverrideMethod )
+     end // ( l_Overridden GarantModel::TtfwWord.ParamsTypes .HasModelElement ! )
+     
+     if ( 
+         ( l_Op .GetUP 'extprop:prop_stereo' .IsValueValid )
+         OR ( l_Op .UPisTrue "lvalue" )
+        ) then
+     begin
+      if ( l_Overridden GarantModel::TtfwWord.SetValuePrim .HasModelElement ! ) then
+      begin     
+       .join> ToArray: ( GarantModel::TtfwWord.SetValuePrim .OverrideMethod )
+      end // ( l_Overridden GarantModel::TtfwWord.SetValuePrim .HasModelElement ! )
+     end // ( l_Op .GetUP 'extprop:prop_stereo' .IsValueValid )
+     
+     if ( l_Op .IsVarWorker ) then
+     begin
+      if ( l_Overridden GarantModel::TtfwAnonimousWord.DoRun .HasModelElement ! ) then
+      begin     
+       .join> ToArray: ( GarantModel::TtfwAnonimousWord.DoRun .OverrideMethod )
+       true >>> l_HasDoIt
+      end // ( l_Overridden GarantModel::TtfwAnonimousWord.DoRun .HasModelElement ! )
+     end // ( l_Op .IsVarWorker )
+     else
+     begin
+      if ( l_HasDoIt ! ) then
+      begin     
+       .join> ToArray: ( GarantModel::TtfwWordPrim.DoDoIt .OverrideMethod )
+       true >>> l_HasDoIt
+      end // ( l_HasDoIt ! )
+     end // ( l_Op .IsVarWorker )
+     
+    end // ( l_Op .IsNotNil )
+    
+    if ( l_HasDoIt ! ) then
+    begin
+     if ( 
+         Self .InheritsEx 
+         .filter> ( GarantModel::TtfwRegisterableWord .IsSameModelElement )
+         .NotEmpty 
+        ) then
+     begin
+      //Self .Name Msg
+      .join> ToArray: ( GarantModel::TtfwWordPrim.DoDoIt .OverrideMethod )
+     end // .filter> ( GarantModel::TtfwRegisterableWord .IsSameModelElement )
+    end // ( l_HasDoIt ! )
+    
+   end // ( Self .IsScriptKeyword )
+   
+   if ( Self .GetUP "is immediate" IsBool ) then
+   begin
+    if ( Self GarantModel::TtfwWord .InheritsFromOrSomeAncestorImplements ) then
+    begin
+     if ( l_Overridden GarantModel::TtfwWord.IsImmediate .HasModelElement ! ) then
+     begin     
+      .join> ToArray: ( GarantModel::TtfwWord.IsImmediate .OverrideMethod )
+     end // ( l_Overridden GarantModel::TtfwWord.IsImmediate .HasModelElement )
+    end // ( Self GarantModel::TtfwWord .InheritsFromOrSomeAncestorImplements ) 
+   end // ( Self .GetUP "is immediate" IsBool )
+   
+  end // ( Self .IsClassOrMixIn )
+  
+  if ( Self .IsTestCase ) then
+  begin
+   if ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements ) then
+   begin
+    if ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement ! ) then
+    begin     
+     .join> ToArray: ( GarantModel::TAbstractTest.GetFolder .OverrideMethod )
+    end // ( l_Overridden GarantModel::TAbstractTest.GetFolder .HasModelElement )
+    
+    if ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement ! ) then
+    begin     
+     .join> ToArray: ( GarantModel::TAbstractTest.GetModelElementGUID .OverrideMethod )
+    end // ( l_Overridden GarantModel::TAbstractTest.GetModelElementGUID .HasModelElement )
+   end // ( Self GarantModel::TBaseTest .InheritsFromOrSomeAncestorImplements )
+  end // ( Self .IsTestCase )
+  
+  if ( Self .IsVCMApplication ) then
+  begin
+   .join> ToArray: ( GarantModel::TComponent.Loaded .OverrideMethod )
+  end // ( Self .IsVCMApplication )
+ ) 
  >>> Result
 ; // OverriddenEx
+
+elem_iterator ImplementedAndOverridden
+ Cached:
+ (
+  Self .ImplementedEx
+  .join> ( Self .OverriddenEx )
+ ) 
+ >>> Result
+; // ImplementedAndOverridden
 
 elem_iterator NeededElements
  Cached:
@@ -5892,8 +6404,7 @@ elem_iterator NeededElements
   .join> ( Self .AttributesAndOperationsNeededElements )
   if ( Self .IsTypedef ! ) then
   begin
-   .join> ( Self .ImplementedEx .OperationsNeededElements )
-   .join> ( Self .OverriddenEx .OperationsNeededElements )
+   .join> ( Self .ImplementedAndOverridden .OperationsNeededElements )
   end // Self .IsTypedef !
   if ( Self .IsClassOrMixIn ) then
   begin
@@ -6064,7 +6575,8 @@ INTERFACE elem_func InstanceFreeMethod
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  l_TypeName 'Free' Cat MakeProcedure: ( IN aMade
+  l_TypeName 'Free' Cat MakeProcedure: ( 
+    IN aMade
    aMade -> %SUM := ( 'Метод освобождения экземпляра синглетона ' l_TypeName Cat )
    aMade -> Visibility := PrivateAccess
    aMade -> "ifdef" := ( Self .IfDefStr )
@@ -6091,17 +6603,17 @@ elem_iterator GlobalOperationsPrim
   RULES
    ( Self .IsInterface )
     ( 
-     Self .Operations 
+     Self .OperationsEx
      .filter> .IsStaticMethod
      .filter> ( .IsFactoryInTie ! )
     ) 
    ( Self .IsRecord )
     ( 
-     Self .Operations 
+     Self .OperationsEx
      .filter> .IsConstructor
     ) 
    ( Self .IsUtilityPack )
-    ( Self .Operations )
+    ( Self .OperationsEx )
    ( Self .IsClassOrMixIn ) 
     (
      if ( Self .IsSingleton ) then
@@ -6120,12 +6632,12 @@ elem_iterator GlobalOperationsPrim
   l_Operations
   
   .joinWithLambded> (
-  Self .Operations
+  Self .OperationsEx
   .filter> .IsIterator
   .filter> ( .IsServiceIterator ! )
   .filter> ( .IsOverride ! )
-  .filter> ( l_Operations SWAP .LocalStub .Name .HasModelElementWithName ! )
-  ) ( .ToArray: .LocalStub )
+  .filter> ( l_Operations SWAP .IteratorStub .Name .HasModelElementWithName ! )
+  ) ( .ToArray: .IteratorStub )
  )
  >>> Result
 ; // GlobalOperationsPrim
@@ -6141,7 +6653,7 @@ elem_iterator GlobalOperations
 
 elem_iterator OperationsUsed
  [empty]
- .joinWithLambded> ( Self .Operations ) .UsesInDependencies
+ .joinWithLambded> ( Self .OperationsEx ) .UsesInDependencies
  
  .joinWithLambded> (
   Self .GlobalOperations
@@ -6149,7 +6661,7 @@ elem_iterator OperationsUsed
   .filter> ( .UPisTrue 'extprop:isAsm' )
  ) ( DROP ToArray: GarantModel::l3LocalStub )
  
- .joinWithLambded> ( Self .Operations ) call.me
+ .joinWithLambded> ( Self .OperationsEx ) call.me
  >>> Result
 ; // OperationsUsed
 
@@ -6200,7 +6712,7 @@ BOOLEAN elem_func IsClass
  Self .IsSimpleClass >>> Result
 ; // IsClass
 
-BOOLEAN elem_func NeedRegisterInScripts
+BOOLEAN elem_func NeedRegisterInScriptsPrim
  Cached:
  (
   RULES
@@ -6210,14 +6722,16 @@ BOOLEAN elem_func NeedRegisterInScripts
     true
    ( Self .InheritsEx .filter> call.me .NotEmpty )
     true
+   ( Self .IsGuiControl )
+    true 
    DEFAULT
     false
   ; // RULES
  )
  >>> Result
-; // NeedRegisterInScripts
+; // NeedRegisterInScriptsPrim
 
-BOOLEAN elem_func NeedIniRegClass
+BOOLEAN elem_func NeedRegisterInScripts
  Cached:
  (
   RULES
@@ -6225,7 +6739,7 @@ BOOLEAN elem_func NeedIniRegClass
     false
    ( Self .IsVCMCustomForm )
     true
-   ( Self .NeedRegisterInScripts )
+   ( Self .NeedRegisterInScriptsPrim )
     RULES
      ( Self .Name 'Hack' string:Pos -1 != )
       false
@@ -6239,6 +6753,12 @@ BOOLEAN elem_func NeedIniRegClass
       false
      ( Self .IsClass )
       true 
+     ( Self .IsEnum )
+      true 
+     ( Self .IsException )
+      true
+     ( Self .IsInterface )
+      true
      DEFAULT
       false
     ; // RULES
@@ -6247,13 +6767,7 @@ BOOLEAN elem_func NeedIniRegClass
   ; // RULES
  )
  >>> Result
-; // NeedIniRegClass
-
-elem_iterator ImplementedAndOverridden
- Self .ImplementedEx
- .join> ( Self .Overridden )
- >>> Result
-; // ImplementedAndOverridden
+; // NeedRegisterInScripts
 
 elem_iterator ImplementsIsInterface
  Cached:
@@ -6298,13 +6812,27 @@ elem_iterator Used
    .joinWithLambded> ( Self .ImplementedAndOverridden ) .UsesInDependencies
   end // ( Self .IsClassOrMixIn )
   
-  if ( Self .NeedIniRegClass ) then
+  if ( Self .NeedRegisterInScripts ) then
   begin
-   if ( Self GarantModel::TtfwWord .InheritsFrom ! ) then
-   begin
-    .join> ToArray: GarantModel::TtfwClassRef(Proxy) 
-   end // ( Self GarantModel::TtfwWord .InheritsFrom ! )
-  end // ( Self .NeedIniRegClass )
+   RULES
+    ( Self .IsEnum )
+     begin
+      .join> ToArray: GarantModel::TtfwTypeRegistrator(Proxy)
+     end // ( Self .IsEnum )
+    ( Self .IsException )
+     begin
+      .join> ToArray: GarantModel::TtfwTypeRegistrator(Proxy)
+     end // ( Self .IsException )
+    ( Self .IsInterface )
+     begin
+      .join> ToArray: GarantModel::TtfwTypeRegistrator(Proxy)
+     end // ( Self .IsInterface )
+    ( Self GarantModel::TtfwWord .InheritsFrom ! )
+     begin
+      .join> ToArray: GarantModel::TtfwClassRef(Proxy) 
+     end // ( Self GarantModel::TtfwWord .InheritsFrom ! )
+   ; // RULES
+  end // ( Self .NeedRegisterInScripts )
   
   if ( Self .IsTestCase ) then
   begin
@@ -6398,7 +6926,7 @@ elem_iterator ImplUses
   begin
    .join> ( Self .ChildrenWithOwnFile )
    .join> ToArray: GarantModel::SysUtils
-   .join> ToArray: GarantModel::TtfwTypeRegistrator
+   .join> ToArray: GarantModel::TtfwTypeRegistrator(Proxy)
    .join> ToArray: GarantModel::TypeInfoExt
   end // ( Self .IsScriptKeywordsPack )
   
@@ -6863,8 +7391,14 @@ OUTABLE elem_func MethodKeyword
 ; // MethodKeyword
 
 BOOLEAN elem_func IsInline
- Self .IsStereotype st_inline::Operation >>> Result
+ Self .IsStereotype st_inline::Operation 
+ >>> Result
 ; // IsInline
+
+BOOLEAN elem_func IsOperationOverride
+ Self .IsStereotype st_override::Operation
+ >>> Result
+; // IsOperationOverride
 
 INTEGER elem_func MethodAbstraction
  Cached:
@@ -6890,7 +7424,7 @@ INTEGER elem_func MethodAbstraction
        at_final
       ( Self .IsFunction )
        at_final
-      ( Self .IsStereotype st_override::Operation )
+      ( Self .IsOperationOverride )
        at_override
       DEFAULT
        ( Self .Abstraction )
@@ -6966,13 +7500,6 @@ STRING elem_func MethodNamePrefix
  ; // RULES 
  >>> Result
 ; // MethodNamePrefix
-
-INTERFACE elem_func ValueParam
- Cached:
- (
-  'aValue' Self MakeParam
- ) >>> Result
-; // ValueParam
 
 STRING CompileTime-VAR g_MethodParentPrefix ''
 BOOLEAN CompileTime-VAR g_EnableMethodDirectives true
@@ -7550,7 +8077,8 @@ INTERFACE elem_func ExistsMethod
 INTERFACE elem_func FakeMethod
  Cached:
  (
-  'Fake' MakeProcedure: ( IN aMade
+  'Fake' MakeProcedure: ( 
+    IN aMade
    aMade -> %SUM := 'это нужно чтобы правильно генерировались вызовы методов доступа к свойствам'
    aMade -> Visibility := PrivateAccess
    aMade -> Abstraction := at_virtual
@@ -7569,7 +8097,7 @@ INTERFACE elem_func InitConstructor
    aMade -> Stereotype := st_ctor::Operation
    aMade -> Visibility := PublicAccess
    aMade -> Abstraction := at_final
-   aMade -> UID := ( Self .UID 'Init' Cat )
+   aMade -> UID := ( Self .LUID 'Init' Cat )
    if ( Self .IsAutoHelper ) then
    begin
     aMade -> Parameters := [ 
@@ -7725,7 +8253,7 @@ elem_iterator AllOperationsForOverload
     ( Self .InterfaceOperationsTotal )
    ( Self .IsStaticObject )
     ( 
-      Self .Operations
+      Self .OperationsEx
       .filter> ( .IsStaticConstructor ! )
       .join> ( Self .ImplementedEx )
       
@@ -7737,7 +8265,7 @@ elem_iterator AllOperationsForOverload
     )
    ( Self .IsClassOrMixIn )
     ( 
-      Self .Operations 
+      Self .OperationsEx
       
       VAR l_CastMethods
       [] >>> l_CastMethods
@@ -7796,15 +8324,15 @@ elem_iterator AllOperationsForOverload
        end // ( Self .HasFactory ! )
        //if ( Self .UseNewGen ) then
        begin
-        if ( Self .Operations 'Exists' .HasModelElementWithName ! ) then
+        if ( Self .OperationsEx 'Exists' .HasModelElementWithName ! ) then
         begin
          .join> ToArray: ( Self .ExistsMethod )
-        end // ( Self .Operations 'Exists' .HasModelElementWithName ! )
+        end // ( Self .OperationsEx 'Exists' .HasModelElementWithName ! )
        end // ( Self .UseNewGen )
       end // ( Self .IsSingleton )
     )
    DEFAULT
-    ( Self .Operations )
+    ( Self .OperationsEx )
   ; // RULES
  )
  >>> Result
@@ -8391,9 +8919,8 @@ ARRAY CompileTime-VAR g_MixInValues nil
 elem_iterator AllInlinedOperations
  Cached:
  (
-  Self .ImplementedEx
-  .join> ( Self .OverriddenEx )
-  .filter> ( .IsInline ) 
+  Self .ImplementedAndOverridden
+  .filter> .IsInline
  )
  >>> Result
 ; // AllInlinedOperations
@@ -9534,7 +10061,7 @@ elem_proc OutInterfaceSection
 ; // OutInterfaceSection
 
 elem_iterator LocalMethods
- Self .Operations
+ Self .OperationsEx
  .filter> .IsLocalMethod
  >>> Result
 ; // LocalMethods
@@ -9801,7 +10328,7 @@ elem_proc OutTestClassImplementation
  ; // ParamsOrKeys
  
  elem_iterator OperationsAndProperties
-  Self .Operations 
+  Self .OperationsEx
   .join> ( Self .Properties )
   >>> Result
  ; // OperationsAndProperties
@@ -10138,7 +10665,7 @@ INTERFACE elem_func MakeIniStr
 ; // MakeIniStr
 
 elem_iterator IniOperationsPrim
- Self .Operations 
+ Self .OperationsEx
  .filter> .IsIni
  >>> Result
 ; // IniOperationsPrim
@@ -10156,6 +10683,28 @@ ModelElement elem_func ElementOrParentThatCanHaveIniOperations
  ; // RULES
  >>> Result
 ; // ElementOrParentThatCanHaveIniOperations
+
+INTERFACE elem_func RegTypeMethod
+ Cached:
+ (
+  VAR l_TypeName
+  Self .TypeName >>> l_TypeName
+  VAR l_Name 
+  'Reg_Type_' l_TypeName Cat >>> l_Name
+  l_Name MakeIniProcedure: (
+    IN aMade
+   aMade -> "ifndef" := 'NoScripts'
+   aMade -> %SUM := ( 'Регистрация типа ' l_TypeName Cat ) 
+   aMade ->^ cUserCodePrefix ^:= [ 
+    ' ' 
+    'TtfwTypeRegistrator.RegisterType('
+    Self .TypeInfo
+    ');'
+   ] // aMade ->^ cUserCodePrefix
+  ) // MakeIniProcedure:
+ )
+ >>> Result
+; // RegTypeMethod
 
 elem_iterator IniOperations
  VAR l_IniOperations
@@ -10205,7 +10754,6 @@ elem_iterator IniOperations
    ( .join> ToArray: ( Self .RegisterTagTableMethod ) )
   ( 
    ( Self .IsServiceImplementation ) 
-   //AND ( Self .UseNewGen )
    AND ( l_IniOperations 'bind' .HasModelElementWithName ! )
   ) 
    ( .join> ToArray: ( Self .RegisterServiceImplementationMethod ) )
@@ -10241,7 +10789,7 @@ elem_iterator IniOperations
     
     if ( l_WasRegisterInEngine ! ) then
     begin
-     if ( Self .NeedIniRegClass ) then
+     if ( Self .NeedRegisterInScripts ) then
      begin
       if ( l_IniOperations 'Ini_Reg_Class' .HasModelElementWithName ! ) then
       begin     
@@ -10262,20 +10810,72 @@ elem_iterator IniOperations
            begin
             ' TtfwClassRef.Register(' Self .TypeName ');' 
            end 
-          ]
+          ] // aMade ->^ cUserCodePrefix
          ) // MakeIniProcedure:
         ) // .join>
-      end // ( l_IniOperations GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
-     end // ( Self .NeedIniRegClass )
+      end // ( l_IniOperations 'Ini_Reg_Class' .HasModelElementWithName ! )
+     end // ( Self .NeedRegisterInScripts )
     end // ( l_WasRegisterInEngine ! )
     
    ) // ( Self .IsClassOrMixIn )
+   
+  ( Self .IsEnum ) 
+   begin
+    if ( Self .NeedRegisterInScripts ) then
+    begin
+     .join> ToArray: ( Self .RegTypeMethod )
+    end // ( Self .NeedRegisterInScripts )
+   end // ( Self .IsEnum )
+   
+  ( Self .IsException ) 
+   begin
+    if ( Self .NeedRegisterInScripts ) then
+    begin
+     .join> ToArray: ( Self .RegTypeMethod )
+    end // ( Self .NeedRegisterInScripts )
+   end // ( Self .IsException )
+   
+  ( Self .IsInterface ) 
+   begin
+    if ( Self .NeedRegisterInScripts ) then
+    begin
+     .join> ToArray: ( Self .RegTypeMethod )
+    end // ( Self .NeedRegisterInScripts )
+   end // ( Self .IsInterface )
+   
+  ( Self .IsScriptKeywordsPack )
+   begin
+    Self .InheritsEx 
+    .join> ( Self .ImplementsEx )
+    
+    .join> ( 
+     Self .OperationsEx
+     .filter> .IsSomeKeyWord
+     .mapToTarget>
+    ) // .join>
+    
+    .joinWithLambded> 
+    ( Self .OperationsEx ) ( .Parameters .mapToTarget> )
+    
+    .filter> .IsAcceptableForScripts
+    .map> .RegTypeMethod
+    .filter> ( .Name l_IniOperations SWAP .HasModelElementWithName ! )
+    .for> (
+      IN aMethod
+     .join> ToArray: aMethod 
+     array:Copy >>> l_IniOperations
+     // - перекопируем массив, чтобы убрать дубликаты
+     l_IniOperations
+     // - кладём его обратно на стек
+    ) // .for>
+   end // ( Self .IsScriptKeywordsPack )
  ; // RULES
+ 
  >>> Result
 ; // IniOperations
 
 elem_iterator FiniOperations
- Self .Operations 
+ Self .OperationsEx
  .filter> .IsFini
  >>> Result
 ; // FiniOperations
@@ -10848,7 +11448,7 @@ STRING elem_func PasFinalFileName
      begin
       [ Result 
        [ 
-        [ Self .Parent .Name '_' Self .Name ] strings:Cat
+        [ Self .Parent .Name cUnderline Self .Name ] strings:Cat
         cSpace cUnderline string:Replace
         cDot cUnderline string:Replace
         '_TestUnit' '.pas' 
@@ -11067,7 +11667,7 @@ elem_generator res.cmd
  CONST Ext '.res.cmd'
  
  BOOLEAN elem_func NeedOwnFilePrim
-  Self .UPisTrue "needs script" >>> Result 
+  Self .NeedsScript >>> Result 
  ; // NeedOwnFilePrim
   
  BOOLEAN elem_func CanCopyToFinalFile
@@ -11151,12 +11751,12 @@ elem_generator rc.script
    
    [ '// Класс ' aG .Name ' - ' aG .SelfName ] .Out 
    
-   Self .Operations
+   Self .OperationsEx
    .filter> .IsKeyWord
    .for> (
      IN anOp
     VAR l_NameForScript 
-    anOp .GetUP "NameForScript" >>> l_NameForScript
+    anOp .NameForScript >>> l_NameForScript
     [ 
       '//  Операция ' anOp .Name 
       if ( l_NameForScript .IsNotNil ) then
@@ -11165,34 +11765,37 @@ elem_generator rc.script
       end // ( l_NameForScript .IsNotNil )
     ] .Out
     
-    anOp .Speller .GetUP "NameForScript" >>> l_NameForScript
-    [
-     '//  Класс реализующий операцию '
-     anOp .Speller .Name
-     ' - '
-     l_NameForScript
-    ] .Out
-    
-    if ( anOp .IsCreator ! ) then
+    if ( anOp .Speller .NotIsNil ) then
     begin
-     VAR l_CanonicName
-     [ 
-      'pop:' 
-      aG .SelfName
-      ':' 
-      anOp .Name 
-       'pop_' .CutPrefix
-       [ aG .SelfName string:Lower cUnderline ] strings:Cat .CutPrefix
-       cUnderline ':' string:Replace
-     ] strings:Cat >>> l_CanonicName
+     anOp .Speller .NameForScript >>> l_NameForScript
+     [
+      '//  Класс реализующий операцию '
+      anOp .Speller .Name
+      ' - '
+      l_NameForScript
+     ] .Out
      
-     if ( l_CanonicName l_NameForScript != ) then
+     if ( anOp .IsCreator ! ) then
      begin
-      [ 'WordAlias ' l_CanonicName cSpace l_NameForScript ] .Out
-     end // ( l_CanonicName l_NameForScript != )
-    end // ( anOp .IsCreator ! )
+      VAR l_CanonicName
+      [ 
+       'pop:' 
+       aG .SelfName
+       ':' 
+       anOp .Name 
+        'pop_' .CutPrefix
+        [ aG .SelfName string:Lower cUnderline ] strings:Cat .CutPrefix
+        cUnderline ':' string:Replace
+      ] strings:Cat >>> l_CanonicName
+      
+      if ( l_CanonicName l_NameForScript != ) then
+      begin
+       [ 'WordAlias ' l_CanonicName cSpace l_NameForScript ] .Out
+      end // ( l_CanonicName l_NameForScript != )
+     end // ( anOp .IsCreator ! )
+    end // ( anOp .Speller .NotIsNil )
     
-   ) // Self .Operations
+   ) // Self .OperationsEx
    
    OutLn
    
