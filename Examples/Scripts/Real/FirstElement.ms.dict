@@ -1,0 +1,15 @@
+UNIT FirstElement.ms.dict
+
+USES
+ IsNil.ms.dict
+;
+
+: .FirstElement
+  ARRAY IN anArray
+ VAR l_Found
+ nil >>> l_Found
+ anArray 
+ .trunc> ( DROP l_Found .IsNil ) 
+ .for> ( >>> l_Found )
+ l_Found
+; // .FirstElement

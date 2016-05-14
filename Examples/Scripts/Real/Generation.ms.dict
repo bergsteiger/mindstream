@@ -395,13 +395,9 @@ BOOLEAN elem_func IsOpenArray
  >>> Result
 ; // IsOpenArray
 
-: .FirstElement
-  ARRAY IN anArray
- ModelElement VAR l_Found
- nil >>> l_Found
- anArray .trunc> ( DROP l_Found .IsNil ) .for> ( >>> l_Found )
- l_Found
-; // .FirstElement
+USES
+ FirstElement.ms.dict
+;
 
 ModelElement elem_func FirstAttribute
  Cached:
@@ -1807,7 +1803,11 @@ STRING elem_func SelfName
  if ( Result .IsNil ) then
  begin
   Self .TypeName >>> Result
- end 
+ end
+ else
+ begin
+  Result ToPrintable >>> Result
+ end // ( Result .IsNil )
 ; // SelfName
 
 INTERFACE elem_func ValueParam
@@ -5839,10 +5839,30 @@ BOOLEAN elem_func NeedsScript
 ; // NeedsScript
 
 ModelElement elem_func ClassForKeywordImplementation
-  IN aKeywordSelf
+  ModelElement IN aKeywordSelf
+  ModelElement IN aPack
   
  VAR l_ClassName
- Self .Name
+ [
+  if ( aKeywordSelf .NotIsNil ) then
+  begin
+   if (
+       ( aPack .UPisTrue "no_pop" ! )
+       AND ( Self .IsCreator ! )
+      ) then
+   begin
+    'pop_'
+   end // ( Self .UPisTrue "no_pop" ! )
+   if ( 
+       ( aPack .UPisTrue "no class name" ! )
+       AND ( aKeywordSelf .SelfName 'SV' != )
+      ) then
+   begin
+    aKeywordSelf .SelfName '_'
+   end // ( Self .UPisTrue "no class name" ! )
+  end // ( aKeywordSelf .NotIsNil )
+  Self .Name
+ ] strings:Cat 
  >>> l_ClassName  
  
  l_ClassName
@@ -5931,16 +5951,36 @@ elem_iterator ChildrenEx
   
   if ( Self .IsScriptKeywordsPack ) then
   begin
+   : .OperationsToClasses
+     ARRAY IN anOps
+     ModelElement IN aKeywordSelf
+    anOps 
+    //.filter> ( .Name Msg true )
+    .map> ( aKeywordSelf Self .ClassForKeywordImplementation )
+    .filter> ( l_Children SWAP .Name .HasModelElementWithName ! )
+    .for> (
+      IN aClass
+     l_Children 
+     .join> ToArray: aClass
+     array:Copy
+     >>> l_Children
+    ) // .for>
+   ; // .OperationsToClasses
+   
    Self .OperationsEx 
    .filter> .IsGlobalKeyWord
-   .map> ( nil .ClassForKeywordImplementation )
-   .filter> ( l_Children SWAP .Name .HasModelElementWithName ! )
+   nil
+   .OperationsToClasses
+   
+   Self .InheritsEx
+   .join> ( Self .ImplementsEx )
+   .filter> .IsAcceptableForScripts
    .for> (
-     IN aClass
-    l_Children 
-    .join> ToArray: aClass
-    array:Copy
-    >>> l_Children
+     IN aG
+    Self .OperationsEx 
+    .filter> .IsKeyWord
+    aG
+    .OperationsToClasses
    ) // .for>
   end // ( Self .IsScriptKeywordsPack )
     

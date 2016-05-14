@@ -1,0 +1,21 @@
+UNIT DictionaryByName.ms.dict
+
+USES
+ FirstElement.ms.dict
+;
+
+OBJECT FUNCTION DictionaryByName
+  IN aDictName
+ nil >>> Result
+ STRING VAR l_Code 
+ [ 'INCLUDE ' '''' aDictName '''' ' [EXECUTE] ( Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary CompileValue ) ' ] strings:Cat >>> l_Code 
+ l_Code script:CompileStringAndProcess ( 
+  DO
+  VAR l_OurDict
+  >>> l_OurDict
+  
+  l_OurDict pop:DictionaryEx:UsedDictionaries
+  .filter> ( pop:DictionaryEx:FileName sysutils:ExtractFileName aDictName == )
+  .FirstElement >>> Result
+ )
+; // DictionaryByName
