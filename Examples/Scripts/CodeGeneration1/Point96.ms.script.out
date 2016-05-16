@@ -321,14 +321,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Bar constructor Bar:new
  
- REDIFINITION VIRTUAL VOID readonly Object:Print
+ REDIFINITION VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID readonly Object:Print
+ ; // REDIFINITION VOID readonly Object:Print
  
- VIRTUAL STRING readonly Object:ToPrintable
+ STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -343,7 +343,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING readonly Object:ToPrintable
+ ; // STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE BarClass
   TtfwValueTypes
@@ -748,14 +748,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Foo constructor Foo:new
  
- REDIFINITION VIRTUAL VOID readonly Object:Print
+ REDIFINITION VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID readonly Object:Print
+ ; // REDIFINITION VOID readonly Object:Print
  
- VIRTUAL STRING readonly Object:ToPrintable
+ STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -770,7 +770,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING readonly Object:ToPrintable
+ ; // STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE FooClass
   TtfwValueTypes
@@ -1150,14 +1150,14 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point constructor Point:OF
  
- REDIFINITION OVERRIDE VOID readonly Point:Print
+ REDIFINITION VOID readonly Point:Print
   Point IN Self
   Self
   Point:ToPrintable
   Print
- ; // REDIFINITION OVERRIDE VOID readonly Point:Print
+ ; // REDIFINITION VOID readonly Point:Print
  
- REDIFINITION OVERRIDE STRING readonly Point:ToPrintable
+ REDIFINITION STRING readonly Point:ToPrintable
   Point IN Self
   ARRAY [
    '( '
@@ -1174,7 +1174,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION OVERRIDE STRING readonly Point:ToPrintable
+ ; // REDIFINITION STRING readonly Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self
@@ -1490,12 +1490,12 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Rectangle constructor Rectangle:new
  
- REDIFINITION OVERRIDE VOID readonly Rectangle:Print
+ REDIFINITION VOID readonly Rectangle:Print
   Rectangle IN Self
   Self
   Rectangle:ToPrintable
   Print
- ; // REDIFINITION OVERRIDE VOID readonly Rectangle:Print
+ ; // REDIFINITION VOID readonly Rectangle:Print
  
  Point readonly Rectangle:TopLeft
   Rectangle IN Self
@@ -1509,7 +1509,7 @@ VOID TestWithDump PointTest
   pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
- REDIFINITION OVERRIDE STRING readonly Rectangle:ToPrintable
+ REDIFINITION STRING readonly Rectangle:ToPrintable
   Rectangle IN Self
   ARRAY [
    '( '
@@ -1526,7 +1526,7 @@ VOID TestWithDump PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // REDIFINITION OVERRIDE STRING readonly Rectangle:ToPrintable
+ ; // REDIFINITION STRING readonly Rectangle:ToPrintable
  
  IMMEDIATE VOID TYPE RectangleClass
   TtfwValueTypes

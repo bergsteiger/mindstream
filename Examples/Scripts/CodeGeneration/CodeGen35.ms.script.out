@@ -170,7 +170,7 @@ VOID Test CodeGen
   ; // %SUMMARY %SUM
   
   ModelElement IN anElement
-  true
+  True
   Result
   pop:Word:SetValue
  ; // BOOLEAN FUNCTION IsElementNeedIndent
@@ -427,8 +427,15 @@ VOID OPERATOR : Tests:@[
 tests:CheckEtalon
 tests:CheckOutputWithInput
 Dictionary: axiom:text
-Dictionary: axiom:WordBox
-TtfwWord pop:WordBox:Boxed
+Dictionary: axiom:Tl3InterfacedComponent
+TComponentName .Tl3InterfacedComponent.Name
+INTEGER .Tl3InterfacedComponent.Tag
+Dictionary: axiom:Tl3LinePartDrawType
+Tl3LinePartDrawType Tl3LinePartDrawType::lpdDraw
+Tl3LinePartDrawType Tl3LinePartDrawType::lpdHidden
+Tl3LinePartDrawType Tl3LinePartDrawType::lpdSpecialDraw
+Tl3LinePartDrawType Tl3LinePartDrawType:NameToValue
+STRING Tl3LinePartDrawType:ValueToName
 Dictionary: axiom:WString
 Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen35.ms.script
  Uses: 
@@ -456,6 +463,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeGen35.ms.s
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -510,6 +518,7 @@ Dictionary: axiom:axiom
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -543,6 +552,7 @@ Dictionary: axiom:axiom
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -991,7 +1001,6 @@ VOID 2DROP
 VOID 2DUP
 VOID 2OVER
 VOID 2SWAP
-IMMEDIATE VOID OPERATOR : ABSTRACT
 STRING FUNCTION : Add<<@>>
  STRING OPERATOR :: IN : aName
  STRING FUNCTION :: Add<<@>> : Result
@@ -1192,6 +1201,26 @@ TClass class::EInvalidImage
 TClass class::EInvalidOp
 TClass class::EInvalidOperation
 TClass class::EInvalidPointer
+TClass class::EkwWaitBracketsBalance
+TClass class::El3Abort
+TClass class::El3AbortLoad
+TClass class::El3AbortLoadFilter
+TClass class::El3BadDataInPara
+TClass class::El3BadPictureFormat
+TClass class::El3CannotModify
+TClass class::El3ConvertError
+TClass class::El3DuplicateItem
+TClass class::El3Error
+TClass class::El3Exception
+TClass class::El3FilerError
+TClass class::El3InfoException
+TClass class::El3NoLoggedException
+TClass class::El3NotFound
+TClass class::El3ReadError
+TClass class::El3TryEnterModalState
+TClass class::El3ValueMap
+TClass class::El3ValueMapValueNotFound
+TClass class::El3Warning
 TClass class::EListError
 TClass class::EMathError
 TClass class::EMethodNotFound
@@ -1204,6 +1233,7 @@ TClass class::EPrivilege
 TClass class::ERangeError
 TClass class::EReadError
 TClass class::EResNotFound
+TClass class::ERTTIInfoSkipProperty
 TClass class::EStackOverflow
 TClass class::EStreamError
 TClass class::EStringListError
@@ -1211,6 +1241,7 @@ TClass class::EtfwBreak
 TClass class::EtfwBreakIterator
 TClass class::EtfwCheck
 TClass class::EtfwCheckPrim
+TClass class::EtfwCodeFlowError
 TClass class::EtfwCodeFlowException
 TClass class::EtfwCompiler
 TClass class::EtfwContinue
@@ -1728,6 +1759,7 @@ TClass class::TkwWordWorker
 TClass class::Tl3CastableObject
 TClass class::Tl3CastablePersistent
 TClass class::Tl3DataContainerWithoutIUnknownPrim
+TClass class::Tl3InterfacedComponent
 TClass class::Tl3PrimString
 TClass class::Tl3ProtoDataContainer
 TClass class::Tl3ProtoObject
@@ -1895,6 +1927,27 @@ EInvalidImage
 EInvalidOp
 EInvalidOperation
 EInvalidPointer
+EkwWaitBracketsBalance
+El3Abort
+El3AbortLoad
+El3AbortLoadFilter
+El3BadDataInPara
+El3BadPictureFormat
+El3CannotModify
+El3ConvertError
+El3DuplicateItem
+El3Error
+El3Exception
+El3FilerError
+El3InfoException
+El3NoLoggedException
+El3NotFound
+El3ReadError
+El3TryEnterModalState
+El3ValueMap
+El3ValueMapValueNotFound
+El3Warning
+IMMEDIATE VOID OPERATOR :: TYPE : ElementWithMembers
 EListError
 else
 EMathError
@@ -1927,6 +1980,7 @@ VOID CALLER OPERATOR : ERROR
  ^ OPERATOR :: IN : aMsg
  TtfwWord OPERATOR :: IN : Caller
 ; // ERROR
+ERTTIInfoSkipProperty
 EStackOverflow
 EStreamError
 EStringListError
@@ -1938,6 +1992,7 @@ EtfwBreak
 EtfwBreakIterator
 EtfwCheck
 EtfwCheckPrim
+EtfwCodeFlowError
 EtfwCodeFlowException
 EtfwCompiler
 EtfwContinue
@@ -1969,6 +2024,7 @@ IMMEDIATE VOID OPERATOR : EXPORTS
 ; // EXPORTS
 EZeroDivide
 BOOLEAN false
+BOOLEAN False
 IMMEDIATE VOID OPERATOR : FILE
 BOOLEAN File:EOF
 FILE File:OpenAppend
@@ -1984,7 +2040,6 @@ VOID File:WriteWStr
 VOID File:WriteWStrLn
 INTEGER FileSize
 ARRAY FILTER
-IMMEDIATE VOID OPERATOR : FINAL
 FINALLY
 IMMEDIATE VOID OPERATOR :: MACRO : for
  Documentation:
@@ -2013,6 +2068,7 @@ BOOLEAN GREATER
 STRING guid::IInterface
 STRING guid::Il3Base
 STRING guid::Il3FontInfo
+STRING guid::Il3IntegerList
 STRING guid::ItfwFile
 STRING guid::ItfwIterator
 STRING guid::ItfwParser
@@ -2033,6 +2089,7 @@ if
 IInterface
 Il3Base
 Il3FontInfo
+Il3IntegerList
 VOID IMMEDIATE
 IMMEDIATE VOID OPERATOR : in
  ^L OPERATOR :: private:DefineNameParam : aName
@@ -2218,7 +2275,6 @@ BOOLEAN OPERATOR : OR
 IMMEDIATE VOID OPERATOR :: TYPE : ORDINAL
 STRING OSName
 VOID OVER
-IMMEDIATE VOID OPERATOR : OVERRIDE
 VOID PICK
 VOID pop:Array:Add
 VOID pop:Array:Clear
@@ -2339,8 +2395,6 @@ VOID PureDir
 RAISE
 INTEGER Random
 VOID Randomize
-IMMEDIATE VOID OPERATOR : REALIZE
-IMMEDIATE VOID OPERATOR : REDEFINEABLE
 IMMEDIATE VOID OPERATOR : REDEFINITION
 VOID ReduceStackLevel
 IMMEDIATE VOID OPERATOR : REF
@@ -2372,7 +2426,6 @@ IMMEDIATE VOID OPERATOR :: MACRO : RunTests
 ; // RunTests
 BOOLEAN SameStr
 BOOLEAN SameText
-IMMEDIATE VOID OPERATOR : SEALED
 IMMEDIATE VOID OPERATOR :: TYPE : Sequence
 VOID SetAppPath2CurrentDir
 VOID SetLocalDate
@@ -2458,7 +2511,6 @@ STRING FUNCTION : strings:CatSep
  STRING FUNCTION :: strings:CatSep : Result
 ; // strings:CatSep
 INTEGER StrToInt
-IMMEDIATE VOID OPERATOR : SUMMONED
 VOID SWAP
 IMMEDIATE VOID OPERATOR : TClass
 TColor
@@ -2977,6 +3029,8 @@ TkwWordWorker
 Tl3CastableObject
 Tl3CastablePersistent
 Tl3DataContainerWithoutIUnknownPrim
+Tl3InterfacedComponent
+Tl3LinePartDrawType
 Tl3PrimString
 Tl3ProtoDataContainer
 Tl3ProtoObject
@@ -3003,6 +3057,7 @@ REDIFINITION STRING FUNCTION : ToPrintable
 ; // ToPrintable
 TPersistent
 BOOLEAN true
+BOOLEAN True
 ARRAY Trunc
 ARRAY TRUNC
 TRY
@@ -3098,9 +3153,14 @@ IMMEDIATE VOID OPERATOR : VarProducer
  ^L OPERATOR :: IN : aName
  STRING OPERATOR :: VAR : l_Name
 ; // VarProducer
-IMMEDIATE VOID OPERATOR : VIRTUAL
 IMMEDIATE OPERATOR : void
 IMMEDIATE OPERATOR : VOID
+TtfwWord FUNCTION : WeakRef
+ Documentation:
+  Возвращает СЛАБУЮ ссылку на элемент.
+ TtfwWord FUNCTION :: WeakRef : Result
+ ElementWithMembers OPERATOR :: IN : Self
+; // WeakRef
 IMMEDIATE VOID OPERATOR :: MACRO : while
  Documentation:
   Выполняет слово aWhatToDo пока условие aCondition истинно 
@@ -3296,7 +3356,7 @@ TtfwWord OPERATOR : pop:Word:GetRefDeep
  TtfwWord OPERATOR :: pop:Word:GetRefDeep : Result
 ; // pop:Word:GetRefDeep
 TtfwWord OPERATOR : pop:Word:GetRefDeepest
- TtfwWord OPERATOR :: IN : aSelf
+ ElementWithMembers OPERATOR :: IN : aSelf
  TtfwWord OPERATOR :: pop:Word:GetRefDeepest : Result
 ; // pop:Word:GetRefDeepest
 VOID pop:Word:IncRef
@@ -3400,21 +3460,13 @@ TtfwValueType TtfwValueType::tfw_vtVoid
 TtfwValueType TtfwValueType:NameToValue
 STRING TtfwValueType:ValueToName
 Dictionary: axiom:TtfwWordModifier
-TtfwWordModifier TtfwWordModifier::tfw_wmAbstract
 TtfwWordModifier TtfwWordModifier::tfw_wmCaller
-TtfwWordModifier TtfwWordModifier::tfw_wmFinal
 TtfwWordModifier TtfwWordModifier::tfw_wmImmediate
 TtfwWordModifier TtfwWordModifier::tfw_wmInline
 TtfwWordModifier TtfwWordModifier::tfw_wmLeftWordRef
-TtfwWordModifier TtfwWordModifier::tfw_wmOverride
-TtfwWordModifier TtfwWordModifier::tfw_wmRealize
-TtfwWordModifier TtfwWordModifier::tfw_wmRedefineable
 TtfwWordModifier TtfwWordModifier::tfw_wmRedefinition
 TtfwWordModifier TtfwWordModifier::tfw_wmRightWordRef
-TtfwWordModifier TtfwWordModifier::tfw_wmSealed
-TtfwWordModifier TtfwWordModifier::tfw_wmSummoned
 TtfwWordModifier TtfwWordModifier::tfw_wmTreatUnknownAsString
-TtfwWordModifier TtfwWordModifier::tfw_wmVirtual
 TtfwWordModifier TtfwWordModifier:NameToValue
 STRING TtfwWordModifier:ValueToName
 Dictionary: axiom:TtfwAccessType
@@ -3515,6 +3567,8 @@ ARRAY FUNCTION : Sequence.It
  Sequence OPERATOR :: IN : aCode
  ARRAY FUNCTION :: Sequence.It : Result
 ; // Sequence.It
+Dictionary: axiom:WordBox
+TtfwWord pop:WordBox:Boxed
 Dictionary: axiom:Stereotype
 ARRAY FUNCTION : .Stereotype.Words
  ARRAY FUNCTION :: .Stereotype.Words : Result
@@ -3583,6 +3637,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3634,6 +3689,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Exports.ms.dic
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3687,6 +3743,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\axiom_push.ms.
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3732,6 +3789,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\macro.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3773,6 +3831,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\types.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3811,6 +3870,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\core.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3886,6 +3946,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Documentation.
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3933,6 +3994,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\Literal.ms.dic
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -3973,6 +4035,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoStrangeSymbo
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4023,6 +4086,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\NoCapsLock.ms.
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4084,6 +4148,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\params.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4150,6 +4215,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\math.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4211,6 +4277,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\io.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4250,6 +4317,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4289,6 +4357,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\arrays.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4354,6 +4423,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\to.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4394,6 +4464,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\filter.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4435,6 +4506,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\map.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4476,6 +4548,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\reverted.ms.di
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4514,6 +4587,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\string.ms.dict
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4561,6 +4635,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\CodeDump.ms.di
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary
@@ -4659,6 +4734,7 @@ Dictionary: H:\Dropbox\mindstream\Examples\Scripts\CodeGeneration\metaMACRO.ms.d
   axiom:std
   axiom:KeywordFinder
   axiom:Sequence
+  axiom:WordBox
   axiom:Stereotype
   axiom:Dictionary
   axiom:MainDictionary

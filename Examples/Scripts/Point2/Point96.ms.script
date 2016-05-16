@@ -258,7 +258,8 @@ class Object
  anOffset Self [i]
 ; // FieldByOffset
 
-VIRTUAL STRING method ToPrintable
+//VIRTUAL 
+STRING method ToPrintable
  Self ToPrintable =: Result
 ; // ToPrintable
 
@@ -351,7 +352,8 @@ Point method -
  Point:OF ( Self Point:+ ( aPoint Point:Neg ) ) =: Result
 ; // -
 
-OVERRIDE STRING method ToPrintable
+//OVERRIDE 
+STRING method ToPrintable
  [ '( ' 'X: ' Self Point:X ToPrintable ', Y: ' Self Point:Y ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 
@@ -377,7 +379,8 @@ constructor :
  new[ aTopLeft aBottomRight ] =: Result
 ; // :
 
-OVERRIDE STRING method ToPrintable
+//OVERRIDE 
+STRING method ToPrintable
  [ '( ' 'TopLeft: ' Self Rectangle:TopLeft Point:ToPrintable ', BottomRight: ' Self Rectangle:BottomRight Point:ToPrintable ' )' ] strings:Cat =: Result
 ; // ToPrintable
 

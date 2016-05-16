@@ -430,14 +430,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object1 constructor Object1:new
  
- REDIFINITION VIRTUAL VOID readonly Object:Print
+ REDIFINITION VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID readonly Object:Print
+ ; // REDIFINITION VOID readonly Object:Print
  
- VIRTUAL STRING readonly Object:ToPrintable
+ STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -452,7 +452,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING readonly Object:ToPrintable
+ ; // STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object1Class
   TtfwValueTypes
@@ -682,14 +682,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object2 constructor Object2:new
  
- REDIFINITION VIRTUAL VOID readonly Object:Print
+ REDIFINITION VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID readonly Object:Print
+ ; // REDIFINITION VOID readonly Object:Print
  
- VIRTUAL STRING readonly Object:ToPrintable
+ STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -704,7 +704,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING readonly Object:ToPrintable
+ ; // STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object2Class
   TtfwValueTypes
@@ -934,14 +934,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object3 constructor Object3:new
  
- REDIFINITION VIRTUAL VOID readonly Object:Print
+ REDIFINITION VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID readonly Object:Print
+ ; // REDIFINITION VOID readonly Object:Print
  
- VIRTUAL STRING readonly Object:ToPrintable
+ STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -956,7 +956,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING readonly Object:ToPrintable
+ ; // STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object3Class
   TtfwValueTypes
@@ -1173,14 +1173,14 @@ VOID TestWithDump ObjectTest
   pop:Word:SetValue
  ; // Object4 constructor Object4:new
  
- REDIFINITION VIRTUAL VOID readonly Object:Print
+ REDIFINITION VOID readonly Object:Print
   Object IN Self
   Self
   Object:ToPrintable
   Print
- ; // REDIFINITION VIRTUAL VOID readonly Object:Print
+ ; // REDIFINITION VOID readonly Object:Print
  
- VIRTUAL STRING readonly Object:ToPrintable
+ STRING readonly Object:ToPrintable
   Object IN Self
   Self
   ToPrintable
@@ -1195,7 +1195,7 @@ VOID TestWithDump ObjectTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // VIRTUAL STRING readonly Object:ToPrintable
+ ; // STRING readonly Object:ToPrintable
  
  IMMEDIATE VOID TYPE Object4Class
   TtfwValueTypes

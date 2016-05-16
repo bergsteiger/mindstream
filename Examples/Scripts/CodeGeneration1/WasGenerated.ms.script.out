@@ -22,13 +22,13 @@ VOID TestWithDump WasGenerated.ms.script.test
     aWord
     >>>[]
     g_WasGenerated
-    false
+    False
     Result
     pop:Word:SetValue
    END
   else
    BEGIN
-    true
+    True
     Result
     pop:Word:SetValue
    END

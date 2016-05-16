@@ -834,13 +834,15 @@ MACRO new[
 
 def_constructor_empty
 
-VIRTUAL STRING readonly ToPrintable
+//VIRTUAL 
+STRING readonly ToPrintable
  Self ToPrintable >>> Result
  [ Self .ClassName ' : ' Result ] strings:Cat >>> Result
  //Self .ClassName >>> Result
 ; // ToPrintable
 
-VIRTUAL void readonly Print
+//VIRTUAL 
+void readonly Print
  Self .ToPrintable Print
 ; // Print
 

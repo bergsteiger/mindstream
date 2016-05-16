@@ -238,7 +238,8 @@ class Object
  anOffset Self [i]
 ; // FieldByOffset
 
-VIRTUAL STRING method ToPrintable
+//VIRTUAL 
+STRING method ToPrintable
  Self ToPrintable =: Result
 ; // ToPrintable
 

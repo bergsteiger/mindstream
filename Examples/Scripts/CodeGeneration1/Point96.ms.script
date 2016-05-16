@@ -66,11 +66,13 @@ Point method - ( Point in_param aPoint )
  Point:OF ( Self .+ ( aPoint .Neg ) ) >>> Result
 ; // -
 
-OVERRIDE STRING readonly ToPrintable
+//OVERRIDE 
+STRING readonly ToPrintable
  [ '( ' 'X: ' Self .X ToPrintable ', Y: ' Self .Y ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
-OVERRIDE void readonly Print
+//OVERRIDE 
+void readonly Print
  Self .ToPrintable Print
 ; // Print
 
@@ -92,11 +94,13 @@ constructor : (
  new[ aTopLeft aBottomRight ] >>> Self
 ; // :
 
-OVERRIDE STRING readonly ToPrintable
+//OVERRIDE 
+STRING readonly ToPrintable
  [ '( ' 'TopLeft: ' Self .TopLeft .ToPrintable ', BottomRight: ' Self .BottomRight .ToPrintable ' )' ] strings:Cat >>> Result
 ; // ToPrintable
 
-OVERRIDE void readonly Print
+//OVERRIDE 
+void readonly Print
  Self .ToPrintable Print
 ; // Print
 

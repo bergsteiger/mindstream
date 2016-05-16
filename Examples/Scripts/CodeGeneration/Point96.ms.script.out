@@ -213,7 +213,7 @@ VOID Test PointTest
   .
  ; // VOID method Point:Print
  
- OVERRIDE STRING method Point:ToPrintable
+ STRING method Point:ToPrintable
   Point IN Self
   [
    '( '
@@ -230,7 +230,7 @@ VOID Test PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // OVERRIDE STRING method Point:ToPrintable
+ ; // STRING method Point:ToPrintable
  
  Pixel readonly Point:X
   Point IN Self
@@ -339,7 +339,7 @@ VOID Test PointTest
   pop:Word:SetValue
  ; // Point readonly Rectangle:TopLeft
  
- OVERRIDE STRING method Rectangle:ToPrintable
+ STRING method Rectangle:ToPrintable
   Rectangle IN Self
   [
    '( '
@@ -356,7 +356,7 @@ VOID Test PointTest
   strings:Cat
   Result
   pop:Word:SetValue
- ; // OVERRIDE STRING method Rectangle:ToPrintable
+ ; // STRING method Rectangle:ToPrintable
  
  PointTest
  DumpElement
