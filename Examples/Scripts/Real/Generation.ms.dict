@@ -1722,16 +1722,9 @@ USES
  axiom:KeyValues
 ;
 
-: KeyValuesCreateAndDo:
-  ^ IN aLambda
- VAR l_Param 
- KeyValues:Create >>> l_Param
- TRY 
-  l_Param aLambda DO
- FINALLY
-  l_Param pop:Word:DecRef 
- END // TRY..FINALLY
-; // KeyValuesCreateAndDo:
+USES
+ KeyValuesCreateAndDo.ms.dict
+;
 
 elem: DecorateMethodAndDo:
   ^ IN aLambda
@@ -1889,6 +1882,90 @@ STRING elem_func NameForScript
  >>> Result
 ; // NameForScript
 
+USES
+ string.ms.dict
+;
+
+STRING FUNCTION RemoveDuplicatedIfDef
+  STRING IN aValue
+ cEmptyStr >>> Result 
+ ARRAY VAR l_Outed
+ [] >>> l_Outed
+ aValue ',' string:Split:for> (
+   IN aSubstr
+  aSubstr string:Trim >>> aSubstr
+  if ( aSubstr .IsNotNil ) 
+   if ( aSubstr .TextNotInArray: l_Outed ) then
+   begin
+    aSubstr .AddToArray: l_Outed
+    if ( Result .IsNil ) then
+     ( aSubstr >>> Result )
+    else
+     ( Result ',' aSubstr Cat Cat >>> Result )
+   end // ( aSubstr .TextNotInArray: l_Outed )
+ ) // aValue ',' string:Split:for>
+; // RemoveDuplicatedIfDef
+
+ModelElement CompileTime-VAR g_Implementor nil
+
+FORWARD .MainAncestorThatNotMixIn
+
+STRING elem_func IfDefStr
+ Cached:
+ (
+  Self .GetUP "ifdef" >>> Result
+  
+  VAR l_Parent
+  Self .Parent >>> l_Parent
+  if ( l_Parent .IsNotNil ) then
+  begin
+   VAR l_ParentIfDefStr
+   l_Parent call.me >>> l_ParentIfDefStr
+   if ( l_ParentIfDefStr .IsNotNil ) then
+   begin
+    if ( Result .IsNil ) then
+    begin
+     l_ParentIfDefStr >>> Result
+    end // ( Result .IsNil )
+    else
+    begin
+     l_ParentIfDefStr ',' Result Cat Cat >>> Result
+    end // ( Result .IsNil )
+   end // ( l_ParentIfDefStr .IsNotNil )
+  end // ( l_Parent .IsNotNil )
+  Result RemoveDuplicatedIfDef
+ )
+ >>> Result 
+; // IfDefStr
+
+STRING elem_func IfNDefStr
+ Cached:
+ (
+  Self .GetUP "ifndef" >>> Result
+  
+  VAR l_Parent
+  Self .Parent >>> l_Parent
+  if ( l_Parent .IsNotNil ) then
+  begin
+   VAR l_ParentIfDefStr
+   l_Parent call.me >>> l_ParentIfDefStr
+   if ( l_ParentIfDefStr .IsNotNil ) then
+   begin
+    if ( Result .IsNil ) then
+    begin
+     l_ParentIfDefStr >>> Result
+    end // ( Result .IsNil )
+    else
+    begin
+     l_ParentIfDefStr ',' Result Cat Cat >>> Result
+    end // ( Result .IsNil )
+   end // ( l_ParentIfDefStr .IsNotNil )
+  end // ( l_Parent .IsNotNil )
+  Result RemoveDuplicatedIfDef
+ )
+ >>> Result 
+; // IfNDefStr
+
 elem_iterator OperationsEx
  Cached:
  (
@@ -1993,7 +2070,7 @@ elem_iterator OperationsEx
        )
     
 }*/          
-          aMade -> SpelledFor := l_Op
+          aMade -> SpelledFor := ( l_Op .WeakRef )
           aMade -> Parameters := (
            ToArray: ( GarantModel::TtfwContext .CtxParam )
            if ( l_Op .IsVarWorker ) then
@@ -2017,7 +2094,7 @@ elem_iterator OperationsEx
           ) // aMade -> Parameters
           VAR l_Ref
           Self .WeakRef >>> l_Ref
-          l_Ref -> Stub := aMade
+          l_Ref -> Stub := ( aMade .WeakRef )
           // - обратная ссылка для l_Call
           // %{Class_Inst}%f_set_var(Stub,{Op_Instance})\
          ) // MakeFunction:
@@ -2027,6 +2104,44 @@ elem_iterator OperationsEx
       
      end // ( l_Op .IsNotNil )
     end // ( Self .IsScriptKeyword )
+   ( Self .IsScriptKeywordsPack ) 
+    begin
+     Self .Attributes
+     .filter> ( .IsStereotype st_property::Attribute )
+     .for> (
+       IN aProp
+      VAR l_Name
+      aProp .Name >>> l_Name
+      if ( l_Operations l_Name .HasModelElementWithName ! ) then
+      begin
+       .join> ToArray: (
+        l_Name 
+        aProp .Target
+        MakeFunction: (
+          IN aMade
+         aMade -> UID := ( aProp .LUID ) 
+         aMade -> Parent := ( aProp .Parent .WeakRef ) 
+         aMade -> Stereotype := st_keyword::Operation
+         aMade -> %SUM := ( aProp .Documentation )
+         aMade -> "NameForScript" := ( aProp .GetUP "NameForScript" )
+         if ( aProp .IsStereotype st_readonly::Attribute ) then
+         begin
+          aMade -> 'extprop:prop_stereo' := 'readonly'
+         end // ( aProp .IsStereotype st_readonly::Attribute )
+         else
+         begin
+          aMade -> 'extprop:prop_stereo' := 'property'
+         end // ( aProp .IsStereotype st_readonly::Attribute )
+         aMade -> 'extprop:prop_name' := l_Name
+         aMade -> "mapped" := ( aProp .GetUP "mapped" )
+         aMade -> "is immediate" := ( aProp .GetUP "is immediate" )
+         aMade -> "ifdef" := ( aProp .GetUP "ifdef" )
+         aMade -> "ifndef" := ( aProp .GetUP "ifndef" )
+        ) // MakeFunction:
+       ) // .join> ToArray:
+      end // ( l_Operations l_Name .HasModelElementWithName ! )
+     ) // .for>
+    end // ( Self .IsScriptKeywordsPack )
   ; // RULES
  )
  >>> Result
@@ -2722,90 +2837,6 @@ BOOLEAN elem_func IsControlPrim
 BOOLEAN elem_func IsContract
  Self .IsStereotype st_Contract >>> Result
 ; // IsContract
-
-USES
- string.ms.dict
-;
-
-STRING FUNCTION RemoveDuplicatedIfDef
-  STRING IN aValue
- cEmptyStr >>> Result 
- ARRAY VAR l_Outed
- [] >>> l_Outed
- aValue ',' string:Split:for> (
-   IN aSubstr
-  aSubstr string:Trim >>> aSubstr
-  if ( aSubstr .IsNotNil ) 
-   if ( aSubstr .TextNotInArray: l_Outed ) then
-   begin
-    aSubstr .AddToArray: l_Outed
-    if ( Result .IsNil ) then
-     ( aSubstr >>> Result )
-    else
-     ( Result ',' aSubstr Cat Cat >>> Result )
-   end // ( aSubstr .TextNotInArray: l_Outed )
- ) // aValue ',' string:Split:for>
-; // RemoveDuplicatedIfDef
-
-ModelElement CompileTime-VAR g_Implementor nil
-
-FORWARD .MainAncestorThatNotMixIn
-
-STRING elem_func IfDefStr
- Cached:
- (
-  Self .GetUP "ifdef" >>> Result
-  
-  VAR l_Parent
-  Self .Parent >>> l_Parent
-  if ( l_Parent .IsNotNil ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr .IsNotNil ) then
-   begin
-    if ( Result .IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result .IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result .IsNil )
-   end // ( l_ParentIfDefStr .IsNotNil )
-  end // ( l_Parent .IsNotNil )
-  Result RemoveDuplicatedIfDef
- )
- >>> Result 
-; // IfDefStr
-
-STRING elem_func IfNDefStr
- Cached:
- (
-  Self .GetUP "ifndef" >>> Result
-  
-  VAR l_Parent
-  Self .Parent >>> l_Parent
-  if ( l_Parent .IsNotNil ) then
-  begin
-   VAR l_ParentIfDefStr
-   l_Parent call.me >>> l_ParentIfDefStr
-   if ( l_ParentIfDefStr .IsNotNil ) then
-   begin
-    if ( Result .IsNil ) then
-    begin
-     l_ParentIfDefStr >>> Result
-    end // ( Result .IsNil )
-    else
-    begin
-     l_ParentIfDefStr ',' Result Cat Cat >>> Result
-    end // ( Result .IsNil )
-   end // ( l_ParentIfDefStr .IsNotNil )
-  end // ( l_Parent .IsNotNil )
-  Result RemoveDuplicatedIfDef
- )
- >>> Result 
-; // IfNDefStr
 
 ModelElement elem_func FriendClass
  Cached:
@@ -4983,11 +5014,14 @@ STRING FUNCTION .UpperFirstChar
     VAR l_Len
     aSubstr string:Len 1 - >>> l_Len
     l_Len < 0 ?FAIL 'l_Len < 0'
-    VAR l_Tail
-    l_Len
-     1 aSubstr string:Substring >>> l_Tail
-    l_Tail .IsNil ?FAIL 'l_Tail .IsNil'
-    l_Tail  
+    if ( l_Len > 0 ) then
+    begin
+     VAR l_Tail
+     l_Len
+      1 aSubstr string:Substring >>> l_Tail
+     l_Tail .IsNil ?FAIL 'l_Tail .IsNil'
+     l_Tail  
+    end // ( l_Len > 0 )
    ] strings:Cat 
   end // DEFAULT
  ; // RULES 
@@ -5899,8 +5933,8 @@ ModelElement elem_func ClassForKeywordImplementation
   aMade -> Stereotype := st_ScriptKeyword
   aMade -> Visibility := PrivateAccess
   aMade -> Abstraction := at_final
-  aMade -> SpelledFor := Self
-  aMade -> Speller := aKeywordSelf
+  aMade -> SpelledFor := ( Self .WeakRef )
+  aMade -> Speller := ( aKeywordSelf .WeakRef )
   aMade -> "is immediate" := ( Self .GetUP "is immediate" )
   aMade -> "ifdef" := ( Self .IfDefStr )
   aMade -> "ifndef" := ( Self .IfNDefStr )

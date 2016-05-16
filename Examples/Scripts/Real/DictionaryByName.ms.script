@@ -1,3 +1,5 @@
+PROGRAM DictionaryByName.ms.script
+
 USES
  axiom_push.ms.dict
 ; 
@@ -31,31 +33,15 @@ USES
  FirstElement.ms.dict
 ;
 
-: KeyValuesCreateAndDo:
-  ^ IN aLambda
- VAR l_Param 
- KeyValues:Create >>> l_Param
- TRY 
-  l_Param aLambda DO
- FINALLY
-  l_Param pop:Word:DecRef 
- END // TRY..FINALLY
-; // KeyValuesCreateAndDo:
-
-INTERFACE FUNCTION KeyValuesCreate:
-  ^ IN aLambda
- KeyValuesCreateAndDo: (
-   IN aMade
-  aMade pop:Word:Box >>> Result
-  aMade aLambda DO
- ) // KeyValuesCreateAndDo:
-; // DecorateMethod:
+USES
+ KeyValuesCreateAndDo.ms.dict
+;
 
 ARRAY FUNCTION ProcessDict
   IN aDictName
 
  [
-  aDictName sysutils:ExtractFileName >>> aDictName
+  //aDictName sysutils:ExtractFileName >>> aDictName
   VAR l_Dict
   aDictName DictionaryByName >>> l_Dict
   
@@ -83,7 +69,17 @@ ARRAY FUNCTION ProcessDict
 
 ARRAY VAR A
 [ 
- @ ProcessDict '*.pas.ms.script' 'W:\shared\models\NewSchool\Scripts\' ProcessFilesWithMask
+ @ ProcessDict 
+ '*.pas.ms.script' 
+ VAR l_Dir
+ thisDictionary pop:DictionaryEx:FileName sysutils:ExtractFilePath >>> l_Dir
+ if ( l_Dir IsNil ) then
+ begin
+  sysutils:GetCurrentDir >>> l_Dir
+ end // ( l_Dir IsNil )
+ //l_Dir .
+ l_Dir
+ ProcessFilesWithMask
 ] >>> A
 
 ARRAY VAR B
@@ -101,31 +97,56 @@ A .for> (
    anItem -> Target aRec -> Target ==
   )
   .FirstElement >>> l_Rec
-  if ( l_Rec .NotIsNil ) then
-  begin
-   VAR l_A
-   l_Rec -> Sources >>> l_A
+  
+  : MakePair
    KeyValuesCreate: (
      IN aPair
     aPair -> SourceFile := ( aRec -> SourceFile )
     aPair -> Source := ( aRec -> Source )
-   ) .AddToArray: l_A
+   ) // KeyValuesCreate:
+  ; // MakePair
+  
+  if ( l_Rec .NotIsNil ) then
+  begin
+   MakePair .AddToArray: ( l_Rec -> Sources )
   end // ( l_Rec .NotIsNil )
   else
   begin
    KeyValuesCreate: (
      IN aMade
     aMade -> Target := ( aRec -> Target )
-    aMade -> Sources := [
-     KeyValuesCreate: (
-       IN aPair
-      aPair -> SourceFile := ( aRec -> SourceFile )
-      aPair -> Source := ( aRec -> Source )
-     ) // KeyValuesCreate:
-    ] // aMade -> Sources
+    aMade -> Sources := [ MakePair ]
    ) .AddToArray: B
   end // ( l_Rec .NotIsNil )
  ) // .for>
+) // .for>
+
+B 
+.map> pop:WordBox:Boxed
+.for> (
+   IN aRec
+ FILE VAR l_Out
+ aRec -> Target '.pas.ms.script.inj' Cat File:OpenWrite >>> l_Out
+ TRY
+  'Seq: (' l_Out File:WriteWStrLn
+  aRec -> Sources
+  .map> pop:WordBox:Boxed
+  .map> (
+    IN aRec
+   [ 
+    'WL' ' '
+    '''' aRec -> Source ''''
+    ' '
+    '''' aRec -> SourceFile '.pas.ms.script' '''' 
+   ] strings:Cat
+  ) // .map>
+  .for> (
+   l_Out File:WriteWStrLn
+  ) // .for>
+  ')' l_Out File:WriteWStrLn
+ FINALLY
+  nil >>> l_Out
+ END
 ) // .for>
 
 B 

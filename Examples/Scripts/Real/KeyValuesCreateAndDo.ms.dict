@@ -1,0 +1,27 @@
+UNIT KeyValuesCreateAndDo.ms.dict
+
+USES
+ axiom:CompiledProcedure
+ axiom:KeyValues
+ axiom:WordBox
+;
+
+: KeyValuesCreateAndDo:
+  ^ IN aLambda
+ VAR l_Param 
+ KeyValues:Create >>> l_Param
+ TRY 
+  l_Param aLambda DO
+ FINALLY
+  l_Param pop:Word:DecRef 
+ END // TRY..FINALLY
+; // KeyValuesCreateAndDo:
+
+INTERFACE FUNCTION KeyValuesCreate:
+  ^ IN aLambda
+ KeyValuesCreateAndDo: (
+   IN aMade
+  aMade pop:Word:Box >>> Result
+  aMade aLambda DO
+ ) // KeyValuesCreateAndDo:
+; // DecorateMethod:
