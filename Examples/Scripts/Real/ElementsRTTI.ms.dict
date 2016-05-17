@@ -120,6 +120,21 @@ STRING elem_func WordName
    ( Self pop:Word:Name ) 
  ; // RULES
  >>> Result  
+ if (
+     ( Result IsNil ) 
+     OR ( Result 'KeyValues:Create' == )
+    ) then
+ begin
+  if ( Self IsIntf ) then
+  begin
+   Self pop:WordBox:Boxed >>> Self
+  end // ( Self IsIntf )
+  
+  VAR l_Field
+  Self %% 'UID' >>> l_Field
+  l_Field IsNil ?FAIL 'Не удалось получить UID'
+  'ME_' l_Field DO Cat >>> Result
+ end // ( Result IsNil )
 ; // WordName
 
 : DoCache
@@ -573,7 +588,8 @@ STRING FUNCTION ValueToKey
   ( aValue IsInt )
    ( aValue ToPrintable )  
   ( aValue IsIntf )
-   ERROR 'Невозможно построить ключ для интерфейса'
+   ( aValue pop:WordBox:Boxed .UIDEx )
+   //ERROR 'Невозможно построить ключ для интерфейса'
   ( aValue Is class::TkwCompiledWord )
    ( aValue .UIDEx )
   ( aValue Is class::TtfwWord )

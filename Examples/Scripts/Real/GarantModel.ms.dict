@@ -152,8 +152,13 @@ USES
  4F3E3F5F0160.pas.ms.script // PrimitiveWords
 ;
 
+WordAlias GarantModel::TtfwRegisterableWordPrim ME_54D229E702B6
+WordAlias GarantModel::TtfwRegisterableWordPrim.RegisterInEngine ME_52A086150180
+
 WordAlias GarantModel::TtfwRegisterableWord ME_53EDC0E701BC
 WordAlias GarantModel::TtfwRegisterableWord.GetWordNameForRegister ME_4DB0614603C8
+
+WordAlias GarantModel::TtfwString.GetString ME_4DDFD2EA0116
 
 USES
  5527F81C020E.pas.ms.script // TypesRegistration
@@ -208,6 +213,12 @@ WordAlias GarantModel::TtfwCompilingWord ME_4DB6C8F30161
 WordAlias GarantModel::TtfwCompilingWord.SuppressNextImmediate ME_4F3AB3B101FC
 
 WordAlias GarantModel::TtfwWordWorkerEx ME_5512E4070106
+
+USES
+ 54DB92D203C9.pas.ms.script // VCL bindings
+;
+
+WordAlias GarantModel::TtfwControlString ME_508527F30183
 
 USES
  4B2A0D6A0077.pas.ms.script // Source TestFrameWork

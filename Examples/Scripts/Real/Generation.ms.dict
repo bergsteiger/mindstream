@@ -293,6 +293,8 @@ PROCEDURE CopyChangedFile
   STRING IN aTo
   STRING IN aFrom
   BOOLEAN IN aNeedBackup
+ aTo .NotIsNil ?ASSURE aFrom
+ aFrom .NotIsNil ?ASSURE aTo
  if (
      ( aTo sysutils:FileExists ! )
      OR ( cEmptyStr aTo aFrom CompareFiles ! ) 
@@ -1966,6 +1968,121 @@ STRING elem_func IfNDefStr
  >>> Result 
 ; // IfNDefStr
 
+BOOLEAN elem_func IsControlOverride
+ Self .IsStereotype st_ControlOverride 
+ >>> Result
+; // IsControlOverride
+
+BOOLEAN elem_func IsControlPrim
+ Self .IsStereotype st_ControlPrim 
+ >>> Result
+; // IsControlPrim
+
+BOOLEAN elem_func IsComponent
+ Self .IsStereotype st_Component
+ >>> Result
+; // IsComponent
+
+elem_iterator ImplementsEx
+ Self .Implements
+ >>> Result
+; // ImplementsEx
+
+/*{
+f _CollectControlsPrim
+	<{}{%C#f_IsControl()=true}{}\
+	[{%C#f_IsOverride()!=true}\
+	[{%f_exists_in_list(CONTROLS,C)!=true}\
+	%f_add_to_list(CONTROLS,C)\
+	]\
+	]\
+	%f_CollectControlsPrim(%C)\
+	>
+
+f _CollectControls
+	%f_CollectControlsPrim(%S)\
+	<%f_CollectControls(%G)>\
+	<%f_CollectControls(%R)>
+}*/
+
+elem_iterator CollectControls
+ Cached:
+ (
+  VAR l_Controls
+  [] >>> l_Controls
+  
+  elem_proc CollectControlsPrim
+   Self .Attributes
+   .filter> .IsControlPrim
+   .filter> ( .IsControlOverride ! )
+   .filter> ( .NotInArray: l_Controls )
+   .for> ( 
+     IN aControl
+    aControl .AddToArray: l_Controls 
+    aControl call.me
+   ) // .for>
+  ; // CollectControlsPrim
+  
+  elem_proc DoCollectControls
+   Self .CollectControlsPrim
+   Self .InheritsEx .for> call.me
+   Self .ImplementsEx .for> call.me
+  ; // DoCollectControls
+  
+  Self .DoCollectControls
+  
+  l_Controls
+ )
+ >>> Result
+; // CollectControls
+
+elem_iterator ScriptKeywordsPackProperties
+ Cached:
+ (
+  VAR l_Properties
+  Self .Attributes
+  .filter> ( .IsStereotype st_property::Attribute )
+  >>> l_Properties
+  
+  l_Properties
+  
+  Self .InheritsEx
+  .filter> .IsVCMForm
+  .filter> ( .Abstraction at_final == )
+  .for> (
+    IN aForm
+   aForm .CollectControls
+   .filter> ( .Visibility PublicAccess == )
+   .filter> ( .MainAncestor .NotIsNil )
+   .for> (
+     IN aControl
+    VAR l_Name
+    aControl .Name >>> l_Name
+    if ( l_Properties l_Name .HasModelElementWithName ! ) then
+    begin
+     .join> ToArray: (
+      l_Name 
+      aControl .MainAncestor
+      MakeProperty: (
+        IN aMade
+       aMade -> UID := ( [ aForm .LUID '_' aControl .LUID '_Control' ] strings:Cat ) 
+       aMade -> Parent := ( Self .WeakRef )
+       aMade -> %SUM := (  [ 'Контрол ' l_Name ' формы ' aForm .TypeName ] strings:Cat )
+       aMade -> "NameForScript" := ( [ '.' aForm .TypeName '.' l_Name ] strings:Cat )
+       aMade -> Stereotype := st_readonly::Attribute
+       aMade -> "mapped" := true
+       aMade -> "ifdef" := ( aControl .GetUP "ifdef" )
+       aMade -> "ifndef" := ( aControl .GetUP "ifndef" )
+      ) // MakeProperty:
+     ) // .join> ToArray: 
+    end // ( l_Properties l_Name .HasModelElementWithName ! )
+   ) // .for>
+  ) // .for>
+  
+ )
+ >>> Result
+; // ScriptKeywordsPackProperties
+
 elem_iterator OperationsEx
  Cached:
  (
@@ -2106,8 +2223,7 @@ elem_iterator OperationsEx
     end // ( Self .IsScriptKeyword )
    ( Self .IsScriptKeywordsPack ) 
     begin
-     Self .Attributes
-     .filter> ( .IsStereotype st_property::Attribute )
+     Self .ScriptKeywordsPackProperties
      .for> (
        IN aProp
       VAR l_Name
@@ -2260,11 +2376,6 @@ elem_iterator ImplementsInDependencies
  ) 
  >>> Result
 ; // ImplementsInDependencies
-
-elem_iterator ImplementsEx
- Self .Implements
- >>> Result
-; // ImplementsEx
 
 elem_iterator ForClassImplements
  Self .ImplementsEx
@@ -2690,10 +2801,6 @@ INTERFACE elem_func IndexParam
  ) >>> Result
 ; // IndexParam
 
-BOOLEAN elem_func IsControlOverride
- Self .IsStereotype st_ControlOverride >>> Result
-; // IsControlOverride
-
 BOOLEAN elem_func IsOverride
  RULES
   ( Self .IsControlOverride )
@@ -2829,10 +2936,6 @@ ModelElement elem_func IteratorStub
 BOOLEAN elem_func IsInParam
  Self .IsStereotype st_in::Attribute >>> Result
 ; // IsInParam
-
-BOOLEAN elem_func IsControlPrim
- Self .IsStereotype st_ControlPrim >>> Result
-; // IsControlPrim
 
 BOOLEAN elem_func IsContract
  Self .IsStereotype st_Contract >>> Result
@@ -5287,7 +5390,7 @@ elem_proc UserCode:
     
    ( 
     ( l_Op .IsNotNil )  
-    AND ( '4DDFD2EA0116' IsUID ) // GetString
+    AND ( GarantModel::TtfwString.GetString .LUID IsUID ) // GetString
    )
     Code: 
       (
@@ -5497,7 +5600,7 @@ elem_proc UserCode:
    
    ( 
     ( l_Op .IsNotNil )
-    AND ( '52A086150180' IsUID ) // RegisterInEngine
+    AND ( GarantModel::TtfwRegisterableWordPrim.RegisterInEngine .LUID IsUID ) // RegisterInEngine
    ) 
      Code:
        (
@@ -5848,6 +5951,8 @@ BOOLEAN elem_func NeedsScript
  RULES
   ( Self .UPisTrue "needs script" )
    true
+  ( Self .UPisTrue "noRegistrator" )
+   false
   DEFAULT
    RULES
     ( Self .IsScriptKeywordsPack )
@@ -6016,7 +6121,228 @@ elem_iterator ChildrenEx
     aG
     .OperationsToClasses
    ) // .for>
+   
+   Self .InheritsEx
+   .filter> .IsVCMForm
+   .filter> ( .Abstraction at_final == )
+   .for> (
+     IN aForm
+     
+    begin
+     VAR l_ClassName
+     [ 'Tkw_Form_' aForm .Name ] strings:Cat >>> l_ClassName
+     if ( l_Children l_ClassName .HasModelElementWithName ! ) then
+     begin
+      l_Children
+      .join> ToArray: (
+       l_ClassName
+       GarantModel::TtfwControlString
+       MakeClass: (
+         IN aMade
+        aMade -> UID := ( [ aForm .LUID '_Word' ] strings:Cat ) 
+        aMade -> Parent := ( Self .WeakRef )
+        aMade -> "NameForScript" := ( 
+         [ 'форма::' aForm .Name ' ' '_' string:Replace ] strings:Cat 
+        ) // aMade -> "NameForScript"
+        aMade -> %SUM := ( 
+         [
+          'Слово словаря для идентификатора формы ' aForm .Name \n
+          '----' \n
+          '*Пример использования*:' \n
+          '{code}'
+          aMade .NameForScript
+          ' TryFocus ASSERT'
+          '{code}'
+         ] strings:Cat 
+        ) // aMade -> %SUM
+        aMade -> Visibility := PrivateAccess
+        aMade -> Abstraction := at_final
+        aMade -> SpelledFor := ( aForm .WeakRef )
+        aMade -> Stereotype := st_ScriptKeyword
+        aMade -> "ifdef" := ( aForm .GetUP "ifdef" )
+        aMade -> "ifndef" := ( aForm .GetUP "ifndef" )
+        aMade -> IsSummoned := true
+        aMade -> Overridden := [
+         GarantModel::TtfwString.GetString .OverrideMethod
+         GarantModel::TtfwRegisterableWordPrim.RegisterInEngine .OverrideMethod
+        ] // aMade -> Overridden
+       ) // MakeClass:
+      ) // .join> ToArray: 
+      array:Copy
+      >>> l_Children
+     end // ( l_Children l_ClassName .HasModelElementWithName ! )
+    end // ( aForm .IsComponent ! )
+     
+    aForm .CollectControls
+    //.filter> ( .Visibility PublicAccess == )
+    //.filter> ( .MainAncestor .NotIsNil )
+    .for> (
+      IN aControl
+      
+     //if ( aControl .IsComponent ! ) then 
+     begin
+      VAR l_ClassName
+      [ 'Tkw_' aForm .Name 
+        '_' 
+        if ( aControl .IsComponent ) then
+         'Component'
+        else
+         'Control' 
+        '_' aControl .Name ] strings:Cat >>> l_ClassName
+      if ( l_Children l_ClassName .HasModelElementWithName ! ) then
+      begin
+       l_Children
+       .join> ToArray: (
+        l_ClassName
+        GarantModel::TtfwControlString
+        MakeClass: (
+          IN aMade
+         aMade -> UID := ( [ aControl .LUID '_Word' ] strings:Cat ) 
+         aMade -> Parent := ( Self .WeakRef )
+         aMade -> "NameForScript" := ( 
+          [ 
+           if ( aControl .IsComponent ) then
+            'компонент'
+           else
+            'контрол'
+           '::'
+           aControl .Name ' ' '_' string:Replace
+          ] strings:Cat 
+         ) // aMade -> "NameForScript"
+         aMade -> %SUM := ( 
+          [
+           'Слово словаря для идентификатора контрола ' aControl .Name \n
+           '----' \n
+           '*Пример использования*:' \n
+           '{code}'
+           aMade .NameForScript
+           ' TryFocus ASSERT'
+           '{code}'
+          ] strings:Cat 
+         ) // aMade -> %SUM
+         aMade -> Visibility := PrivateAccess
+         aMade -> Abstraction := at_final
+         aMade -> SpelledFor := ( aControl .WeakRef )
+         aMade -> Stereotype := st_ScriptKeyword
+         aMade -> "ifdef" := ( aControl .GetUP "ifdef" )
+         aMade -> "ifndef" := ( aControl .GetUP "ifndef" )
+         aMade -> IsSummoned := true
+         aMade -> Overridden := [
+          GarantModel::TtfwString.GetString .OverrideMethod
+          GarantModel::TtfwRegisterableWordPrim.RegisterInEngine .OverrideMethod
+         ] // aMade -> Overridden
+        ) // MakeClass:
+       ) // .join> ToArray: 
+       array:Copy
+       >>> l_Children
+      end // ( l_Children l_ClassName .HasModelElementWithName ! )
+     end // ( aControl .IsComponent ! )
+     
+     if ( aControl .IsComponent ! ) then 
+     begin
+      VAR l_ClassName
+      [ 'Tkw_' aForm .Name 
+        '_' 
+        if ( aControl .IsComponent ) then
+         'Component'
+        else
+         'Control' 
+        '_' aControl .Name '_Push' ] strings:Cat >>> l_ClassName
+      if ( l_Children l_ClassName .HasModelElementWithName ! ) then
+      begin
+       l_Children
+       .join> ToArray: (
+        l_ClassName
+        GarantModel::TkwBynameControlPush
+        MakeClass: (
+          IN aMade
+         aMade -> UID := ( [ aControl .LUID '_Word_Push' ] strings:Cat ) 
+         aMade -> Parent := ( Self .WeakRef )
+         aMade -> "NameForScript" := ( 
+          [ 
+           if ( aControl .IsComponent ) then
+            'компонент'
+           else
+            'контрол'
+           '::'
+           aControl .Name ' ' '_' string:Replace
+           ':push'  
+          ] strings:Cat 
+         ) // aMade -> "NameForScript"
+         aMade -> %SUM := ( 
+          [
+           'Слово словаря для контрола ' aControl .Name \n
+           '----' \n
+           '*Пример использования*:' \n
+           '{code}'
+           aMade .NameForScript
+           ' pop:control:SetFocus ASSERT'
+           '{code}'
+          ] strings:Cat 
+         ) // aMade -> %SUM
+         aMade -> Visibility := PrivateAccess
+         aMade -> Abstraction := at_final
+         aMade -> SpelledFor := ( aControl .WeakRef )
+         aMade -> Stereotype := st_ScriptKeyword
+         aMade -> "ifdef" := ( aControl .GetUP "ifdef" )
+         aMade -> "ifndef" := ( aControl .GetUP "ifndef" )
+         aMade -> IsSummoned := true
+         aMade -> Overridden := [
+          GarantModel::TtfwWordPrim.DoDoIt .OverrideMethod
+         ] // aMade -> Overridden
+        ) // MakeClass:
+       ) // .join> ToArray: 
+       array:Copy
+       >>> l_Children
+      end // ( l_Children l_ClassName .HasModelElementWithName ! )
+     end // ( aControl .IsComponent ! )
+    ) // .for>
+   ) // .for>
+   
   end // ( Self .IsScriptKeywordsPack )
+  
+  if ( Self .IsVCMForm ) then
+  begin
+   if ( Self .Abstraction at_final == ) then
+   begin
+    VAR l_PackName
+    [ Self .Name 'KeywordsPack' ] strings:Cat >>> l_PackName
+    if ( l_Children l_PackName .HasModelElementWithName ! ) then
+    if ( Self .Parent call.me l_PackName .HasModelElementWithName ! ) then
+    begin
+     l_Children
+     .join> ToArray: (
+      l_PackName
+      Self
+      MakeClass: (
+        IN aMade
+       aMade -> UID := ( [ Self .LUID '_Pack' ] strings:Cat ) 
+       aMade -> Parent := ( Self .WeakRef )
+       aMade -> %SUM := ( 
+        [ 
+         'Набор слов словаря для доступа к экземплярам контролов формы '
+         Self .Name
+        ] strings:Cat 
+       ) // aMade -> %SUM
+       aMade -> Visibility := PublicAccess
+       aMade -> Abstraction := at_final
+       aMade -> SpelledFor := ( Self .WeakRef )
+       aMade -> Stereotype := st_ScriptKeywordsPack
+       aMade -> "ifdef" := ( Self .GetUP "ifdef" )
+       aMade -> "ifndef" := ( 
+        [ 'NoScripts' 'NoVCL' Self .GetUP "ifndef" ] ',' strings:CatSep
+       ) // aMade -> "ifndef"
+       aMade -> IsSummoned := true
+       aMade -> "UseNewGen" := true
+       aMade -> "noRegistrator" := true
+       aMade -> "no_pop" := true
+      ) // MakeClass:
+     ) // .join> ToArray: 
+     array:Copy
+     >>> l_Children
+    end // ( l_Children l_ClassName .HasModelElementWithName ! )
+   end // ( Self .Abstraction at_final == )
+  end // ( Self .IsVCMForm )
     
   l_Children
   if ( Self .IsTestClass ) then
@@ -6913,6 +7239,29 @@ elem_iterator Used
    .join> ToArray: GarantModel::TestFrameWork 
   end // ( Self .IsTestCase )  
   
+  if ( Self .IsScriptKeywordsPack ) then
+  begin
+   if (
+       Self .InheritsEx
+       .filter> .IsVCMForm
+       .filter> ( .Abstraction at_final == )
+       .NotEmpty
+      ) then
+   begin
+    Self .InheritsEx
+    .filter> .IsVCMForm
+    .filter> ( .Abstraction at_final == )
+    .for> (
+      IN aForm
+     .join> ( 
+      aForm .CollectControls
+      .map> .MainAncestor
+      .filterNil>
+     ) // .join>
+    ) // .for>
+    .join> ToArray: GarantModel::TtfwClassRef(Proxy) 
+   end // .filter> .IsVCMForm
+  end // ( Self .IsScriptKeywordsPack )
  )
  >>> Result
 ; // Used
@@ -11541,6 +11890,17 @@ STRING elem_func PasFinalFileName
       ] cPathSep strings:CatSep >>> Result
      end // ( Result .IsNotNil )
     end // ( Self .IsElementProxy )
+   ( Self .IsScriptKeywordsPack ) 
+    begin
+     Self .PasPathOnly >>> Result
+     if ( Result .IsNotNil ) then
+     begin
+      [ 
+       Result
+       [ Self .Name '.pas' ] strings:Cat
+      ] cPathSep strings:CatSep >>> Result
+     end // ( Result .IsNotNil )
+    end // ( Self .IsScriptKeywordsPack )
   ; // RULES
  end // ( Result .IsNil )
 ; // PasFinalFileName
