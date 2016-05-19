@@ -60,8 +60,20 @@ CONST cEmptyStr ''
 BOOLEAN CompileTime-VAR g_EnableAutoEOL true
 BOOLEAN CompileTime-VAR g_NeedOutLn false
 
+: DoToOut
+ g_OutFile File:WriteStr
+; // DoToOut
+
+VAR g_ToOut
+( @ DoToOut >>> g_ToOut )
+
+: ToOut
+ g_ToOut IsNil ?FAIL 'Не определён файл для вывода'
+ g_ToOut DO
+; // ToOut
+
 PROCEDURE OutLnToFile
- \n g_OutFile File:WriteStr
+ \n ToOut
 ; // OutLnToFile
 
 BOOLEAN FUNCTION .Out?
@@ -74,7 +86,7 @@ BOOLEAN FUNCTION .Out?
    false >>> g_NeedOutLn
    OutLnToFile
   end // g_NeedOutLn
-  g_OutFile File:WriteStr  
+  ToOut
  ; // .OutToFile 
   
  VAR l_WasOut
@@ -1401,19 +1413,23 @@ BOOLEAN elem_func IsClassOrMixIn
 ; // IsClassOrMixIn
 
 BOOLEAN elem_func IsTestClass
- Self .IsStereotype st_TestClass >>> Result
+ Self .IsStereotype st_TestClass 
+ >>> Result
 ; // IsTestClass
 
 BOOLEAN elem_func IsUserType
- Self .IsStereotype st_UserType >>> Result
+ Self .IsStereotype st_UserType 
+ >>> Result
 ; // IsUserType
 
 BOOLEAN elem_func IsScriptKeywords
- Self .IsStereotype st_ScriptKeywords >>> Result
+ Self .IsStereotype st_ScriptKeywords 
+ >>> Result
 ; // IsScriptKeywords
 
 BOOLEAN elem_func IsTestResults
- Self .IsStereotype st_TestResults >>> Result
+ Self .IsStereotype st_TestResults 
+ >>> Result
 ; // IsTestResults
 
 BOOLEAN elem_func NeedOwnFilePrim
@@ -1988,22 +2004,41 @@ elem_iterator ImplementsEx
  >>> Result
 ; // ImplementsEx
 
-/*{
-f _CollectControlsPrim
-	<{}{%C#f_IsControl()=true}{}\
-	[{%C#f_IsOverride()!=true}\
-	[{%f_exists_in_list(CONTROLS,C)!=true}\
-	%f_add_to_list(CONTROLS,C)\
-	]\
-	]\
-	%f_CollectControlsPrim(%C)\
-	>
+elem_iterator CollectOwnControls
+ Cached:
+ (
+  VAR l_Controls
+  [] >>> l_Controls
+  
+  elem_proc CollectControlsPrim
+   Self .Attributes
+   .filter> .IsControlPrim
+   .filter> ( .NotInArray: l_Controls )
+   .for> ( 
+     IN aControl
+    aControl .AddToArray: l_Controls 
+    aControl call.me
+   ) // .for>
+  ; // CollectControlsPrim
+  
+  Self .CollectControlsPrim
+  
+  l_Controls
+ )
+ >>> Result
+; // CollectOwnControls
 
-f _CollectControls
-	%f_CollectControlsPrim(%S)\
-	<%f_CollectControls(%G)>\
-	<%f_CollectControls(%R)>
-}*/
+FORWARD .MethodType
+
+ModelElement elem_func AttrType
+ RULES
+  //( Self .IsOverride )
+  // ( Self .MainAncestor call.me )
+  DEFAULT
+   ( Self .MethodType )
+ ; // RULES  
+ >>> Result
+; // AttrType
 
 elem_iterator CollectControls
  Cached:
@@ -2014,7 +2049,6 @@ elem_iterator CollectControls
   elem_proc CollectControlsPrim
    Self .Attributes
    .filter> .IsControlPrim
-   .filter> ( .IsControlOverride ! )
    .filter> ( .NotInArray: l_Controls )
    .for> ( 
      IN aControl
@@ -2052,8 +2086,9 @@ elem_iterator ScriptKeywordsPackProperties
   .for> (
     IN aForm
    aForm .CollectControls
+   .filter> ( .IsControlOverride ! )
    .filter> ( .Visibility PublicAccess == )
-   .filter> ( .MainAncestor .NotIsNil )
+   .filter> ( .AttrType .NotIsNil )
    .for> (
      IN aControl
     VAR l_Name
@@ -2062,7 +2097,7 @@ elem_iterator ScriptKeywordsPackProperties
     begin
      .join> ToArray: (
       l_Name 
-      aControl .MainAncestor
+      aControl .AttrType
       MakeProperty: (
         IN aMade
        aMade -> UID := ( [ aForm .LUID '_' aControl .LUID '_Control' ] strings:Cat ) 
@@ -2487,14 +2522,21 @@ elem_iterator ClassImplements
  >>> Result
 ; // ClassImplements
 
+INTERFACE elem_func OverrideMethod:
+  ^ IN aLambda
+ Self .DecorateMethod:
+ (
+   IN aMethod
+  aMethod -> OpKind := opkind_Overridden
+  aMethod aLambda DO
+ ) // Self .DecorateMethod:
+ >>> Result
+; // OverrideMethod:
+
 INTERFACE elem_func OverrideMethod
  Cached:
  (
-  Self .DecorateMethod:
-  (
-    IN aMethod
-   aMethod -> OpKind := opkind_Overridden
-  ) // Self .DecorateMethod:
+  Self .OverrideMethod: DROP
  )
  >>> Result
 ; // OverrideMethod
@@ -3395,7 +3437,7 @@ elem_proc DefaultUserCodePrim:
    IN aKey
    IN aValue
   [ cUCStart aKey ] .Out
-  aValue .for> ( g_OutFile File:WriteWStrLn )
+  aValue .for> ( ToOut \n ToOut )
   [ cUCEnd aKey ] .Out
  ) (
    IN aKey
@@ -3423,7 +3465,7 @@ elem_proc DefaultUserCodePrim:
   else
   begin
    [ cUCStart aKey ] .Out
-   l_Field DO .for> ( g_OutFile File:WriteWStrLn )
+   l_Field DO .for> ( ToOut \n ToOut )
    [ cUCEnd aKey ] .Out
    //l_Field .WordName Msg
   end // ( l_Field .IsNil )
@@ -4336,14 +4378,14 @@ elem_proc MethodUserCode
     )
    )
   
-  ( Self .LUID '4C937013031D' == ) // GetFolder
+  ( Self .LUID GarantModel::TAbstractTest.GetFolder .LUID == ) // GetFolder
    (
     WithoutVar:
     (
      'Result := ' cQuote l_Implementor .Parent .Name cQuote ';'
     )
    )
-  ( Self .LUID '4DAED6F60146' == ) // GetModelElementGUID
+  ( Self .LUID GarantModel::TAbstractTest.GetModelElementGUID .LUID == ) // GetModelElementGUID
    (
     WithoutVar:
     (
@@ -4351,14 +4393,14 @@ elem_proc MethodUserCode
     )
    )
   ( 
-   Self .LUID '4EE1DC8903BB' == // GetInteger
+   Self .LUID GarantModel::TtfwInteger.GetInteger .LUID == // GetInteger
    AND ( l_Implementor .Parent .IsUserType )
   ) 
    WithoutVar: ( 'Result := ' l_Implementor .Parent .Name ';' )
    
   ( Self .LUID GarantModel::TtfwAxiomaticsResNameGetter.ResName .LUID == ) // ResName
    WithoutVar: ( 'Result := ' cQuote l_Implementor .EffectiveUnitName cQuote ';' )
-  ( Self .LUID '4DB079E00084' == ) // GetModuleOperationCode
+  ( Self .LUID GarantModel::TtfwModuleOperationWord.GetModuleOperationCode .LUID == ) // GetModuleOperationCode
    ( 
     WithoutVar:
     (
@@ -4505,12 +4547,30 @@ elem: IfDefBraceLn:
   ^ IN aLambda
  VAR l_WasIf 
  false >>> l_WasIf
- Self nil .IfDefPrim: ( true >>> l_WasIf \n )
+ Self nil .IfDefPrim: ( 
+  true >>> l_WasIf 
+  \n 
+ )
  (
   aLambda DO
   l_WasIf ? \n
  ) // Self .IfDefPrim:
 ; // IfDefBraceLn:
+
+elem: IfDefBraceLnBefore:
+  ^ IN aLambda
+ VAR l_WasIf 
+ false >>> l_WasIf
+ Self nil .IfDefPrim: ( 
+  \n 
+  l_WasIf ! ? SWAP
+  true >>> l_WasIf
+ )
+ (
+  aLambda DO
+  l_WasIf ? \n
+ ) // Self .IfDefPrim:
+; // IfDefBraceLnBefore:
 
 BOOLEAN elem_func IsClassRef
  Self .UPisTrue "isClassRef"
@@ -5377,7 +5437,7 @@ elem_proc UserCode:
      ) 
     )
    (
-    ( Self .LUID '4DB6D7F70155' == ) // IsImmediate
+    ( Self .LUID GarantModel::TtfwWord.IsImmediate .LUID == ) // IsImmediate
     AND ( l_Implementor .GetUP "is immediate" IsBool )
    ) 
     Code: ( [ ' Result := ' l_Implementor .GetUP "is immediate" ';' ] .Out )
@@ -5823,6 +5883,8 @@ elem_proc UserCode:
     AsDefault
    ( Self .IsInterfaces )
     AsDefault
+   ( Self .IsStereotype st_VCMFormZone )
+    AsDefault
    DEFAULT
     AsMethod
   ; // RULES 
@@ -6174,8 +6236,7 @@ elem_iterator ChildrenEx
     end // ( aForm .IsComponent ! )
      
     aForm .CollectControls
-    //.filter> ( .Visibility PublicAccess == )
-    //.filter> ( .MainAncestor .NotIsNil )
+    .filter> ( .IsControlOverride ! )
     .for> (
       IN aControl
       
@@ -6343,6 +6404,46 @@ elem_iterator ChildrenEx
     end // ( l_Children l_ClassName .HasModelElementWithName ! )
    end // ( Self .Abstraction at_final == )
   end // ( Self .IsVCMForm )
+  
+  if ( Self .IsUserType ) then
+  begin
+   VAR l_ClassName
+   [ 'Tkw_FormUserType_' Self .Name ] strings:Cat >>> l_ClassName
+   if ( l_Children l_ClassName .HasModelElementWithName ! ) then
+   begin
+    l_Children
+    .join> ToArray: (
+     l_ClassName
+     GarantModel::TtfwInteger
+     MakeClass: (
+       IN aMade
+      aMade -> UID := ( [ Self .LUID '_Word' ] strings:Cat ) 
+      aMade -> Parent := ( Self .WeakRef )
+      aMade -> "NameForScript" := ( 
+       [ 
+        'тип_формы::'
+        Self .Name ' ' '_' string:Replace
+       ] strings:Cat 
+      ) // aMade -> "NameForScript"
+      aMade -> %SUM := ( 
+       [
+        'Слово словаря для типа формы ' Self .Name
+       ] strings:Cat 
+      ) // aMade -> %SUM
+      aMade -> Visibility := PrivateAccess
+      aMade -> Abstraction := at_final
+      aMade -> Stereotype := st_ScriptKeyword
+      aMade -> "ifndef" := 'NoScripts'
+      aMade -> IsSummoned := true
+      aMade -> Overridden := [
+       GarantModel::TtfwInteger.GetInteger .OverrideMethod
+      ] // aMade -> Overridden
+     ) // MakeClass:
+    ) // .join> ToArray: 
+    array:Copy
+    >>> l_Children
+   end // ( l_Children l_ClassName .HasModelElementWithName ! )
+  end // ( Self .IsUserType )
     
   l_Children
   if ( Self .IsTestClass ) then
@@ -6440,7 +6541,10 @@ INTERFACE FUNCTION MakeConstant:
  aName nil MakeParam: ( 
    IN aMade
   aMade -> Class := class_Attribute
-  aMade -> 'extprop:pas:Value' := aValue
+  if ( aValue .NotIsNil ) then
+  begin
+   aMade -> 'extprop:pas:Value' := aValue
+  end // ( aValue .NotIsNil )
   aMade aLambda DO
  )
  >>> Result 
@@ -6449,7 +6553,9 @@ INTERFACE FUNCTION MakeConstant:
 elem_iterator ConstantsEx
  Cached:
  (
-  Self .Constants
+  VAR l_Constants
+  Self .Constants >>> l_Constants
+  l_Constants
   
   RULES
    ( Self .IsTypedef )
@@ -6506,6 +6612,60 @@ elem_iterator ConstantsEx
        ; // RULES
      ; // RULES
     end // ( Self .IsTypedef )
+   ( Self .IsUserType )
+    begin
+     VAR l_ConstantsName
+     [ Self .Name 'Constants' ] strings:Cat >>> l_ConstantsName
+     if ( l_Constants l_ConstantsName .HasModelElementWithName ! ) then
+     begin
+      .join> ToArray: (
+       l_ConstantsName MakeConstants: (
+         IN aConstants
+        aConstants -> %SUM := ( [ 'Константы для типа формы ' Self .Name ] strings:Cat )
+        aConstants -> Visibility := PublicAccess
+        aConstants -> Attributes := [
+         [ Self .Name 'Name' ] strings:Cat
+         nil
+         MakeConstant: (
+           IN aConstant
+          aConstant -> Visibility := PublicAccess 
+          aConstant -> %SUM := ( [ 'Строковый идентификатор пользовательского типа "' Self .Documentation '"'] strings:Cat )
+          aConstant -> Value := ( [ cQuote Self .Name cQuote ] strings:Cat )
+         ) // MakeConstant: 
+         
+         Self .Name
+         if ( Self .MainAncestor .IsNil ) then
+         begin
+          'TvcmUserType(0)'
+         end // ( Self .MainAncestor .IsNil )
+         else
+         begin
+          [ 'TvcmUserType(' Self .MainAncestor .Name ' + 1)' ] strings:Cat
+         end // ( Self .MainAncestor .IsNil )
+         MakeConstant: (
+           IN aConstant
+          aConstant -> Visibility := PublicAccess 
+          aConstant -> Target := GarantModel::TvcmUserType
+          aConstant -> %SUM := ( Self .Documentation )
+/*{          aConstant -> Value := (
+           if ( Self .MainAncestor .IsNil ) then
+           begin
+            0
+           end // ( Self .MainAncestor .IsNil )
+           else
+           begin
+            Self .MainAncestor .Name
+            aConstant -> "suffix expr" := '+ 1'
+           end // ( Self .MainAncestor .IsNil )
+          ) // aConstant -> Value}*/
+          aConstant -> "is define" := true
+          aConstant -> "no unit prefix" := true
+         ) // MakeConstant: 
+        ] // aConstants -> Attributes
+       ) // l_ConstantsName MakeConstants:
+      ) // .join> ToArray:
+     end // ( l_Constants l_ConstantsName .HasModelElementWithName ! )
+    end // ( Self .IsUserType )
   ; // RULES
   array:Copy
  )
@@ -6606,6 +6766,40 @@ BOOLEAN FUNCTION .HasModelElement
  anArray .HasSomeOf: ( anElement .IsSameModelElement )
  >>> Result
 ; // .HasModelElement
+
+STRING elem_func AttrName
+ RULES
+  ( Self .IsOverride )
+   ( Self .MainAncestor call.me )
+  DEFAULT
+   ( Self .Name )
+ ; // RULES  
+ >>> Result
+; // AttrName
+
+ARRAY FUNCTION HookOut:
+  ^ IN aLambda
+ [] >>> Result
+ TF g_ToOut (
+   @ ( IN aValue aValue .AddToArray: Result ) >>> g_ToOut 
+  aLambda DO
+ ) // TF g_ToOut
+; // HookOut:
+
+BOOLEAN elem_func NeedsInitEntities
+ Self .UPisTrue 'extprop:NeedsInitEntities'
+ >>> Result
+; // NeedsInitEntities
+
+BOOLEAN elem_func NeedsMakeControls
+ Self .ChildrenEx
+ .filter> .IsUserType
+ .join> (
+  Self .CollectOwnControls
+ ) // .join>
+ .NotEmpty
+ >>> Result
+; // NeedsMakeControls
 
 elem_iterator OverriddenEx
  Cached:
@@ -6777,6 +6971,224 @@ elem_iterator OverriddenEx
   begin
    .join> ToArray: ( GarantModel::TComponent.Loaded .OverrideMethod )
   end // ( Self .IsVCMApplication )
+  
+  if ( Self .IsVCMForm ) then
+  begin
+   if ( Self .NeedsInitEntities ) then
+   begin
+    .join> ToArray: ( 
+     GarantModel::vcmLayout.InitEntities .OverrideMethod: (
+       IN aMade
+     ) // GarantModel::vcmLayout.InitEntities .OverrideMethod:
+    ) // .join> ToArray:
+   end // InitEntities
+   
+   if ( Self .NeedsMakeControls ) then
+   begin   
+    .join> ToArray: ( 
+     GarantModel::vcmLayout.MakeControls .OverrideMethod: (
+       IN aMade
+      aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+      aMade .AddMethodWithParams: cImplementationUserCodeName Self ( 
+        IN aForm
+       [ 
+        ' inherited;'
+        aForm .ChildrenEx
+        .filter> .IsUserType
+        .for> (
+          IN aUserType
+         [ \n ' with AddUsertype(' aUserType .Name 'Name,' \n ]
+         [ '  ' 'str_' aUserType .Name 'Caption,' \n ]
+         [ 
+           '  ' 'str_' aUserType .Name 
+           if ( aUserType .GetUP "SettingsCaption" .NotIsNil ) then
+            'Settings'
+           'Caption,' \n 
+         ]
+         [ '  ' aUserType .UPisTrue "VisibleToUser" ',' \n ]
+         [ '  ' aUserType .GetUP "ImageIndex" ',' \n ]
+         [ '  ' aUserType .GetUP "Weight" ',' \n ]
+         [ '  ' 
+           VAR l_UseToolbar
+           aUserType .Attributes
+           .filter> ( .Name 'UseToolbarOfUserTypeName' == )
+           .FirstElement >>> l_UseToolbar
+           if ( l_UseToolbar .IsNil ) then
+           begin
+            cQuote cQuote
+           end // ( l_UseToolbar .IsNil )
+           else
+           begin
+            l_UseToolbar .Target .Name 'Name'
+           end // ( l_UseToolbar .IsNil )
+           ',' \n ]
+         [ '  ' 
+           if ( aUserType .UPisTrue "NeedOnQueryMaximized" ) then
+           begin
+            aUserType .Name 'QueryMaximized'
+           end // ( aUserType .UPisTrue "NeedOnQueryMaximized" )
+           else
+            'nil' 
+           ',' \n ]
+         [ '  ' 
+           if ( aUserType .UPisTrue "NeedOnQueryOpen" ) then
+           begin
+            aUserType .Name 'QueryOpen'
+           end // ( aUserType .UPisTrue "NeedOnQueryOpen" )
+           else
+            'nil' 
+           ',' \n ]
+         [ '  ' 
+           if ( aUserType .UPisTrue "NeedOnQueryClose" ) then
+           begin
+            aUserType .Name 'QueryClose'
+           end // ( aUserType .UPisTrue "NeedOnQueryClose" )
+           else
+            'nil' 
+           ',' \n ]
+         [ '  '
+           RULES
+            ( aUserType .UPisTrue "CanClose" )
+             'vcm_ccEnable'
+            ( aUserType .GetUP "CanClose" false ?== )
+             'vcm_ccDisable'
+            DEFAULT
+             'vcm_ccNone' 
+           ; // RULES
+         ]
+         [ ') do' \n ]
+         [ ' begin' \n ]
+         if ( aUserType .GetUP "CanHaveToolbars" false ?== ) then
+         begin
+          [ '  ' 'CanHaveToolbars := false;' \n ]
+         end // ( aUserType .GetUP "CanHaveToolbars" false ?== )
+         [ ' end;//with AddUsertype(' aUserType .Name 'Name' ]
+        ) // .for>
+        
+        STRING elem_func ControlParentName
+         RULES
+          ( Self .IsVCMForm )
+           'Self'
+          DEFAULT
+           ( Self .AttrName ) 
+         ; // RULES
+         >>> Result
+        ; // ControlParentName
+        
+        aForm .CollectOwnControls
+        //.filter> ( .NeedPutToDFM ! )
+        .for> (
+          IN aControl
+         aControl .IfDefBraceLnBefore: (
+          if ( aControl .NeedPutToDFM ! ) then
+          begin
+           if ( aControl .IsControlOverride ! ) then
+           begin
+            [ \n ' ' 
+              aControl .FieldName 
+              ' := ' 
+              aControl .AttrType .TypeName '.Create' 
+              '('
+              if ( aControl GarantModel::TvgReminder .InheritsFrom ) then
+              begin
+               aControl .Parent .ControlParentName
+              end // ( aControl GarantModel::TvgReminder .InheritsFrom )
+              else
+               'Self' 
+              ')'
+              ';' 
+            ]
+            [ \n ' ' 
+              aControl .FieldName 
+              '.Name'
+              ' := ' 
+              cQuote aControl .Name cQuote
+              ';'
+            ]  
+           end // ( aControl .IsControlOverride ! )
+           if ( aControl GarantModel::TvgReminder .InheritsFrom ! ) then
+           begin
+            if ( aControl .IsComponent ! ) then
+            begin
+             [ \n ' ' 
+               aControl .FieldName 
+               '.Parent'
+               ' := ' 
+               aControl .Parent .ControlParentName
+               ';'
+             ]  
+             VAR l_Doc
+             aControl .Documentation >>> l_Doc
+             if ( l_Doc .NotIsNil ) then
+             begin
+              if ( aControl .GetUP "need Caption" false ?== ) then
+              begin
+               [ \n ' ' 
+                 aControl .FieldName
+                 '.Caption'
+                 ' := ' 
+                 cQuote l_Doc cQuote
+                 ';'
+               ]
+              end // ( aControl .GetUP "need Caption" false ?== )
+             end // if ( l_Doc .NotIsNil )
+            end // ( aControl .IsComponent ! )
+           end // ( aControl GarantModel::TvgReminder .InheritsFrom ! )
+          end // ( aControl .NeedPutToDFM ! )
+          
+          aControl .Zones
+          .for> (
+            IN aZone
+           [ 
+             \n ' with DefineZone(vcm_zt' aZone .GetUP "ZoneType" ', ' 
+             if ( aControl .NeedPutToDFM ) then
+             begin
+              aControl .AttrName
+             end // ( aControl .NeedPutToDFM )
+             else
+             begin
+              aControl .FieldName
+             end // ( aControl .NeedPutToDFM )
+           ]
+           [ ') do' \n ]
+           [ ' begin' \n ]
+           
+           if ( aZone .UPisTrue "MergeTopTollbarWithContainer" ) then
+           begin
+            [ '  FormStyle.Toolbars.Top.MergeWithContainer := vcm_bTrue;' \n ]
+           end // ( aZone .UPisTrue "MergeTopTollbarWithContainer" )
+           
+           if ( aZone .UPisTrue "MergeBottomTollbarWithContainer" ) then
+           begin
+            [ '  FormStyle.Toolbars.Bottom.MergeWithContainer := vcm_bTrue;' \n ]
+           end // ( aZone .UPisTrue "MergeBottomTollbarWithContainer" )
+           
+           RULES
+            ( aZone .UPisTrue "CanClose" )
+             [ '  CanClose := vcm_ccEnable;' \n ]
+            ( aZone .GetUP "CanClose" false ?== )
+             [ '  CanClose := vcm_ccDisable;' \n ]
+           ; // RULES
+           
+           if ( aZone .UPisTrue "Need UC" ) then
+           begin
+            HookOut: ( 
+             Indented: 
+              Indented: 
+               ( aZone .UserCode: '' '!!!' ) 
+            ) // HookOut:
+           end // ( aZone .UPisTrue "Need UC" )
+           
+           [ ' end;//with DefineZone(vcm_zt' aZone .GetUP "ZoneType" ]
+          ) // .for>
+         ) // aControl .IfDefBraceLnBefore:
+        ) // .for>
+       ]
+      ) // aMade .AddMethodWithParams: cImplementationUserCodeName Self
+     ) // GarantModel::vcmLayout.MakeControls .OverrideMethod:
+    ) // .join> ToArray:
+   end // MakeControls
+  end // ( Self .IsVCMForm )
  ) 
  >>> Result
 ; // OverriddenEx
@@ -6928,6 +7340,20 @@ elem_iterator IntfUses
   begin
    .join> ToArray: GarantModel::vcmExternalInterfaces 
   end // ( Self .IsVCMControls )
+  
+  if ( Self .IsVCMForm ) then
+  begin
+   if ( Self .Abstraction at_final == ) then
+   begin
+    .join> ToArray: GarantModel::TvcmEntities
+   end // ( Self .Abstraction at_final == )
+   .join> ( 
+    Self .CollectOwnControls
+    .map> .AttrType
+    .filterNil>
+   ) // .join>
+  end // ( Self .IsVCMForm )
+  
  ) 
  >>> Result
 ; // IntfUses
@@ -7255,13 +7681,14 @@ elem_iterator Used
       IN aForm
      .join> ( 
       aForm .CollectControls
-      .map> .MainAncestor
+      .map> .AttrType
       .filterNil>
      ) // .join>
     ) // .for>
     .join> ToArray: GarantModel::TtfwClassRef(Proxy) 
    end // .filter> .IsVCMForm
   end // ( Self .IsScriptKeywordsPack )
+  
  )
  >>> Result
 ; // Used
@@ -8092,23 +8519,7 @@ elem_proc MethodInterfacePrim
       if ( l_WasParam ! ) then
        '('
       
-      VAR l_WasIf 
-      false >>> l_WasIf
-      
-      elem: IfDefBraceLn:
-        ^ IN aLambda
-       Self nil .IfDefPrim: ( 
-        \n 
-        l_WasIf ! ? SWAP
-        true >>> l_WasIf
-       )
-       (
-        aLambda DO
-        l_WasIf ? \n
-       ) // Self .IfDefPrim:
-      ; // IfDefBraceLn:
-      
-      aParam .IfDefBraceLn:
+      aParam .IfDefBraceLnBefore:
       (
        if ( l_WasParam ) then
        begin
@@ -8144,7 +8555,7 @@ elem_proc MethodInterfacePrim
        begin
         \n cSpace l_Doc
        end // ( l_Doc .IsNotNil )
-      ) // aParam .IfDefBraceLn:
+      ) // aParam .IfDefBraceLnBefore:
      ) // Self .MethodParameters .for>
    
      if ( l_WasParam ) then
@@ -8607,6 +9018,11 @@ BOOLEAN elem_func UseNewGen
     true
    ( Self .ForceUseNewGen )
     true 
+   ( Self .IsVCMForm )
+    RULES
+     DEFAULT
+      ( Self .Parent call.me )
+    ; // RULES
    ( Self .IsVCMCustomForm )
     ( Self .Parent call.me )
    ( Self .IsGuiControl )
@@ -9056,6 +9472,22 @@ INTEGER elem_func FieldVisibility
 
 elem_proc OutClassInner
  Indented: (
+  if ( Self .IsVCMForm ) then
+  begin
+   if ( Self .Abstraction at_final == ) then
+   begin
+    Indented: (
+     'Entities : TvcmEntities;' .Out
+     Self .CollectControls
+     .filter> ( .IsControlOverride ! )
+     .filter> .NeedPutToDFM
+     .for> (
+       IN aControl
+      [ aControl .AttrName ' : ' aControl .AttrType .TypeName ';' ] .Out
+     ) // .for>
+    ) // Indented:
+   end // ( Self .Abstraction at_final == )
+  end // ( Self .IsVCMForm )
   Self .Fields .ByVisibility> .FieldVisibility .OutField
   
   TF g_Implementor (
@@ -10638,6 +11070,15 @@ BOOLEAN elem_func NeedsInstanceR
 ; // NeedsInstanceR
 
 elem_proc OutClassImplementation
+
+ if ( Self .IsVCMForm ) then
+ begin
+  if ( Self .Abstraction at_final == ) then
+  begin
+   [ '{$R *.DFM}' \n ] .Out
+  end // ( Self .Abstraction at_final == )
+ end // ( Self .IsVCMForm )
+ 
  Self .IfDef:
  (
   Self .DefineImplementedMixInValues
@@ -11966,26 +12407,6 @@ elem_generator pas_dependent
  ; // FinalFileNamePrim
  
 ; // pas_dependent
-
-STRING elem_func AttrName
- RULES
-  ( Self .IsOverride )
-   ( Self .MainAncestor call.me )
-  DEFAULT
-   ( Self .Name )
- ; // RULES  
- >>> Result
-; // AttrName
-
-ModelElement elem_func AttrType
- RULES
-  //( Self .IsOverride )
-  // ( Self .MainAncestor call.me )
-  DEFAULT
-   ( Self .MethodType )
- ; // RULES  
- >>> Result
-; // AttrType
 
 ARRAY CompileTime-VAR g_FormControls nil
 

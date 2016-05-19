@@ -132,6 +132,12 @@ WordAlias GarantModel::IvcmTestExecutePrim ME_4683E1AD0047
 WordAlias GarantModel::TvcmOperationStateIndex ME_4683F4D501E9
 
 USES
+ 499EAAE502A8.pas.ms.script // vcmUserControls
+;
+
+WordAlias GarantModel::TvcmUserType ME_47F2534B010F
+
+USES
  4DAF19F600C5.pas.ms.script // tfwScriptingInterfaces
 ;
 
@@ -158,7 +164,11 @@ WordAlias GarantModel::TtfwRegisterableWordPrim.RegisterInEngine ME_52A086150180
 WordAlias GarantModel::TtfwRegisterableWord ME_53EDC0E701BC
 WordAlias GarantModel::TtfwRegisterableWord.GetWordNameForRegister ME_4DB0614603C8
 
+WordAlias GarantModel::TtfwString ME_4DDFD1430390
 WordAlias GarantModel::TtfwString.GetString ME_4DDFD2EA0116
+
+WordAlias GarantModel::TtfwInteger ME_4EE1DBBB013C
+WordAlias GarantModel::TtfwInteger.GetInteger ME_4EE1DC8903BB
 
 USES
  5527F81C020E.pas.ms.script // TypesRegistration
@@ -249,6 +259,20 @@ WordAlias GarantModel::IvcmUseCaseController ME_4981E70101D7
 WordAlias GarantModel::IvcmViewAreaController ME_497841510139
 
 USES
+ 4AB34028023E.pas.ms.script // Components
+;
+
+WordAlias GarantModel::TvcmEntities ME_560AC98C026A
+
+USES
+ 5000041101C8.pas.ms.script // Layouts
+;
+
+WordAlias GarantModel::vcmLayout ME_500004240202
+WordAlias GarantModel::vcmLayout.MakeControls ME_500004A60200
+WordAlias GarantModel::vcmLayout.InitEntities ME_5000105E028C
+
+USES
  4AADF9450143.pas.ms.script // Visual
 ;
 
@@ -299,6 +323,13 @@ USES
 ;
 
 WordAlias GarantModel::Tl3MouseWheelHelper ME_4F7ACCBE02AF
+
+USES
+ 4E200FED0213.pas.ms.script // Operations
+;
+
+WordAlias GarantModel::TtfwModuleOperationWord ME_4DB060930263
+WordAlias GarantModel::TtfwModuleOperationWord.GetModuleOperationCode ME_4DB079E00084
 
 USES
  ref.ms.dict
@@ -410,3 +441,9 @@ USES
 ; 
  
 WordAlias GarantModel::evExtFormat ME_4D514CA600C2
+
+USES
+ 53288DFA03A7.pas.ms.script // NewReminders
+; 
+ 
+WordAlias GarantModel::TvgReminder ME_532973740186

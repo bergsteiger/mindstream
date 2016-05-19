@@ -132,6 +132,10 @@ STRING elem_func WordName
   
   VAR l_Field
   Self %% 'UID' >>> l_Field
+  if ( l_Field IsNil ) then
+  begin
+   Self %% 'Name' >>> l_Field
+  end // ( l_Field IsNil )
   l_Field IsNil ?FAIL 'Не удалось получить UID'
   'ME_' l_Field DO Cat >>> Result
  end // ( Result IsNil )
@@ -331,6 +335,10 @@ elem_iterator Depends
 elem_iterator Injected
  Self 'Injected' .ElemList >>> Result
 ; // Injected
+
+elem_iterator Zones
+ Self 'Zones' .ElemList >>> Result
+; // Zones
 
 elem_iterator Forwarded
  Self 'Forwarded' .ElemList >>> Result
