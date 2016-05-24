@@ -11,21 +11,18 @@ ARRAY FUNCTION Lulin.locked
  [
   // UtilityPack
   '3DBAA1891003' // Design_AttrValues implementation after const - надо поступать так же как с Type
-  '52FA4ACA0020' // csRequestTask GetTaggedDataType
+  //'52FA4ACA0020' // csRequestTask GetTaggedDataType
   '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
   '4B2A6D4303A9' // KTestRunner проблемы с TTimeInfoList с предварительным описанием RTestResultsPlace = class of TTestResultsPlace;
   '4AC9A3F801F3' // nsMainMenuNew uses vtOutliner и l3ControlsTypes - отсутствуют
   '4AAF93E201FD' // nsPostingsLine uses l3TreeInterfaces - отсутствует
-  '5453986402AC' // ncsMessage не реализует pm_GetKind от тега
+  //'5453986402AC' // ncsMessage не реализует pm_GetKind от тега
   '483C0AEA0186' // atGblAdapterWorker [Error] atGblAdapterWorker.pas(132): Declaration of 'Fire' differs from declaration in interface 'IControlledChangeNotifier'
   '483AD11C02A1' // atQueryExecutor [Error] atQueryExecutor.pas(82): Undeclared identifier: 'FinishProcess'
   
   // Impurity
   '48FDA9D500E4' // nsNodeNotifierImplementation [Error] nsNodeNotifierImplementation.imp.pas(39): Undeclared identifier: 'ChangeChildrenCount'
   '47EB3E2202E6' // dBaseDocument function _dBaseDocument_.pm_GetdsDocumentRef: IvcmFormDataSourceRef;
-  
-  // GuiControl
-  //'4E732D7F0082' // TvtHideField cDefaultOptions = [hfoCanHide, hfoHyperlink];
   
   // InternalInterfaces
   '4678209200A6' // nevBase nev_plThis = TnevParaLevel(0);
@@ -55,19 +52,19 @@ ARRAY FUNCTION Lulin.locked
   'F2DB96F6C0D4' // DocumentPrintAndExportFontSizeSettingRes [Error] DocumentPrintAndExportFontSizeSettingRes.pas(133): Illegal character in input file: '!' ($21)
   
   '4AA517B5037A' // AdminAppRes
-  '4F7C3C0B035C' // AdminMain_Form
-  '4F7C2E78015C' // MonitoringsMain_Form
+  //'4F7C3C0B035C' // AdminMain_Form
+  //'4F7C2E78015C' // MonitoringsMain_Form
   '4AA9038C0387' // MonitoringsRes
   '4AA518EB039C' // PrimAdminMain_Form
   '4AA919040176' // PrimMonitoringsMain_Form
   '4A9527D40146' // NemesisRes
   
-  '4F6AEAE5007B' // Main_Form
+  //'4F6AEAE5007B' // Main_Form
   '4F6B6E380367' // NewGenMainPrim_Form
   
   '521649770277' // VCMSandBoxRes
   
-  '4ADDD3030251' // OfficeLikeMain_Form
+  //'4ADDD3030251' // OfficeLikeMain_Form
   '4ADDCE970294' // OfficeLikeRes
   
   '4A92BBDF0126' // PrimF1Res
@@ -79,13 +76,13 @@ ARRAY FUNCTION Lulin.locked
   
   '4A952BA3006D' // Main_Form
   '4C8A29700261' // MainOptions_Form
-  '4AA7EA010274' // MainWindow_Form
+  //'4AA7EA010274' // MainWindow_Form
   '4F7DAC14027A' // MainWithReminders_Form
   '4958D2EA00CC' // NemesisMain_Form
   '4A925AFF01BA' // PrimNemesisRes
   
   '4F6B607F027E' // F1LikeRes
-  '4F6B382E00D9' // MainPrim_Form
+  //'4F6B382E00D9' // MainPrim_Form
  ] 
  >>> Result
 ; // Lulin.locked

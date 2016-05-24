@@ -34,126 +34,13 @@ USES
 
 CONST cPathSep '\'
 
-FILE CompileTime-VAR g_OutFile nil
-%REMARK 'Текущий файл'
+USES
+ Chars.ms.dict
+;
 
-STRING CompileTime-VAR g_Indent ''
-%REMARK 'Текущий отступ'
-
-CONST cIndentChar ' '
-
-STRING FUNCTION IndentStr
- g_Indent >>> Result
-; // IndentStr
-
-OBJECT STRING INTEGER ARRAY BOOLEAN TYPE OUTABLE
-
-CONST \n #13#10
-CONST cQuote ''''
-CONST cOpenComment '{'
-CONST cCloseComment '}'
-CONST cSpace ' '
-CONST cUnderline '_'
-CONST cDot '.'
-CONST cEmptyStr ''
-
-BOOLEAN CompileTime-VAR g_EnableAutoEOL true
-BOOLEAN CompileTime-VAR g_NeedOutLn false
-
-: DoToOut
- g_OutFile File:WriteStr
-; // DoToOut
-
-VAR g_ToOut
-( @ DoToOut >>> g_ToOut )
-
-: ToOut
- g_ToOut IsNil ?FAIL 'Не определён файл для вывода'
- g_ToOut DO
-; // ToOut
-
-PROCEDURE OutLnToFile
- \n ToOut
-; // OutLnToFile
-
-BOOLEAN FUNCTION .Out?
-
-  OUTABLE IN aValue
-  
- : .OutToFile
-  if g_NeedOutLn then
-  begin
-   false >>> g_NeedOutLn
-   OutLnToFile
-  end // g_NeedOutLn
-  ToOut
- ; // .OutToFile 
-  
- VAR l_WasOut
- VAR l_NeedIndent
-
- PROCEDURE .OutValue
-   OUTABLE IN aValue
-  RULES 
-   ( aValue .IsValueValid ! )
-    ()
-   ( aValue IsArray )
-    begin
-     aValue .for> call.me
-    end // aValue IsArray
-   DEFAULT 
-    begin
-     STRING VAR l_Value 
-     aValue ToPrintable >>> l_Value
-     if ( l_WasOut ! ) then
-     begin
-      true >>> l_WasOut
-      IndentStr .OutToFile
-      false >>> l_NeedIndent
-     end // l_WasOut !
-     
-     if ( l_NeedIndent ) then
-     begin
-      false >>> l_NeedIndent
-      IndentStr .OutToFile
-     end // l_NeedIndent
-  
-     if ( l_Value \n == ) then
-     begin
-      l_Value .OutToFile
-      true >>> l_NeedIndent
-     end // ( l_Value \n == )
-     else
-     begin
-      l_Value .OutToFile
-     end // ( l_Value \n == )
-    end // DEFAULT
-  ; // RULES  
- ; // .OutValue
- 
- false >>> l_WasOut
- false >>> l_NeedIndent
- aValue .OutValue
- 
- if l_WasOut then
-  if g_EnableAutoEOL then
-   OutLnToFile
-  
- l_WasOut >>> Result
-; // .Out?
-
-: .Out
- .Out? DROP
-; // .Out
-
-PROCEDURE Indented:
-  ^ IN aLambda
-  
- TF g_Indent (
-  g_Indent cIndentChar Cat >>> g_Indent
-  aLambda DO
- ) 
-; // Indented:
+USES
+ Out.ms.dict
+;
 
 USES
  axiom:SysUtils
@@ -506,12 +393,8 @@ BOOLEAN elem_func IsSameType
 
 USES
  GarantModel.ms.dict
+ GarantMetaModel.ms.dict
 ;
-
-BOOLEAN elem_func IsScriptKeyword
- Self .IsStereotype st_ScriptKeyword 
- >>> Result
-; // IsScriptKeyword
 
 WordAlias [[ [
 %REMARK 'Начинает определение константного массива. Пока просто мапируется на неконстантный.'
@@ -628,11 +511,6 @@ USES
  ForceUseNewGen.ms.dict
 ;
 
-BOOLEAN elem_func IsScriptKeywordsPack
- Self .IsStereotype st_ScriptKeywordsPack 
- >>> Result
-; // IsScriptKeywordsPack
-
 BOOLEAN elem_func IsUtilityPack
  Cached:
  (
@@ -654,22 +532,22 @@ BOOLEAN elem_func UseNewGenExcluded
    true
   ( Self GarantModel::vcmData .InheritsFrom )
    true
-  ( 
+/*{  ( 
    ( Self .IsUtilityPack ! )
    AND ( Self GarantModel::Tl3Tag .InheritsFrom )
    //( Self GarantModel::Tl3Variant .InheritsFrom )
    //AND ( Self GarantModel::Tl3TagImpl .InheritsFrom ! )
    AND ( Self GarantModel::TtfwKeyWordPrim .InheritsFrom ! )
   ) 
-   true
+   true}*/
   ( Self GarantModel::TddComboBoxConfigItem .InheritsFrom )
    true
   ( Self GarantModel::Tl3ProtoObjectForTie ?== )
    false
   ( Self GarantModel::Tl3ProtoObjectForTie .InheritsFrom )
    true
-  ( Self GarantModel::evdTagHolder .InheritsFrom )
-   true
+/*{  ( Self GarantModel::evdTagHolder .InheritsFrom )
+   true}*/
   DEFAULT
   begin
    if ( g_UseNewGenExcluded .IsNil ) then
@@ -1382,16 +1260,6 @@ BOOLEAN elem_func IsTarget
  >>> Result
 ; // IsTarget
 
-BOOLEAN elem_func IsAtom
- Self .IsStereotype st_Atom
- >>> Result
-; // IsAtom
-
-BOOLEAN elem_func IsTag
- Self .IsStereotype st_Tag
- >>> Result
-; // IsTag
-
 BOOLEAN elem_func IsEvdSchemaElement
  Self .IsAtom
  >>> Result
@@ -1561,12 +1429,6 @@ BOOLEAN elem_func NeedOwnFile
  Self .? .NeedOwnFilePrim >>> Result
 ; // NeedOwnFile
 
-PROCEDURE OutLn
- if g_NeedOutLn then
-  OutLnToFile
- true >>> g_NeedOutLn
-; // OutLn
-
 elem: WithDelim
   STRING IN aDelim
   TtfwWord IN aVar
@@ -1682,20 +1544,19 @@ ARRAY FUNCTION .filterMixIns>
  >>> Result
 ; // .filterMixIns>
 
-BOOLEAN elem_func IsMethod
- Self .IsStereotype st_method >>> Result
-; // IsMethod
-
 BOOLEAN elem_func IsMessageOperation
- Self .IsStereotype st_message::Operation >>> Result
+ Self .IsStereotype st_message::Operation 
+ >>> Result
 ; // IsMessageOperation
 
 BOOLEAN elem_func IsMessage
- Self .IsStereotype st_Message >>> Result
+ Self .IsStereotype st_Message 
+ >>> Result
 ; // IsMessage
 
 BOOLEAN elem_func IsLocalMethod
- Self .IsStereotype st_localmethod >>> Result
+ Self .IsStereotype st_localmethod 
+ >>> Result
 ; // IsLocalMethod
 
 ModelElement elem_func KeywordOperation
@@ -2081,7 +1942,7 @@ elem_iterator ScriptKeywordsPackProperties
   l_Properties
   
   Self .InheritsEx
-  .filter> .IsVCMForm
+  .filter> .IsVCMCustomForm
   .filter> ( .Abstraction at_final == )
   .for> (
     IN aForm
@@ -2318,11 +2179,6 @@ BOOLEAN elem_func IsMixInMirror
  >>> Result
 ; // IsMixInMirror
 
-BOOLEAN elem_func IsVCMOperations
- Self .IsStereotype st_VCMOperations 
- >>> Result
-; // IsVCMOperations
-
 BOOLEAN elem_func IsClassImplementable
  Cached:
  (
@@ -2541,14 +2397,21 @@ INTERFACE elem_func OverrideMethod
  >>> Result
 ; // OverrideMethod
 
+INTERFACE elem_func ImplementMethod:
+  ^ IN aLambda
+ Self .DecorateMethod:
+ (
+   IN aMethod
+  aMethod -> OpKind := opkind_Implemented
+  aMethod aLambda DO
+ ) // Self .DecorateMethod:
+ >>> Result
+; // ImplementMethod:
+
 INTERFACE elem_func ImplementMethod
  Cached:
  (
-  Self .DecorateMethod:
-  (
-    IN aMethod
-   aMethod -> OpKind := opkind_Implemented
-  ) // Self .DecorateMethod:
+  Self .ImplementMethod: DROP
  )
  >>> Result
 ; // ImplementMethod
@@ -2614,6 +2477,22 @@ STRING FUNCTION cImplementationUserCodeName
 STRING FUNCTION cVarUserCodeName
  cUserCodePrefix cVarUserCodeSuffix Cat >>> Result
 ; // cVarUserCodeName
+
+STRING FUNCTION cSetterImplementationUserCodeName
+ [ cUserCodePrefix 'set' cImplementationUserCodeSuffix ] strings:Cat >>> Result
+; // cSetterImplementationUserCodeName
+
+STRING FUNCTION cSetterVarUserCodeName
+ [ cUserCodePrefix 'set' cVarUserCodeSuffix ] strings:Cat >>> Result
+; // cSetterVarUserCodeName
+
+STRING FUNCTION cGetterImplementationUserCodeName
+ [ cUserCodePrefix 'get' cImplementationUserCodeSuffix ] strings:Cat >>> Result
+; // cGetterImplementationUserCodeName
+
+STRING FUNCTION cGetterVarUserCodeName
+ [ cUserCodePrefix 'get' cVarUserCodeSuffix ] strings:Cat >>> Result
+; // cGetterVarUserCodeName
 
 INTERFACE elem_func CastMethod
  Cached:
@@ -3083,8 +2962,11 @@ BOOLEAN elem_func IsVCMOperationPrim
  >>> Result
 ; // IsVCMOperationPrim
 
+WordAlias .IsVCMOperation .IsVCMOperationPrim
+
 BOOLEAN elem_func IsInternalOperation
- Self .IsStereotype st_InternalOperation::Operation >>> Result
+ Self .IsStereotype st_InternalOperation::Operation 
+ >>> Result
 ; // IsInternalOperation
 
 INTERFACE elem_func ParamsParam
@@ -3133,12 +3015,12 @@ ARRAY elem_func MethodParameters
        ( Self .IsInternalOperation )
         ( Self .Parameters )
        DEFAULT
-        ( GarantModel::IvcmTestExecutePrim .ParamsParam .ToArray )
+        ( GarantModel::IvcmExecuteParamsPrim .ParamsParam .ToArray )
       ; // RULES  
      ( Self .IsGetState )
       ( GarantModel::TvcmOperationStateIndex .StateParam .ToArray )
      ( Self .IsInternalOperation ) 
-      ( GarantModel::IvcmTestExecutePrim .ParamsParam .ToArray )
+      ( GarantModel::IvcmExecuteParams .ParamsParam .ToArray )
      DEFAULT
       ( Self .Parameters )
     ; // RULES 
@@ -3213,6 +3095,7 @@ elem_iterator PropertyKeys
    ( Self .Attributes )
  ; // RULES  
  .filter> ( .IsControlPrim ! )
+ .filter> ( .IsStereotype st_after::Attribute ! )
  >>> Result
 ; // PropertyKeys
 
@@ -3588,6 +3471,197 @@ BOOLEAN elem_func HasFieldName
  >>> Result
 ; // HasFieldName
 
+BOOLEAN elem_func IsInterfaceFactory
+ Self .IsStereotype st_InterfaceFactory
+ >>> Result
+; // IsInterfaceFactory
+
+BOOLEAN elem_func IsWrapper
+ Self .IsStereotype st_Wrapper
+ >>> Result
+; // IsWrapper
+
+ARRAY elem_func LoadList
+  STRING IN anExt
+  STRING IN aFuncSuffix
+ [empty] >>> Result 
+ VAR l_FileName
+ Self .LUID anExt Cat >>> l_FileName
+ l_FileName Ctx:ResolveIncludedFilePath >>> l_FileName
+ if ( l_FileName sysutils:FileExists ) then
+ begin
+  STRING VAR l_Code 
+  [ 
+   'INCLUDE ' 
+   cQuote l_FileName cQuote
+   ' '
+   'ME_' Self .LUID aFuncSuffix
+  ] strings:Cat >>> l_Code 
+  l_Code script:CompileStringAndProcess ( 
+   DO
+   >>> Result
+  ) // l_Code script:CompileStringAndProcess
+ end // ( l_FileName sysutils:FileExists )
+; // LoadList
+
+elem_iterator ImplementorsEx
+ Cached:
+ (
+  Self .Implementors
+  .join> ( Self '.pas.ms.script.impl' '_Implementors' .LoadList )
+  array:Copy
+ )
+ >>> Result
+; // ImplementorsEx
+
+ModelElement elem_func TagAttrType
+ //Cached:
+ (
+  VAR l_Target
+  Self .Target >>> l_Target
+  RULES
+   ( l_Target .Name 'String' == )
+    GarantModel::String
+   ( l_Target .Name 'Long' == )
+    GarantModel::Integer
+   ( l_Target .Name 'ULong' == )
+    GarantModel::Cardinal
+   ( l_Target .Name 'Int64' == )
+    GarantModel::Int64
+   ( l_Target .Name 'DateTime' == )
+    GarantModel::TDateTime
+   ( l_Target .Name 'DateTimeNotNull' == )
+    GarantModel::TDateTime
+   ( l_Target .Name 'Bool' == )
+    GarantModel::Boolean
+   ( l_Target .Name 'RawData' == )
+    GarantModel::Tk2RawData
+   ( Self .IsStereotype st_array::Attribute ) 
+    begin
+     VAR l_Implementor
+     l_Target .ImplementorsEx
+     .filter> .IsInterface
+     .filter> ( .Name Self .Name 'Helper' Cat == )
+     .FirstElement >>> l_Implementor
+     RULES
+      ( l_Implementor .NotIsNil )
+       l_Implementor
+      DEFAULT
+       GarantModel::Tl3Tag
+     ; // RULES
+    end // ( Self .IsStereotype st_array::Attribute )
+   ( l_Target .IsTag )
+    GarantModel::Tl3Tag
+   ( l_Target .IsAtom )
+    GarantModel::Tl3Tag
+   DEFAULT
+    l_Target
+  ; // RULES
+ )
+ >>> Result
+; // TagAttrType
+
+STRING elem_func TagAttrAccessor
+ Cached:
+ (
+  RULES
+   ( Self .Name 'String' == )
+    'Str'
+   ( Self .Name 'Long' == )
+    'Int'
+   ( Self .Name 'ULong' == )
+    'Int'
+   ( Self .Name 'Int64' == )
+    'Int64'
+   ( Self .Name 'DateTime' == )
+    'DateTime'
+   ( Self .Name 'DateTimeNotNull' == )
+    'DateTime'
+   ( Self .Name 'Bool' == )
+    'Bool'
+   ( Self .Name 'RawData' == )
+    'cAtom'
+   ( Self .IsTag )
+    'Attr'
+   ( Self .IsAtom )
+    'Attr'
+   DEFAULT
+    'Int'
+  ; // RULES
+ )
+ >>> Result
+; // TagAttrAccessor
+
+STRING elem_func TagAttrGetType
+ //Cached:
+ (
+  VAR l_Target
+  Self .Target >>> l_Target
+  RULES
+   ( l_Target .Name 'String' == )
+    ''
+   ( l_Target .Name 'Long' == )
+    ''
+   ( l_Target .Name 'ULong' == )
+    'Cardinal'
+   ( l_Target .Name 'Int64' == )
+    ''
+   ( l_Target .Name 'DateTime' == )
+    ''
+   ( l_Target .Name 'DateTimeNotNull' == )
+    ''
+   ( l_Target .Name 'Bool' == )
+    ''
+   ( l_Target .Name 'RawData' == )
+    ( GarantModel::Tk2RawData .TypeName )
+   ( l_Target .IsTag )
+    ''
+   ( l_Target .IsAtom )
+    ''
+   ( l_Target .IsSetOf )
+    ( [ 'k2_typ' Self .GetUP 'extprop:evd:NewTypeName' '_ToSet' ] strings:Cat )
+   DEFAULT
+    ( l_Target .TypeName )
+  ; // RULES
+ )
+ >>> Result
+; // TagAttrGetType
+
+STRING elem_func TagAttrSetType
+ //Cached:
+ (
+  VAR l_Target
+  Self .Target >>> l_Target
+  RULES
+   ( l_Target .Name 'String' == )
+    ''
+   ( l_Target .Name 'Long' == )
+    ''
+   ( l_Target .Name 'ULong' == )
+    'Integer'
+   ( l_Target .Name 'Int64' == )
+    ''
+   ( l_Target .Name 'DateTime' == )
+    ''
+   ( l_Target .Name 'DateTimeNotNull' == )
+    ''
+   ( l_Target .Name 'Bool' == )
+    ''
+//   ( l_Target .Name 'RawData' == )
+//    ( GarantModel::Tk2RawData .TypeName )
+   ( l_Target .IsTag )
+    ''
+   ( l_Target .IsAtom )
+    ''
+   ( l_Target .IsSetOf )
+    ( [ 'k2_typ' Self .GetUP 'extprop:evd:NewTypeName' '_FromSet' ] strings:Cat )
+   DEFAULT
+    ( 'Ord' )
+  ; // RULES
+ )
+ >>> Result
+; // TagAttrSetType
+
 elem_iterator Properties
  Cached:
  (
@@ -3598,6 +3672,130 @@ elem_iterator Properties
   >>> l_Properties
   
   l_Properties
+  
+  if ( Self .IsClassOrMixIn ) then
+  begin
+   RULES
+    ( Self .IsInterfaceFactory )
+     ()
+    ( Self .IsWrapper )
+     ()
+    DEFAULT
+     begin
+      Self .ImplementsEx 
+      .filter> .IsTag
+      .for> (
+        IN aTag
+        aTag .Attributes
+        .filter> ( .IsStereotype st_override::Attribute ! )
+        .filter> ( .IsStereotype st_default_child::Attribute ! )
+        .filter> ( .IsStereotype st_disabled_child::Attribute ! )
+        .filter> ( .IsStereotype st_children_override::Attribute ! )
+        .filter> ( .Stereotype st_children::Attribute ?!= )
+        .filter> ( .TagAttrType .NotIsNil )
+        .for> (
+          IN anAttr
+         .join> ToArray: (
+          anAttr .Name anAttr .TagAttrType MakeProperty: ( 
+            IN aMade
+           aMade -> %SUM := ( anAttr .Documentation )
+           aMade -> Visibility := PublicAccess
+           aMade -> Stereotype := (
+            RULES
+             ( anAttr .UPisTrue "ReadOnly" )
+              st_readonly::Attribute
+             ( anAttr .IsStereotype st_array::Attribute )
+              st_readonly::Attribute
+             DEFAULT
+              st_property::Attribute
+            ; // RULES
+           ) // aMade -> Stereotype
+           aMade -> Abstraction := at_final
+           aMade -> LinkType := lt_ref
+           aMade -> "pm" := true
+           aMade -> "needs field" := false
+           aMade -> "ifdef" := ( anAttr .GetUP "ifdef" )
+           aMade -> "ifndef" := ( anAttr .GetUP "ifndef" )
+           
+           aMade ->^ cGetterVarUserCodeName ^:= cEmptyUserCode
+           aMade .AddMethodWithParams: cGetterImplementationUserCodeName ( anAttr aMade ) ( 
+             IN anAttr
+             IN aMade
+            [ 
+             ' Assert(Self <> nil);' \n
+             ' Assert(TaggedData <> nil);' \n
+             if ( anAttr .Target .Name 'DateTimeNotNull' == ) then
+             begin
+              ' if not TaggedData.HasSubAtom(k2_attr' aMade .Name ') then' \n
+              '  if not Tk2Type(TaggedData.TagType).Prop[k2_attr' aMade .Name '].ReadOnly then' \n
+              '  begin' \n
+              '   pm_Set' aMade .Name '(Now);' \n
+              '  end;' '//not Tk2Type(TaggedData.TagType).Prop[k2_attr' aMade .Name '].ReadOnly then' \n
+             end // ( anAttr .Target .Name 'DateTimeNotNull' == )
+             ' Result := '
+             if ( anAttr .IsStereotype st_array::Attribute ) then
+             begin
+              if ( aMade .Target GarantModel::Tl3Tag .IsSameModelElement ) then
+              begin
+               'TaggedData.cAtom(k2_attr' anAttr .Name ')'
+              end // ( aMade .Target GarantModel::Tl3Tag .IsSameModelElement )
+              else
+              begin
+               'T' aMade .Target .TypeName '.Make(TaggedData.cAtom(k2_attr' anAttr .Name '))'
+              end // ( aMade .Target GarantModel::Tl3Tag .IsSameModelElement )
+             end // ( anAttr .IsStereotype st_array::Attribute )
+             else
+             begin
+              anAttr .TagAttrGetType
+              '(' 
+              'TaggedData.' anAttr .Target .TagAttrAccessor
+              if ( anAttr .Target .TagAttrAccessor 'cAtom' == ) then
+              begin
+               '(k2_attr' anAttr .Name ')'
+              end // ( anAttr .Target .TagAttrAccessor 'cAtom' == )
+              else
+              begin
+               if ( anAttr .Target .TagAttrAccessor 'Attr' != ) then
+                'A'
+               '[k2_attr' anAttr .Name ']'
+              end // ( anAttr .Target .TagAttrAccessor 'cAtom' == )
+              ')'
+             end // ( anAttr .IsStereotype st_array::Attribute )
+             ';'
+            ]
+           ) // aMade .AddMethodWithParams: cGetterImplementationUserCodeName ( anAttr aMade )
+           
+           aMade ->^ cSetterVarUserCodeName ^:= cEmptyUserCode
+           aMade .AddMethodWithParams: cSetterImplementationUserCodeName ( anAttr aMade ) ( 
+             IN anAttr
+             IN aMade
+            [
+             ' TaggedData.'
+             if ( anAttr .Target .TagAttrAccessor 'cAtom' == ) then
+             begin
+              'Attr'
+             end // ( anAttr .Target .TagAttrAccessor 'cAtom' == )
+             else
+             begin
+              anAttr .Target .TagAttrAccessor
+             end // ( anAttr .Target .TagAttrAccessor 'cAtom' == )
+             'W' '[k2_attr' anAttr .Name ', nil]'
+             ' := '
+             anAttr .TagAttrSetType
+             '('
+             'aValue'
+             ')'
+             ';'
+            ] 
+           ) // aMade .AddMethodWithParams: cSetterImplementationUserCodeName ( anAttr aMade ) 
+          ) // anAttr .Name anAttr .TagAttrType MakeProperty:
+         ) // .join> ToArray:
+        ) // .for>
+      ) // .for>
+     end // DEFAULT
+   ; // RULES 
+    
+  end // ( Self .IsClassOrMixIn )
   
   if ( Self .IsService ) then
   begin
@@ -3620,11 +3818,32 @@ elem_iterator Properties
        aMade -> LinkType := lt_ref
        aMade -> "pm" := true
        aMade -> "needs field" := true
+       aMade ->^ cSetterVarUserCodeName ^:= cEmptyUserCode
+       aMade .AddMethodWithParams: cSetterImplementationUserCodeName () ( 
+        [
+         ' Assert((f_Alien = nil) OR (aValue = nil));' \n
+         ' f_Alien := aValue;'
+        ]
+       ) // aMade .AddMethodWithParams: cSetterImplementationUserCodeName
       ) // 'Alien' l_Facet MakeProperty:
      ] // .join>
     end // ( l_Properties 'Alien' .HasModelElementWithName ! )
    end // ( l_Facet .IsNotNil )
   end // ( Self .IsService )
+  
+  if ( Self .IsVCMCustomForm ) then
+  begin
+   //if ( Self .Abstraction at_final == ) then
+   begin
+    .join>
+    ( 
+     Self .CollectOwnControls 
+     .filter> ( .IsControlOverride ! )
+     .filter> ( .NotInArray: l_Properties )
+     array:Copy
+    )
+   end // ( Self .Abstraction at_final == )
+  end // ( Self .IsVCMCustomForm )
  )
  >>> Result
 ; // Properties
@@ -4015,6 +4234,8 @@ BOOLEAN elem_func IsType
       false
      ( Self .IsMixInParamType )
       false 
+     ( Self .IsStereotype st_VCMFormZone ) 
+      false
      DEFAULT
       true
     ; // RULES
@@ -4288,6 +4509,24 @@ BOOLEAN elem_func IsVCMApplication
  >>> Result
 ; // IsVCMApplication
 
+STRING elem_func MethodUserCodeModifier
+ RULES
+  ( Self .IsSetter ) then
+   'set'
+  ( Self .IsProperty ) then
+   'get'
+  ( Self .IsTester ) then
+   'test'
+  ( Self .IsExecutor ) then
+   'exec'
+  ( Self .IsGetState ) then
+   'getstate'
+  DEFAULT
+   '' 
+ ; // RULES
+ >>> Result
+; // MethodUserCodeModifier
+
 elem_proc MethodUserCode
   STRING IN aKey
   TtfwWord IN aCode
@@ -4307,18 +4546,7 @@ elem_proc MethodUserCode
    ()
   DEFAULT
    (
-    RULES
-     ( Self .IsSetter ) then
-      ( 'set' l_Key Cat >>> l_Key )
-     ( Self .IsProperty ) then
-      ( 'get' l_Key Cat >>> l_Key )
-     ( Self .IsTester ) then
-      ( 'test' l_Key Cat >>> l_Key )
-     ( Self .IsExecutor ) then
-      ( 'exec' l_Key Cat >>> l_Key )
-     ( Self .IsGetState ) then
-      ( 'getstate' l_Key Cat >>> l_Key )
-    ; // RULES
+    Self .MethodUserCodeModifier l_Key Cat >>> l_Key
     
     if ( l_Implementor .IsNotNil ) then
     begin
@@ -4508,17 +4736,20 @@ elem_proc MethodUserCode
    )
   DEFAULT
    (
-    if ( Self .IsStaticConstructor ) then
-    begin
-     if ( aKey cImplementationUserCodeSuffix == ) then
-     begin
-      if ( l_Implementor .NeedsFinalize ) then
+    RULES
+     ( Self .IsStaticConstructor )
       begin
-       ' Finalize(Result);' .Out
-      end // ( l_Implementor .NeedsFinalize )
-      ' System.FillChar(Result, SizeOf(Result), 0);' .Out
-     end // ( aKey cImplementationUserCodeSuffix == )
-    end // ( Self .IsStaticConstructor )
+       if ( aKey cImplementationUserCodeSuffix == ) then
+       begin
+        if ( l_Implementor .NeedsFinalize ) then
+        begin
+         ' Finalize(Result);' .Out
+        end // ( l_Implementor .NeedsFinalize )
+        ' System.FillChar(Result, SizeOf(Result), 0);' .Out
+       end // ( aKey cImplementationUserCodeSuffix == )
+      end // ( Self .IsStaticConstructor )
+    ; // RULES
+    
     Self aKey l_Key aCode .DefaultUserCode 
    )
  ; // RULES 
@@ -5120,11 +5351,6 @@ ModelElement elem_func MethodType
  >>> Result
 ; // MethodType
 
-BOOLEAN elem_func IsAcceptableForScripts
- Self .UPisTrue 'extprop:rc:isAcceptableForScripts' 
- >>> Result
-; // IsAcceptableForScripts
-
 BOOLEAN elem_func InheritsOrImplementsAcceptableForScripts
  Cached:
  (
@@ -5302,7 +5528,9 @@ elem_proc UserCode:
  aSuffix DO >>> l_Key
  
  VAR l_Code
- Self cUserCodePrefix l_Key Cat .GetUserCode >>> l_Code
+ Self 
+  [ cUserCodePrefix Self .MethodUserCodeModifier l_Key ] strings:Cat 
+  .GetUserCode >>> l_Code
  
  if ( l_Code .IsValueValid ) then
  begin
@@ -6185,7 +6413,7 @@ elem_iterator ChildrenEx
    ) // .for>
    
    Self .InheritsEx
-   .filter> .IsVCMForm
+   .filter> .IsVCMCustomForm
    .filter> ( .Abstraction at_final == )
    .for> (
      IN aForm
@@ -6362,7 +6590,7 @@ elem_iterator ChildrenEx
    
   end // ( Self .IsScriptKeywordsPack )
   
-  if ( Self .IsVCMForm ) then
+  if ( Self .IsVCMCustomForm ) then
   begin
    if ( Self .Abstraction at_final == ) then
    begin
@@ -6403,7 +6631,7 @@ elem_iterator ChildrenEx
      >>> l_Children
     end // ( l_Children l_ClassName .HasModelElementWithName ! )
    end // ( Self .Abstraction at_final == )
-  end // ( Self .IsVCMForm )
+  end // ( Self .IsVCMCustomForm )
   
   if ( Self .IsUserType ) then
   begin
@@ -6475,6 +6703,11 @@ elem_iterator ChildrenEx
       aMade -> "register in scripts" := false
       aMade -> "need UC" := true
       
+      aMade .AddMethodWithParams: ( cUserCodePrefix 'impl' Cat ) aMade (
+        IN aMade
+       [ cOpenComment '$R ' aMade .EffectiveUnitName '.res' cCloseComment ]
+      ) // aMade .AddMethodWithParams: ( cUserCodePrefix 'impl' Cat ) aMade
+      
       aMade -> Operations := [
        'RegAxiom' MakeIniProcedure: (
          IN aMadeIni
@@ -6484,7 +6717,14 @@ elem_iterator ChildrenEx
       ] // aMade -> Operations
       
       aMade -> Implemented := [
-       GarantModel::TtfwAxiomaticsResNameGetter.ResName .ImplementMethod
+       GarantModel::TtfwAxiomaticsResNameGetter.ResName .ImplementMethod: (
+         IN aMethod
+        aMethod ->^ cVarUserCodeName ^:= cEmptyUserCode
+        aMethod .AddMethodWithParams: cImplementationUserCodeName aMade ( 
+          IN aMade
+         [ ' Result := ' cQuote aMade .EffectiveUnitName cQuote ';' ] 
+        ) // aMethod .AddMethodWithParams: cImplementationUserCodeName aMade
+       ) // GarantModel::TtfwAxiomaticsResNameGetter.ResName .ImplementMethod:
       ] // aMade -> Implemented
      ) // l_ClassName GarantModel::TtfwAxiomaticsResNameGetter MakeClass:
     ] // .join>
@@ -6725,7 +6965,8 @@ elem_iterator NeededElementsFromInheritsOrImplements
 ; // NeededElementsFromInheritsOrImplements
 
 elem_iterator AttributesAndOperationsNeededElements
- Self .AttributesAndOperations 
+ Self .AttributesAndOperations
+ .join> ( Self .Properties )
  .OperationsNeededElements
  >>> Result
 ; // AttributesAndOperationsNeededElements
@@ -6791,15 +7032,178 @@ BOOLEAN elem_func NeedsInitEntities
  >>> Result
 ; // NeedsInitEntities
 
+BOOLEAN elem_func HasAnyVCMController
+ Self .UPisTrue 'extprop:HasAnyVCMController'
+ >>> Result
+; // HasAnyVCMController
+
 BOOLEAN elem_func NeedsMakeControls
- Self .ChildrenEx
- .filter> .IsUserType
- .join> (
-  Self .CollectOwnControls
- ) // .join>
- .NotEmpty
+ Cached:
+ (
+  Self .ChildrenEx
+  .filter> .IsUserType
+  .join> (
+   Self .CollectOwnControls
+  ) // .join>
+  .NotEmpty
+ )
  >>> Result
 ; // NeedsMakeControls
+
+/*{
+// Реализует ли хоть одну операцию VCM
+%f _ImplementsSomeVCMOperation
+// возвращаемый результат: boolean
+@ %SU
+	[{<{}{%R#f_IsVCMOperations()=true}{C}>!=0}{\
+	%f_set_var(RESULT,"false")\
+	<{}{%O#f_IsVCMOperation()=true}\
+	[{"%O{ShowInContextMenu}"!=""|%O{ShowInContextMenu}!=undefined|"%O{ContextMenuWeight}"!=""|"%O{ShowInToolbar}"!=""|%O{ShowInToolbar}!=undefined}\
+	%f_set_var(RESULT,"true")\
+	%f_cycle_break(%S)\
+	]\
+	>\
+	[{%{RESULT}N!=true}\
+	<{}{%C#f_IsControl()=true}{%C}\
+	[{%C<{}{%R#f_IsVCMOperations()=true}{C}>!=0}\
+	%f_set_var(RESULT,"true")\
+	%f_cycle_break(%S)\
+	]\
+	>\
+	]\
+	%{RESULT}N\
+	}\
+	true\
+	]
+}*/
+
+BOOLEAN elem_func ImplementsSomeVCMOperation
+ Cached:
+ (
+  RULES
+   ( Self .ImplementsEx 
+     .filter> .IsVCMOperations
+     .NotEmpty )
+    true 
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // ImplementsSomeVCMOperation
+
+elem: AsExecuteDo:
+  ^ IN aLambda
+ Self .DecorateMethodAndDo: ( 
+   IN aMethod
+  aMethod -> OpModify := opModifyExecute
+  aMethod aLambda DO 
+ ) // Self .DecorateMethodAndDo:
+; // AsExecuteDo:
+
+elem: AsTestDo:
+  ^ IN aLambda
+ Self .DecorateMethodAndDo: ( 
+   IN aMethod
+  aMethod -> OpModify := opModifyTest
+  aMethod aLambda DO 
+ ) // Self .DecorateMethodAndDo:
+; // AsTestDo:
+
+elem: AsGetStateDo:
+  ^ IN aLambda
+ Self .DecorateMethodAndDo: ( 
+   IN aMethod
+  aMethod -> OpModify := opModifyGetState
+  aMethod aLambda DO 
+ ) // Self .DecorateMethodAndDo:
+; // AsGetStateDo:
+
+elem_iterator InitEntitiesUC
+ [ 
+  ' inherited;'
+  if ( Self .ImplementsSomeVCMOperation ) then
+  begin
+   [ \n 
+     ' with Entities.Entities do' \n ]
+   [ ' begin' ]
+   VAR l_PublishedEntities
+   [] >>> l_PublishedEntities
+   
+   STRING elem_func OnGetTarget
+     IN anEntity
+    'nil'
+    >>> Result
+   ; // OnGetTarget
+   
+   Self .ImplementsEx
+   .filter> .IsVCMOperations
+   .filter> ( .Name .AddToArray?: l_PublishedEntities )
+   .for> (
+     IN anEntity
+    [ \n
+     '  PublishFormEntity(en_' anEntity .Name ', ' Self anEntity .OnGetTarget ');' ]
+   ) // .for>
+   
+   VAR l_PublishedOperations
+   [] >>> l_PublishedOperations
+   
+   Self .ImplementedEx
+   .filter> .IsVCMOperation
+   .filter> ( .AddToArray?: l_PublishedOperations )
+   .for> (
+     IN anOperation
+    anOperation .IfDefBraceLnBefore: 
+    [ \n
+     '  ' 
+     if ( anOperation .IsInternalOperation ) then
+      'PublishOpWithResult'
+     else
+      'PublishOp'
+     '(en_' anOperation .Parent .Name ', ' 
+     'op_' anOperation .Name ', ' 
+     if (
+         ( anOperation .UPisTrue "is FormActivate" ! )
+         OR ( anOperation .IsInternalOperation )
+        ) then
+     begin
+      if ( anOperation .IsInternalOperation ) then
+      begin
+       anOperation .MethodName
+       // %o%f_pas_MethodName("callgate")
+      end // ( anOperation .IsInternalOperation )
+      else
+      begin
+       anOperation .AsExecuteDo: .MethodName
+      end // ( anOperation .IsInternalOperation )
+     end
+     else
+      'nil'
+     ', ' 
+     if ( anOperation .UPisTrue "is query" ! ) then
+     begin
+      anOperation .AsTestDo: .MethodName
+     end // ( anOperation .UPisTrue "is query" ! )
+     else
+      'nil'
+     ', ' 
+     if ( anOperation .UPisTrue "has states" ) then
+     begin
+      anOperation .AsGetStateDo: .MethodName
+     end // ( anOperation .UPisTrue "has states" )
+     else
+      'nil'
+     if ( anOperation .UPisTrue "no prefix" ) then
+      ', true'
+     ');' 
+    ]
+   ) // .for> 
+   [ \n
+     ' end;//with Entities.Entities' ]
+  end // ( Self .ImplementsSomeVCMOperation )
+ ]
+ >>> Result
+; // InitEntitiesUC
 
 elem_iterator OverriddenEx
  Cached:
@@ -6949,6 +7353,54 @@ elem_iterator OverriddenEx
     end // ( Self GarantModel::TtfwWord .InheritsFromOrSomeAncestorImplements ) 
    end // ( Self .GetUP "is immediate" IsBool )
    
+   RULES
+    ( Self .IsInterfaceFactory )
+     ()
+    ( Self .IsWrapper )
+     ()
+    DEFAULT
+     begin
+      VAR l_Tag
+      Self .ImplementsEx 
+      .filter> .IsTag
+      .FirstElement >>> l_Tag
+      if ( l_Tag .NotIsNil ) then
+      begin
+       VAR l_GetTaggedDataType
+       l_Overridden 
+       .join> ( Self .ImplementedEx ) 
+       .filter> ( GarantModel::k2TaggedDataHolder.GetTaggedDataType .IsSameModelElement )
+       .FirstElement >>> l_GetTaggedDataType
+       
+       if ( l_GetTaggedDataType .IsNil ) then
+       begin
+        .join> ToArray: ( 
+         GarantModel::k2TaggedDataHolder.GetTaggedDataType .OverrideMethod: (
+           IN aMade
+          aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+          aMade .AddMethodWithParams: cImplementationUserCodeName l_Tag ( 
+            IN aTag
+           [ 
+            ' Result := k2_typ' aTag .Name ';'
+           ]
+          ) // aMade .AddMethodWithParams: cImplementationUserCodeName Self
+         ) // GarantModel::k2TaggedDataHolder.GetTaggedDataType .OverrideMethod:
+        ) // .join> ToArray:
+       end // ( l_GetTaggedDataType .IsNil )
+       else
+       begin
+        l_GetTaggedDataType ->^ cVarUserCodeName ^:= cEmptyUserCode
+        l_GetTaggedDataType .AddMethodWithParams: cImplementationUserCodeName l_Tag ( 
+          IN aTag
+         [ 
+          ' Result := k2_typ' aTag .Name ';'
+         ]
+        ) // aMade .AddMethodWithParams: cImplementationUserCodeName Self
+       end // ( l_GetTaggedDataType .IsNil )
+      end // ( l_Tag .NotIsNil )
+     end // DEFAULT
+   ; // RULES 
+    
   end // ( Self .IsClassOrMixIn )
   
   if ( Self .IsTestCase ) then
@@ -6974,14 +7426,32 @@ elem_iterator OverriddenEx
   
   if ( Self .IsVCMForm ) then
   begin
+   if ( Self .HasAnyVCMController ) then
+   begin
+    .join> ToArray: ( 
+     GarantModel::vcmLayout.SignalDataSourceChanged .OverrideMethod: (
+       IN aMade
+      aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+      aMade .AddMethodWithParams: cImplementationUserCodeName Self ( 
+        IN aForm
+       [ 
+        ' inherited;'
+       ]
+      ) // aMade .AddMethodWithParams: cImplementationUserCodeName Self
+     ) // GarantModel::vcmLayout.SignalDataSourceChanged .OverrideMethod:
+    ) // .join> ToArray:
+   end // ( Self .HasAnyVCMController )
+   
    if ( Self .NeedsInitEntities ) then
    begin
     .join> ToArray: ( 
      GarantModel::vcmLayout.InitEntities .OverrideMethod: (
        IN aMade
+      aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+      aMade .AddMethodWithParams: cImplementationUserCodeName Self .InitEntitiesUC
      ) // GarantModel::vcmLayout.InitEntities .OverrideMethod:
     ) // .join> ToArray:
-   end // InitEntities
+   end // ( Self .NeedsInitEntities )
    
    if ( Self .NeedsMakeControls ) then
    begin   
@@ -7067,7 +7537,7 @@ elem_iterator OverriddenEx
         
         STRING elem_func ControlParentName
          RULES
-          ( Self .IsVCMForm )
+          ( Self .IsVCMCustomForm )
            'Self'
           DEFAULT
            ( Self .AttrName ) 
@@ -7076,7 +7546,6 @@ elem_iterator OverriddenEx
         ; // ControlParentName
         
         aForm .CollectOwnControls
-        //.filter> ( .NeedPutToDFM ! )
         .for> (
           IN aControl
          aControl .IfDefBraceLnBefore: (
@@ -7111,7 +7580,14 @@ elem_iterator OverriddenEx
             if ( aControl .IsComponent ! ) then
             begin
              [ \n ' ' 
-               aControl .FieldName 
+               if ( aControl .IsControlOverride ) then
+               begin
+                aControl .AttrName 
+               end // ( aControl .IsControlOverride )
+               else
+               begin
+                aControl .FieldName 
+               end // ( aControl .IsControlOverride )
                '.Parent'
                ' := ' 
                aControl .Parent .ControlParentName
@@ -7121,7 +7597,7 @@ elem_iterator OverriddenEx
              aControl .Documentation >>> l_Doc
              if ( l_Doc .NotIsNil ) then
              begin
-              if ( aControl .GetUP "need Caption" false ?== ) then
+              if ( aControl .GetUP "need Caption" false ?!= ) then
               begin
                [ \n ' ' 
                  aControl .FieldName
@@ -7130,7 +7606,7 @@ elem_iterator OverriddenEx
                  cQuote l_Doc cQuote
                  ';'
                ]
-              end // ( aControl .GetUP "need Caption" false ?== )
+              end // ( aControl .GetUP "need Caption" false ?!= )
              end // if ( l_Doc .NotIsNil )
             end // ( aControl .IsComponent ! )
            end // ( aControl GarantModel::TvgReminder .InheritsFrom ! )
@@ -7341,18 +7817,42 @@ elem_iterator IntfUses
    .join> ToArray: GarantModel::vcmExternalInterfaces 
   end // ( Self .IsVCMControls )
   
-  if ( Self .IsVCMForm ) then
+  if ( Self .IsVCMCustomForm ) then
   begin
+   if ( Self .Abstraction at_final != ) then
+   begin
+    .join> ToArray: GarantModel::vcmExternalInterfaces
+    // - вообще это надо только для Internal операций
+   end // ( Self .Abstraction at_final != )
+   
+   if ( Self .IsMixIn ! ) then
+   begin
+    //.join> ToArray: ( Self .DefaultAncestor )
+    .join> ToArray: ( Self .MainAncestorThatNotMixIn )
+   end // ( Self .IsMixIn ! )
    if ( Self .Abstraction at_final == ) then
    begin
-    .join> ToArray: GarantModel::TvcmEntities
+    if ( Self .IsVCMForm ) then
+    begin
+     .join> ToArray: GarantModel::TvcmEntities
+    end // ( Self .IsVCMForm )
+    .join> ( 
+     Self .CollectControls
+     .filter> .NeedPutToDFM
+     .join> ( Self .CollectOwnControls )
+     .map> .AttrType
+     .filterNil>
+    ) // .join>
    end // ( Self .Abstraction at_final == )
-   .join> ( 
-    Self .CollectOwnControls
-    .map> .AttrType
-    .filterNil>
-   ) // .join>
-  end // ( Self .IsVCMForm )
+   else
+   begin
+    .join> ( 
+     Self .CollectOwnControls
+     .map> .AttrType
+     .filterNil>
+    ) // .join>
+   end // ( Self .Abstraction at_final == )
+  end // ( Self .IsVCMCustomForm )
   
  ) 
  >>> Result
@@ -7366,9 +7866,10 @@ BOOLEAN elem_func IsInjects
 elem_iterator InjectedElements
  Cached:
  (
-  Self .Injected 
+  Self .Injected
   .filter> .IsInjects
   .map> .Parent
+  .join> ( Self '.pas.ms.script.inj' '_InjectedElements' .LoadList )
   array:Copy
  ) 
  >>> Result
@@ -7636,6 +8137,7 @@ elem_iterator Used
     .join> ToArray: GarantModel::l3Base 
    end // ( Self .ImplementedAndOverridden .filter> .IsIterator .NotEmpty )
    .joinWithLambded> ( Self .ImplementedAndOverridden ) .UsesInDependencies
+   .join> ( Self .ImplementsEx .filter> .IsTag )
   end // ( Self .IsClassOrMixIn )
   
   if ( Self .NeedRegisterInScripts ) then
@@ -7669,13 +8171,13 @@ elem_iterator Used
   begin
    if (
        Self .InheritsEx
-       .filter> .IsVCMForm
+       .filter> .IsVCMCustomForm
        .filter> ( .Abstraction at_final == )
        .NotEmpty
       ) then
    begin
     Self .InheritsEx
-    .filter> .IsVCMForm
+    .filter> .IsVCMCustomForm
     .filter> ( .Abstraction at_final == )
     .for> (
       IN aForm
@@ -7686,8 +8188,16 @@ elem_iterator Used
      ) // .join>
     ) // .for>
     .join> ToArray: GarantModel::TtfwClassRef(Proxy) 
-   end // .filter> .IsVCMForm
+   end // .filter> .IsVCMCustomForm
   end // ( Self .IsScriptKeywordsPack )
+  
+  if ( Self .IsVCMCustomForm ) then
+  begin
+   if ( Self .NeedsMakeControls ) then
+   begin
+    .join> ToArray: GarantModel::vcmInterfaces
+   end // ( Self .NeedsMakeControls )
+  end // ( Self .IsVCMCustomForm )
   
  )
  >>> Result
@@ -7794,6 +8304,14 @@ elem_iterator ImplUses
   begin
    .join> ( Self .ChildrenWithOwnFile )
   end // ( Self .IsVCMFormsPack )
+  
+  if ( Self .IsVCMForm ) then
+  begin
+   if ( Self .Abstraction at_final != ) then
+   begin
+    .join> ToArray: GarantModel::StdRes
+   end // ( Self .Abstraction at_final != )
+  end // ( Self .IsVCMForm )
   
   if ( Self .IsVCMFormSetFactory ) then
   begin
@@ -8652,33 +9170,6 @@ elem: AsSetterDo:
  ; // RULES
 ; // AsSetterDo:
 
-elem: AsTestDo:
-  ^ IN aLambda
- Self .DecorateMethodAndDo: ( 
-   IN aMethod
-  aMethod -> OpModify := opModifyTest
-  aMethod aLambda DO 
- ) // Self .DecorateMethodAndDo:
-; // AsTestDo:
-
-elem: AsExecuteDo:
-  ^ IN aLambda
- Self .DecorateMethodAndDo: ( 
-   IN aMethod
-  aMethod -> OpModify := opModifyExecute
-  aMethod aLambda DO 
- ) // Self .DecorateMethodAndDo:
-; // AsExecuteDo:
-
-elem: AsGetStateDo:
-  ^ IN aLambda
- Self .DecorateMethodAndDo: ( 
-   IN aMethod
-  aMethod -> OpModify := opModifyGetState
-  aMethod aLambda DO 
- ) // Self .DecorateMethodAndDo:
-; // AsGetStateDo:
-
 elem: AsIteratorFDo:
   ^ IN aLambda
  Self .DecorateMethodAndDo: ( 
@@ -8974,11 +9465,6 @@ BOOLEAN elem_func IsSettingsHolder
  >>> Result
 ; // IsSettingsHolder
 
-BOOLEAN elem_func IsInterfaceFactory
- Self .IsStereotype st_InterfaceFactory
- >>> Result
-; // IsInterfaceFactory
-
 BOOLEAN elem_func UseNewGen
  Cached:
  (
@@ -9008,7 +9494,7 @@ BOOLEAN elem_func UseNewGen
     true
    ( Self .IsScriptKeywords )
     true
-   ( Self .IsStereotype st_Wrapper )
+   ( Self .IsWrapper )
     true
    ( Self .IsStereotype st_EVD )
     false 
@@ -9020,6 +9506,17 @@ BOOLEAN elem_func UseNewGen
     true 
    ( Self .IsVCMForm )
     RULES
+     ( Self .Abstraction at_final == )
+     // - финальные формы наверное уже нормально генерируются
+      true
+     DEFAULT
+      ( Self .Parent call.me )
+    ; // RULES
+   ( Self .IsVCMDataModule )
+    RULES
+     ( Self .Abstraction at_final == )
+     // - финальные формы наверное уже нормально генерируются
+      true
      DEFAULT
       ( Self .Parent call.me )
     ; // RULES
@@ -9161,13 +9658,10 @@ elem_iterator AllOperationsForOverload
        begin
         .join> ToArray: ( Self .InstanceMethod )
        end // ( Self .HasFactory ! )
-       //if ( Self .UseNewGen ) then
+       if ( Self .OperationsEx 'Exists' .HasModelElementWithName ! ) then
        begin
-        if ( Self .OperationsEx 'Exists' .HasModelElementWithName ! ) then
-        begin
-         .join> ToArray: ( Self .ExistsMethod )
-        end // ( Self .OperationsEx 'Exists' .HasModelElementWithName ! )
-       end // ( Self .UseNewGen )
+        .join> ToArray: ( Self .ExistsMethod )
+       end // ( Self .OperationsEx 'Exists' .HasModelElementWithName ! )
       end // ( Self .IsSingleton )
     )
    DEFAULT
@@ -9211,6 +9705,7 @@ elem_iterator AllOperationsForDefine
      .filter> ( .IsInline ! ) 
     ) 
   ; // RULES
+  .filter> ( .Visibility UnknownAccess != )
  )
  >>> Result
 ; // AllOperationsForDefine
@@ -9472,12 +9967,15 @@ INTEGER elem_func FieldVisibility
 
 elem_proc OutClassInner
  Indented: (
-  if ( Self .IsVCMForm ) then
+  if ( Self .IsVCMCustomForm ) then
   begin
    if ( Self .Abstraction at_final == ) then
    begin
     Indented: (
-     'Entities : TvcmEntities;' .Out
+     if ( Self .IsVCMForm ) then
+     begin
+      'Entities : TvcmEntities;' .Out
+     end // ( Self .IsVCMForm )
      Self .CollectControls
      .filter> ( .IsControlOverride ! )
      .filter> .NeedPutToDFM
@@ -9487,7 +9985,7 @@ elem_proc OutClassInner
      ) // .for>
     ) // Indented:
    end // ( Self .Abstraction at_final == )
-  end // ( Self .IsVCMForm )
+  end // ( Self .IsVCMCustomForm )
   Self .Fields .ByVisibility> .FieldVisibility .OutField
   
   TF g_Implementor (
@@ -10333,6 +10831,8 @@ elem_proc OutType
    () 
   ( Self .IsTestLibrary )
    () 
+  ( Self .IsStereotype st_VCMFormZone ) 
+   ()
   DEFAULT
    (
     if ( Self .NotInArray: g_OutedTypes ) then
@@ -11071,13 +11571,13 @@ BOOLEAN elem_func NeedsInstanceR
 
 elem_proc OutClassImplementation
 
- if ( Self .IsVCMForm ) then
+ if ( Self .IsVCMCustomForm ) then
  begin
   if ( Self .Abstraction at_final == ) then
   begin
    [ '{$R *.DFM}' \n ] .Out
   end // ( Self .Abstraction at_final == )
- end // ( Self .IsVCMForm )
+ end // ( Self .IsVCMCustomForm )
  
  Self .IfDef:
  (
@@ -11723,7 +12223,7 @@ elem_iterator IniOperations
     
     .filter> .IsAcceptableForScripts
     .map> .RegTypeMethod
-    .filter> ( .Name l_IniOperations SWAP .HasModelElementWithName ! )
+    .filter> ( l_IniOperations SWAP .Name .HasModelElementWithName ! )
     .for> (
       IN aMethod
      .join> ToArray: aMethod 

@@ -29,6 +29,20 @@ PROCEDURE array:?AddTo
  ) // aValue l_Array array:Has ! ?
 ; // array:?AddTo
 
+FUNCTION .AddToArray?:
+  IN aValue
+  ^ IN anArray
+
+ false >>> Result
+ ARRAY VAR l_Array
+ anArray DO >>> l_Array
+
+ aValue l_Array array:Has ! ? (
+  aValue array:AddTo l_Array
+  true >>> Result
+ ) // aValue l_Array array:Has ! ?
+; // .AddToArray?:
+
 USES
  axiom_push.ms.dict
 ;

@@ -12,6 +12,10 @@ initialization (
  @ UIDS_LIST DisableForHelp
 )
 
+USES
+ Chars.ms.dict
+;
+
 TtfwWord FUNCTION LoadWord
   STRING IN aWordName
   STRING IN aDictName
@@ -25,23 +29,29 @@ TtfwWord FUNCTION LoadWord
  end // l_VAR IsNil !
  else
  begin
-  //aWordName false @ UIDS_LIST pop:NewWordDefinitor:CheckRefcountVar >>> l_VAR
   aWordName false @ UIDS_LIST pop:NewWordDefinitor:CheckVar >>> l_VAR
-  //UIDS_LIST ->^ aWordName >>> l_VAR
-  // - добавляем переменную и снимем её со стека
   
   STRING VAR l_Code 
-  [ 'INCLUDE ' '''' aDictName '''' ' @ ' aWordName ] strings:Cat >>> l_Code 
   BOOLEAN VAR l_WasException
   false >>> l_WasException
-  TRY
-   l_Code script:CompileStringAndProcess DO
-  EXCEPT
-   current:exception:Message .
-   [ 'Возможно элемент ' aWordName ' удалён' ] strings:Cat .
-   true >>> l_WasException
+  
+  aDictName Ctx:ResolveIncludedFilePath >>> aDictName
+  if ( aDictName sysutils:FileExists ) then
+  begin
+   [ 'INCLUDE ' cQuote aDictName cQuote ' @ ' aWordName ] strings:Cat >>> l_Code 
+   TRY
+    l_Code script:CompileStringAndProcess DO
+   EXCEPT
+    current:exception:Message .
+    [ 'Возможно элемент ' aWordName ' удалён' ] strings:Cat .
+    true >>> l_WasException
+    nil >>> Result
+   END
+  end // ( aDictName sysutils:FileExists )
+  else
+  begin
    nil >>> Result
-  END 
+  end // ( aDictName sysutils:FileExists )
   
   if ( l_WasException ! ) then
   begin
@@ -49,7 +59,6 @@ TtfwWord FUNCTION LoadWord
    Result pop:Word:Name aWordName == ?ASSURE [ 'Вернулось неверное слово ' Result pop:Word:Name ' вместо ' aWordName ]
   end // l_WasException !
   l_VAR ^:= Result
-  //Log: [ Result pop:Word:Name ' loaded' ]
  end // l_VAR IsNil !
 ; // LoadWord 
 

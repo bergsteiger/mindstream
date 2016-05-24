@@ -1,0 +1,187 @@
+UNIT CollectElements.ms.dict
+
+USES
+ axiom_push.ms.dict
+; 
+
+USES
+ DictionaryByName.ms.dict
+;
+
+USES
+ ElementsRTTI.ms.dict
+;
+
+USES
+ axiom:KeyValues
+ axiom:WordBox
+;
+
+USES
+ arrays.ms.dict
+;
+
+USES
+ IsNil.ms.dict
+;
+
+USES
+ CountIt.ms.dict
+;
+
+USES
+ FirstElement.ms.dict
+;
+
+USES
+ KeyValuesCreateAndDo.ms.dict
+;
+
+USES
+ GarantMetaModel.ms.dict
+;
+
+ARRAY FUNCTION .CollectInDictionary:
+  IN aDictName
+  ^ IN aCollectionLambda
+ [
+  VAR l_Dict
+  aDictName DictionaryByName >>> l_Dict
+  
+  VAR l_DictFileName
+  l_Dict pop:DictionaryEx:FileName sysutils:ExtractFileName >>> l_DictFileName
+  
+  l_Dict pop:Dictionary:WordsIterator 
+  .for> (
+    IN aWord
+   aWord aCollectionLambda DO 
+   .for> (
+     IN aDep
+    KeyValuesCreate: (
+      IN aMade
+     aMade -> SourceFile := l_DictFileName
+     aMade -> Source := aWord
+     aMade -> Target := aDep
+    ) // KeyValuesCreate:
+   ) // .for>
+  ) // .for>
+ ]
+ >>> Result
+; // .CollectInDictionary:
+
+ARRAY FUNCTION CollectInAllDictionaries:
+  ^ IN aCollectionLambda
+ [ 
+  @ ( 
+    IN aDict
+   aDict .CollectInDictionary: ( aCollectionLambda DO ) 
+  )
+  '*.pas.ms.script' 
+  VAR l_Dir
+  thisDictionary pop:DictionaryEx:FileName sysutils:ExtractFilePath >>> l_Dir
+  if ( l_Dir .IsNil ) then
+  begin
+   sysutils:GetCurrentDir >>> l_Dir
+  end // ( l_Dir .IsNil )
+  //l_Dir .
+  l_Dir
+  ProcessFilesWithMask
+ ] >>> Result
+; // CollectInAllDictionaries:
+
+ARRAY FUNCTION NormalizeCollected
+  ARRAY IN aCollected
+ [] >>> Result
+ 
+ aCollected .for> (
+  .map> pop:WordBox:Boxed
+  .for> (
+    IN aRec
+   VAR l_Rec
+   Result
+   .map> pop:WordBox:Boxed
+   .filter> (
+     IN anItem
+    anItem -> Target .UID aRec -> Target .UID ==
+   )
+   .FirstElement >>> l_Rec
+   
+   : MakePair
+    KeyValuesCreate: (
+      IN aPair
+     aPair -> SourceFile := ( aRec -> SourceFile )
+     aPair -> Source := ( aRec -> Source )
+    ) // KeyValuesCreate:
+   ; // MakePair
+   
+   if ( l_Rec .NotIsNil ) then
+   begin
+    MakePair .AddToArray: ( l_Rec -> Sources )
+   end // ( l_Rec .NotIsNil )
+   else
+   begin
+    KeyValuesCreate: (
+      IN aMade
+     aMade -> Target := ( aRec -> Target )
+     aMade -> Sources := [ MakePair ]
+    ) .AddToArray: Result
+   end // ( l_Rec .NotIsNil )
+  ) // .for>
+ ) // .for>
+; // NormalizeCollected
+
+USES
+ Chars.ms.dict
+;
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+USES
+ Out.ms.dict
+;
+
+PROCEDURE OutCollected
+  ARRAY IN aCollected
+  STRING IN anExt
+  STRING IN aFuncSuffix
+ aCollected NormalizeCollected
+ .map> pop:WordBox:Boxed
+ .for> (
+   IN aRec
+  
+  TF g_OutFile (
+   TF g_NeedOutLn (
+    aRec -> Target .UID anExt Cat File:OpenWrite >>> g_OutFile
+    TRY
+     [ 'INCLUDE ' cQuote 'ElementsRTTI.ms.dict' cQuote ] .Out
+     OutLn
+     [ ': ME_' aRec -> Target .UID aFuncSuffix ' // ' aRec -> Target .Name ] .Out
+     Indented: (
+      'Seq: (' .Out
+      Indented: (
+       aRec -> Sources
+       .map> pop:WordBox:Boxed
+       .map> (
+         IN aRec
+        [ 
+         'WL' ' '
+         cQuote 'ME_' aRec -> Source .UID cQuote
+         ' '
+         cQuote aRec -> SourceFile cQuote
+         ' // ' aRec -> Source .Name
+        ]
+       ) // .map>
+       .for> .Out
+      ) // Indented:
+      ') // Seq:' .Out
+     ) // Indented:
+     ';' .Out
+    FINALLY
+     nil >>> g_OutFile
+    END
+   ) // TF g_NeedOutLn
+  ) // TF g_OutFile
+ ) // .for>
+; // OutCollected

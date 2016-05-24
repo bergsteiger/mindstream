@@ -8,12 +8,19 @@ IMMEDIATE MACRO thisDictionary
  Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary CompileValue
 ; // thisDictionary
 
+USES
+ Chars.ms.dict
+;
+
 OBJECT FUNCTION DictionaryByName
   IN aDictName
  nil >>> Result
  STRING VAR l_Code 
- //[ 'INCLUDE ' '''' aDictName '''' ' thisDictionary ' ] strings:Cat >>> l_Code 
- [ 'INCLUDE ' '''' aDictName '''' ' [EXECUTE] ( Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary CompileValue ) ' ] strings:Cat >>> l_Code 
+ [ 
+  'INCLUDE ' 
+  cQuote aDictName cQuote 
+  ' [EXECUTE] ( Ctx:Engine pop:ScriptEngine:CurrentCompilingDictionary CompileValue ) ' 
+ ] strings:Cat >>> l_Code 
  l_Code script:CompileStringAndProcess ( 
   DO
   VAR l_OurDict
@@ -22,5 +29,5 @@ OBJECT FUNCTION DictionaryByName
   l_OurDict pop:DictionaryEx:UsedDictionaries
   .filter> ( pop:DictionaryEx:FileName sysutils:ExtractFileName aDictName sysutils:ExtractFileName == )
   .FirstElement >>> Result
- )
+ ) // l_Code script:CompileStringAndProcess
 ; // DictionaryByName

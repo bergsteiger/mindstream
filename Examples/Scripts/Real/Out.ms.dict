@@ -1,0 +1,145 @@
+UNIT Out.ms.dict
+
+USES
+ axiom_push.ms.dict
+;
+
+USES
+ core.ms.dict
+;
+
+USES 
+ ElementsRTTI.ms.dict
+;
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+USES
+ SaveVarAndDo.ms.dict
+;
+
+CONST cPathSep '\'
+
+FILE CompileTime-VAR g_OutFile nil
+%REMARK 'Текущий файл'
+
+STRING CompileTime-VAR g_Indent ''
+%REMARK 'Текущий отступ'
+
+CONST cIndentChar ' '
+
+STRING FUNCTION IndentStr
+ g_Indent >>> Result
+; // IndentStr
+
+OBJECT STRING INTEGER ARRAY BOOLEAN TYPE OUTABLE
+
+USES
+ Chars.ms.dict
+;
+
+BOOLEAN CompileTime-VAR g_EnableAutoEOL true
+BOOLEAN CompileTime-VAR g_NeedOutLn false
+
+: DoToOut
+ g_OutFile File:WriteStr
+; // DoToOut
+
+VAR g_ToOut
+( @ DoToOut >>> g_ToOut )
+
+: ToOut
+ g_ToOut IsNil ?FAIL 'Не определён файл для вывода'
+ g_ToOut DO
+; // ToOut
+
+PROCEDURE OutLnToFile
+ \n ToOut
+; // OutLnToFile
+
+BOOLEAN FUNCTION .Out?
+
+  OUTABLE IN aValue
+  
+ : .OutToFile
+  if g_NeedOutLn then
+  begin
+   false >>> g_NeedOutLn
+   OutLnToFile
+  end // g_NeedOutLn
+  ToOut
+ ; // .OutToFile 
+  
+ VAR l_WasOut
+ VAR l_NeedIndent
+
+ PROCEDURE .OutValue
+   OUTABLE IN aValue
+  RULES 
+   ( aValue .IsValueValid ! )
+    ()
+   ( aValue IsArray )
+    begin
+     aValue .for> call.me
+    end // aValue IsArray
+   DEFAULT 
+    begin
+     STRING VAR l_Value 
+     aValue ToPrintable >>> l_Value
+     if ( l_WasOut ! ) then
+     begin
+      true >>> l_WasOut
+      IndentStr .OutToFile
+      false >>> l_NeedIndent
+     end // l_WasOut !
+     
+     if ( l_NeedIndent ) then
+     begin
+      false >>> l_NeedIndent
+      IndentStr .OutToFile
+     end // l_NeedIndent
+  
+     if ( l_Value \n == ) then
+     begin
+      l_Value .OutToFile
+      true >>> l_NeedIndent
+     end // ( l_Value \n == )
+     else
+     begin
+      l_Value .OutToFile
+     end // ( l_Value \n == )
+    end // DEFAULT
+  ; // RULES  
+ ; // .OutValue
+ 
+ false >>> l_WasOut
+ false >>> l_NeedIndent
+ aValue .OutValue
+ 
+ if l_WasOut then
+  if g_EnableAutoEOL then
+   OutLnToFile
+  
+ l_WasOut >>> Result
+; // .Out?
+
+: .Out
+ .Out? DROP
+; // .Out
+
+PROCEDURE Indented:
+  ^ IN aLambda
+  
+ TF g_Indent (
+  g_Indent cIndentChar Cat >>> g_Indent
+  aLambda DO
+ ) 
+; // Indented:
+
+PROCEDURE OutLn
+ if g_NeedOutLn then
+  OutLnToFile
+ true >>> g_NeedOutLn
+; // OutLn

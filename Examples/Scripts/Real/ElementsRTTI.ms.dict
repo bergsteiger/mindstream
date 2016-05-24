@@ -340,6 +340,10 @@ elem_iterator Zones
  Self 'Zones' .ElemList >>> Result
 ; // Zones
 
+elem_iterator Implementors
+ Self 'Implementors' .ElemList >>> Result
+; // Implementors
+
 elem_iterator Forwarded
  Self 'Forwarded' .ElemList >>> Result
 ; // Forwarded

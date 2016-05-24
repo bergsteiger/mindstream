@@ -1,0 +1,40 @@
+UNIT GarantMetaModel.ms.dict
+
+USES 
+ ElementsRTTI.ms.dict
+;
+
+BOOLEAN elem_func IsScriptKeyword
+ Self .IsStereotype st_ScriptKeyword 
+ >>> Result
+; // IsScriptKeyword
+
+BOOLEAN elem_func IsScriptKeywordsPack
+ Self .IsStereotype st_ScriptKeywordsPack 
+ >>> Result
+; // IsScriptKeywordsPack
+
+BOOLEAN elem_func IsAcceptableForScripts
+ Self .UPisTrue 'extprop:rc:isAcceptableForScripts' 
+ >>> Result
+; // IsAcceptableForScripts
+
+BOOLEAN elem_func IsAtom
+ Self .IsStereotype st_Atom
+ >>> Result
+; // IsAtom
+
+BOOLEAN elem_func IsTag
+ Self .IsStereotype st_Tag
+ >>> Result
+; // IsTag
+
+BOOLEAN elem_func IsMethod
+ Self .IsStereotype st_method 
+ >>> Result
+; // IsMethod
+
+BOOLEAN elem_func IsVCMOperations
+ Self .IsStereotype st_VCMOperations 
+ >>> Result
+; // IsVCMOperations

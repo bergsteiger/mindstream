@@ -14,6 +14,12 @@ WordAlias GarantModel::Pointer ME_46A608F00301
 
 WordAlias GarantModel::Integer ME_46A606AC03B2
 
+WordAlias GarantModel::Cardinal ME_46A618AF0053
+
+WordAlias GarantModel::Int64 ME_47208C70028B
+
+WordAlias GarantModel::String ME_476136D3010B
+
 WordAlias GarantModel::Boolean ME_46A603BB0391
 
 WordAlias GarantModel::ByteBool ME_4F6C9243020F
@@ -21,6 +27,8 @@ WordAlias GarantModel::ByteBool ME_4F6C9243020F
 WordAlias GarantModel::Variants ME_48088D6800F9
 
 WordAlias GarantModel::TObject ME_4807745602C8
+
+WordAlias GarantModel::TDateTime ME_47272C8B0128
 
 USES
  4AB0C3F60375.pas.ms.script // Windows
@@ -128,7 +136,8 @@ USES
 
 WordAlias GarantModel::vcmExternalInterfaces ME_467BAB7F021E
 WordAlias GarantModel::IvcmTestParamsPrim ME_4683E07E004B
-WordAlias GarantModel::IvcmTestExecutePrim ME_4683E1AD0047
+WordAlias GarantModel::IvcmExecuteParamsPrim ME_4683E1AD0047
+WordAlias GarantModel::IvcmExecuteParams ME_47F2108E028C
 WordAlias GarantModel::TvcmOperationStateIndex ME_4683F4D501E9
 
 USES
@@ -271,6 +280,7 @@ USES
 WordAlias GarantModel::vcmLayout ME_500004240202
 WordAlias GarantModel::vcmLayout.MakeControls ME_500004A60200
 WordAlias GarantModel::vcmLayout.InitEntities ME_5000105E028C
+WordAlias GarantModel::vcmLayout.SignalDataSourceChanged ME_5000109C01F9
 
 USES
  4AADF9450143.pas.ms.script // Visual
@@ -441,6 +451,19 @@ USES
 ; 
  
 WordAlias GarantModel::evExtFormat ME_4D514CA600C2
+
+USES
+ 4849284D0067.pas.ms.script // Standard
+; 
+ 
+WordAlias GarantModel::Tk2RawData ME_53B546BC00BF
+
+USES
+ 53B24DFD01FF.pas.ms.script // TagHolder
+; 
+ 
+WordAlias GarantModel::k2TaggedDataHolder ME_53B24E23037A
+WordAlias GarantModel::k2TaggedDataHolder.GetTaggedDataType ME_53AC03EE01FD
 
 USES
  53288DFA03A7.pas.ms.script // NewReminders
