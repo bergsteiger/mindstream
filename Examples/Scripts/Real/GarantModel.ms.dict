@@ -58,6 +58,7 @@ USES
 ;
 
 WordAlias GarantModel::Controls ME_47E11FC3021E
+WordAlias GarantModel::Dialogs ME_4AB0EE02004E
 
 USES
  4AB0C3C60310.pas.ms.script // SysUtils
@@ -98,6 +99,8 @@ WordAlias GarantModel::l3LocalStub ME_4BA7BE3B0114
 
 WordAlias GarantModel::Tl3ProtoObject ME_49E7754802A9
 
+WordAlias GarantModel::Tl3CProtoObject ME_4AE5CA2D0034
+
 WordAlias GarantModel::Tl3DataContainerWithoutIUnknownPrim ME_5319E8FF0107
 
 WordAlias GarantModel::Tl3DataContainerWithoutIUnknown ME_4A60A00700B5
@@ -129,6 +132,14 @@ USES
 ;
 
 WordAlias GarantModel::vcmInterfaces ME_4683F37902CF
+WordAlias GarantModel::IvcmEntityForm ME_4914746C019E
+WordAlias GarantModel::IvcmContainer ME_49525C400141
+WordAlias GarantModel::IvcmAggregate ME_49930CC501C9
+WordAlias GarantModel::IvcmMakeParams ME_49930F8B0367
+WordAlias GarantModel::TvcmZoneType ME_4992F763038E
+WordAlias GarantModel::TvcmEffectiveUserType ME_4992F9230369
+WordAlias GarantModel::IvcmFormDataSource ME_47EB900B0216
+WordAlias GarantModel::IvcmEntity ME_4991AD08005B
 
 USES
  467BAB7F021E.pas.ms.script // vcmExternalInterfaces
@@ -266,6 +277,8 @@ USES
 WordAlias GarantModel::vcmControllers ME_4982BE090383
 WordAlias GarantModel::IvcmUseCaseController ME_4981E70101D7
 WordAlias GarantModel::IvcmViewAreaController ME_497841510139
+WordAlias GarantModel::IvcmViewAreaControllerRef ME_4982B4D00032
+WordAlias GarantModel::IvcmFormDataSourceRef ME_47EB514C0336
 
 USES
  4AB34028023E.pas.ms.script // Components
@@ -287,6 +300,8 @@ USES
 ;
 
 WordAlias GarantModel::TvcmEntityForm ME_49525B34022A
+WordAlias GarantModel::TvcmEntityForm.Make ME_574D6CF301EF
+WordAlias GarantModel::TvcmEntityForm.MakeSingleChild ME_574D6D92023B
 WordAlias GarantModel::TvcmContainerForm ME_49525C240170
 WordAlias GarantModel::TvcmMainForm ME_49525C7A0114
 
@@ -303,6 +318,8 @@ USES
 WordAlias GarantModel::TvcmModule ME_4AB33E14004E
 
 WordAlias GarantModel::vcmData ME_4B16B85D03A1
+
+WordAlias GarantModel::vcmBase ME_47F25BC801DB
 
 USES
  5130776E01BE.pas.ms.script // DUnitKeyWordsSupport
@@ -470,3 +487,12 @@ USES
 ; 
  
 WordAlias GarantModel::TvgReminder ME_532973740186
+
+USES
+ 4F9BDEEE01BC.pas.ms.script // Поддержка локализованных сообщений
+; 
+ 
+WordAlias GarantModel::Tl3StringIDEx ME_4B3B3728004C
+WordAlias GarantModel::Pl3StringIDEx ME_4B3B49B40262
+WordAlias GarantModel::Tl3MessageID ME_4E01D1E002AE
+

@@ -328,6 +328,10 @@ elem_iterator Dependencies
  Self 'Dependencies' .ElemList >>> Result
 ; // Dependencies
 
+elem_iterator UsedElements
+ Self 'UsedElements' .ElemList >>> Result
+; // UsedElements
+
 elem_iterator Depends
  Self 'Depends' .ElemList >>> Result
 ; // Depends
@@ -513,6 +517,10 @@ INTEGER elem_func OpKind
 ModelElement elem_func Parent
  Self 'Parent' .ElemWord >>> Result
 ; // Parent
+
+ModelElement elem_func Original
+ Self 'Original' .ElemWord >>> Result
+; // Original
 
 ModelElement elem_func SpelledFor
  Self 'SpelledFor' .ElemWord >>> Result

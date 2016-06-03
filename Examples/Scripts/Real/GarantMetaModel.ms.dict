@@ -38,3 +38,13 @@ BOOLEAN elem_func IsVCMOperations
  Self .IsStereotype st_VCMOperations 
  >>> Result
 ; // IsVCMOperations
+
+BOOLEAN elem_func IsVCMOperationState
+ Self .IsStereotype st_VCMOperationState
+ >>> Result
+; // IsVCMOperationState
+
+BOOLEAN elem_func IsVCMControls
+ Self .IsStereotype st_VCMControls
+ >>> Result
+; // IsVCMControls
