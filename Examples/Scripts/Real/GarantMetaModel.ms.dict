@@ -19,6 +19,11 @@ BOOLEAN elem_func IsAcceptableForScripts
  >>> Result
 ; // IsAcceptableForScripts
 
+BOOLEAN elem_func IsVCMFormDefinition
+ Self .IsStereotype st_VCMFormDefinition
+ >>> Result
+; // IsVCMFormDefinition
+
 BOOLEAN elem_func IsAtom
  Self .IsStereotype st_Atom
  >>> Result
@@ -48,3 +53,23 @@ BOOLEAN elem_func IsVCMControls
  Self .IsStereotype st_VCMControls
  >>> Result
 ; // IsVCMControls
+
+BOOLEAN elem_func IsControlOverride
+ Self .IsStereotype st_ControlOverride 
+ >>> Result
+; // IsControlOverride
+
+BOOLEAN elem_func IsControlPrim
+ Self .IsStereotype st_ControlPrim 
+ >>> Result
+; // IsControlPrim
+
+BOOLEAN elem_func IsComponent
+ Self .IsStereotype st_Component
+ >>> Result
+; // IsComponent
+
+BOOLEAN elem_func IsGuiControl
+ Self .IsStereotype st_GuiControl
+ >>> Result
+; //IsGuiControl

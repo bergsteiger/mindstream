@@ -41,51 +41,65 @@ USES
  GarantMetaModel.ms.dict
 ;
 
+: .ProcessDictionary:
+  IN aDictName
+  ^ IN aWordLambda
+ VAR l_Dict
+ aDictName DictionaryByName >>> l_Dict
+ 
+ VAR l_DictFileName
+ l_Dict pop:DictionaryEx:FileName sysutils:ExtractFileName >>> l_DictFileName
+ 
+ l_Dict pop:Dictionary:WordsIterator 
+ .for> ( l_DictFileName aWordLambda DO )
+; // .ProcessDictionary:
+
 ARRAY FUNCTION .CollectInDictionary:
   IN aDictName
   ^ IN aCollectionLambda
  [
-  VAR l_Dict
-  aDictName DictionaryByName >>> l_Dict
-  
-  VAR l_DictFileName
-  l_Dict pop:DictionaryEx:FileName sysutils:ExtractFileName >>> l_DictFileName
-  
-  l_Dict pop:Dictionary:WordsIterator 
-  .for> (
+  aDictName .ProcessDictionary: (
     IN aWord
+    IN aDictFileName
    aWord aCollectionLambda DO 
    .for> (
      IN aDep
     KeyValuesCreate: (
       IN aMade
-     aMade -> SourceFile := l_DictFileName
+     aMade -> SourceFile := aDictFileName
      aMade -> Source := aWord
      aMade -> Target := aDep
     ) // KeyValuesCreate:
    ) // .for>
-  ) // .for>
+  ) // aDictName .ProcessDictionary:
  ]
  >>> Result
 ; // .CollectInDictionary:
 
+: ProcessAllDictionaries:
+  ^ IN aDictionaryLambda
+ @ ( 
+   IN aDict
+  aDict aDictionaryLambda DO
+ )
+ '*.pas.ms.script' 
+ VAR l_Dir
+ thisDictionary pop:DictionaryEx:FileName sysutils:ExtractFilePath >>> l_Dir
+ if ( l_Dir .IsNil ) then
+ begin
+  sysutils:GetCurrentDir >>> l_Dir
+ end // ( l_Dir .IsNil )
+ l_Dir
+ ProcessFilesWithMask
+; // ProcessAllDictionaries:
+
 ARRAY FUNCTION CollectInAllDictionaries:
   ^ IN aCollectionLambda
  [ 
-  @ ( 
+  ProcessAllDictionaries: (
     IN aDict
    aDict .CollectInDictionary: ( aCollectionLambda DO ) 
-  )
-  '*.pas.ms.script' 
-  VAR l_Dir
-  thisDictionary pop:DictionaryEx:FileName sysutils:ExtractFilePath >>> l_Dir
-  if ( l_Dir .IsNil ) then
-  begin
-   sysutils:GetCurrentDir >>> l_Dir
-  end // ( l_Dir .IsNil )
-  //l_Dir .
-  l_Dir
-  ProcessFilesWithMask
+  ) // ProcessAllDictionaries:
  ] >>> Result
 ; // CollectInAllDictionaries:
 
@@ -150,38 +164,30 @@ PROCEDURE OutCollected
  .map> pop:WordBox:Boxed
  .for> (
    IN aRec
-  
-  TF g_OutFile (
-   TF g_NeedOutLn (
-    aRec -> Target .UID anExt Cat File:OpenWrite >>> g_OutFile
-    TRY
-     [ 'INCLUDE ' cQuote 'ElementsRTTI.ms.dict' cQuote ] .Out
-     OutLn
-     [ ': ME_' aRec -> Target .UID aFuncSuffix ' // ' aRec -> Target .Name ] .Out
-     Indented: (
-      'Seq: (' .Out
-      Indented: (
-       aRec -> Sources
-       .map> pop:WordBox:Boxed
-       .map> (
-         IN aRec
-        [ 
-         'WL' ' '
-         cQuote 'ME_' aRec -> Source .UID cQuote
-         ' '
-         cQuote aRec -> SourceFile cQuote
-         ' // ' aRec -> Source .Name
-        ]
-       ) // .map>
-       .for> .Out
-      ) // Indented:
-      ') // Seq:' .Out
-     ) // Indented:
-     ';' .Out
-    FINALLY
-     nil >>> g_OutFile
-    END
-   ) // TF g_NeedOutLn
-  ) // TF g_OutFile
+  aRec -> Target .UID anExt Cat .ProcessOut: (
+   [ 'INCLUDE ' cQuote 'ElementsRTTI.ms.dict' cQuote ] .Out
+   OutLn
+   [ ': ME_' aRec -> Target .UID aFuncSuffix ' // ' aRec -> Target .Name ] .Out
+   Indented: (
+    'Seq: (' .Out
+    Indented: (
+     aRec -> Sources
+     .map> pop:WordBox:Boxed
+     .map> (
+       IN aRec
+      [ 
+       'WL' ' '
+       cQuote 'ME_' aRec -> Source .UID cQuote
+       ' '
+       cQuote aRec -> SourceFile cQuote
+       ' // ' aRec -> Source .Name
+      ]
+     ) // .map>
+     .for> .Out
+    ) // Indented:
+    ') // Seq:' .Out
+   ) // Indented:
+   ';' .Out
+  ) // aRec -> Target .UID anExt Cat .ProcessOut:
  ) // .for>
 ; // OutCollected

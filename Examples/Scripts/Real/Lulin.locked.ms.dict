@@ -1,13 +1,7 @@
 UNIT Lulin.locked.ms.dict
 
-USES
- FillStrings.locked.ms.dict
-;
-
 ARRAY FUNCTION Lulin.locked
  %SUMMARY 'Элементы модели не законченные Люлиным А. и временно не герерирующиеся в целевой код' ;
- FillStrings.locked
- .join>
  [
   // UtilityPack
   '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
@@ -43,8 +37,6 @@ ARRAY FUNCTION Lulin.locked
   '4DDD0D92039C' // TnsChangesBetweenEditionsDocumentContainer [Error] nsChangesBetweenEditionsDocumentContainer.pas(274): Undeclared identifier: 'Tk2Type'
   '4B683B57028D' // TatChatWorker [Error] atChatWorker.pas(347): Undeclared identifier: 'aNotify'
   '467FCCB101CF' // TnsTagNodePrim [Error] nsTagNodePrim.pas(380): Undeclared identifier: 'IDocumentTextProvider'
-  
-  'F2DB96F6C0D4' // DocumentPrintAndExportFontSizeSettingRes [Error] DocumentPrintAndExportFontSizeSettingRes.pas(133): Illegal character in input file: '!' ($21)
   
   '4AA517B5037A' // AdminAppRes
   '4AA9038C0387' // MonitoringsRes

@@ -802,11 +802,6 @@ BOOLEAN elem_func IsVCMMainForm
  >>> Result
 ; // IsVCMMainForm
 
-BOOLEAN elem_func IsGuiControl
- Self .IsStereotype st_GuiControl
- >>> Result
-; //IsGuiControl
-
 BOOLEAN elem_func IsUseCaseController
  Self .IsStereotype st_UseCaseController 
  >>> Result
@@ -1853,21 +1848,6 @@ STRING elem_func IfNDefStr
  >>> Result 
 ; // IfNDefStr
 
-BOOLEAN elem_func IsControlOverride
- Self .IsStereotype st_ControlOverride 
- >>> Result
-; // IsControlOverride
-
-BOOLEAN elem_func IsControlPrim
- Self .IsStereotype st_ControlPrim 
- >>> Result
-; // IsControlPrim
-
-BOOLEAN elem_func IsComponent
- Self .IsStereotype st_Component
- >>> Result
-; // IsComponent
-
 elem_iterator ImplementsEx
  Self .Implements
  >>> Result
@@ -1985,6 +1965,10 @@ elem_iterator ScriptKeywordsPackProperties
  )
  >>> Result
 ; // ScriptKeywordsPackProperties
+
+FORWARD .Properties
+
+FORWARD .ChildrenEx
 
 elem_iterator OperationsEx
  Cached:
@@ -2162,6 +2146,68 @@ elem_iterator OperationsEx
      ) // .for>
     end // ( Self .IsScriptKeywordsPack )
   ; // RULES
+  
+  Self .Properties
+  .filter> ( .UPisTrue "needs stored directive" )
+  .for> (
+    IN aProp
+   VAR l_Name 
+   aProp .Name 'Stored' Cat >>> l_Name
+   if ( l_Operations l_Name .HasModelElementWithName ! ) then
+   begin
+    .join> ToArray: (
+     l_Name 
+     GarantModel::Boolean
+     MakeFunction: (
+       IN aMade
+      aMade -> UID := ( aProp .LUID 'Stored' Cat ) 
+      aMade -> %SUM := ( [ 'Функция определяющая, что свойство ' aProp .Name ' сохраняется' ] strings:Cat )
+      //aMade -> Stereotype := st_static::Operation
+      aMade -> Visibility := ProtectedAccess
+      aMade -> Abstraction := at_final
+     ) // MakeProcedure:
+    ) // .join> ToArray:
+   end // ( l_Operations l_Name .HasModelElementWithName ! )
+  ) // .for>
+  
+  if ( Self .IsUseCaseControllerImp ) then
+  begin
+   Self .ImplementsEx
+   .filter> .IsUseCaseController
+   .for> (
+     IN aController
+    aController .Parent .ChildrenEx
+    .filter> ( .UPisTrue 'extprop:isSynchroEnum' )
+    .filter> ( .GetUP 'extprop:SDS_CASTER' aController .LUID ?== )
+    .for> (
+      IN aEnum
+     if ( l_Operations 'ChangeSynchroForm' .HasModelElementWithName ! ) then
+     begin
+      .join> ToArray: (
+       'ChangeSynchroForm' MakeProcedure: (
+         IN aMade
+        aMade -> UID := ( [ Self .LUID '_' aEnum .LUID '_' 'ChangeSynchroForm' ] strings:Cat ) 
+        aMade -> %SUM := 'Переключает форму синхронного просмотра'
+        //aMade -> Stereotype := st_static::Operation
+        aMade -> Visibility := ProtectedAccess
+        aMade -> Abstraction := at_final
+        aMade -> Parameters := [
+         'aSynchroForm' aEnum MakeParam
+         'aDoSaveToHistory' GarantModel::Boolean MakeParam: (
+           IN aMade
+          aMade -> 'extprop:pas:Value' := true 
+         ) // 'aDoSaveToHistory' GarantModel::Boolean MakeParam:
+         'aNeedRefresh' GarantModel::Boolean MakeParam: (
+           IN aMade
+          aMade -> 'extprop:pas:Value' := true 
+         ) // 'aNeedRefresh' GarantModel::Boolean MakeParam:
+        ] // aMade -> Parameters
+       ) // 'ChangeSynchroForm' MakeProcedure:  
+      ) // .join> ToArray:
+     end // ( l_Operations 'ChangeSynchroForm' .HasModelElementWithName ! )
+    ) // .for>
+   ) // .for>
+  end // ( Self .IsUseCaseControllerImp )
  )
  >>> Result
 ; // OperationsEx
@@ -2258,6 +2304,34 @@ ARRAY FUNCTION array:Copy
  >>> Result
 ; // array:Copy
 
+ARRAY FUNCTION array:CopyWithoutDuplicates
+  IN anArray
+ RULES
+  ( anArray .IsNil )
+   [nil]
+  DEFAULT 
+   (
+    VAR l_Copy
+    [] >>> l_Copy
+    VAR l_Empty
+    true >>> l_Empty
+    anArray 
+    .filter> .AddToArray?: l_Copy
+    .for> ( 
+      IN anElement
+     false >>> l_Empty
+    ) // anArray .for>
+    RULES
+     l_Empty
+      [nil]
+     DEFAULT
+      l_Copy 
+    ; // RULES
+   ) 
+ ; // RULES 
+ >>> Result
+; // array:CopyWithoutDuplicates
+
 ARRAY FUNCTION array:CopyNotNil
   IN anArray
  [ anArray .for> .KeepInStack ] 
@@ -2276,8 +2350,11 @@ elem_iterator ImplementsInDependencies
 ; // ImplementsInDependencies
 
 elem_iterator ForClassImplements
- Self .ImplementsEx
- .filter> .IsClassImplementable
+ Cached:
+ (
+  Self .ImplementsEx
+  .filter> .IsClassImplementable
+ ) 
  >>> Result
 ; // ForClassImplements
 
@@ -2304,8 +2381,11 @@ BOOLEAN elem_func InTie
 ; // InTie
 
 elem_iterator InterfaceForClassImplements
- Self .ForClassImplements 
- .filter> ( .InTie ! )
+ Cached:
+ (
+  Self .ForClassImplements 
+  .filter> ( .InTie ! )
+ ) 
  >>> Result
 ; // InterfaceForClassImplements
 
@@ -2376,12 +2456,15 @@ BOOLEAN elem_func SomeAncestorImplements
 ; // SomeAncestorImplements
 
 elem_iterator ClassImplements
+ Cached:
  (
-  Self .ClassImplementsPrim
-  .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+  (
+   Self .ClassImplementsPrim
+   .joinWithLambded> ( Self .ClassImplementsPrim ) .InterfaceForClassImplements
+  ) 
+  .filter> ( Self SWAP .SomeAncestorImplements ! )
+  array:CopyWithoutDuplicates
  ) 
- .filter> ( Self SWAP .SomeAncestorImplements ! )
- array:Copy
  >>> Result
 ; // ClassImplements
 
@@ -2655,6 +2738,21 @@ elem_iterator ImplementedEx
     array:Copy
    )
   end // ( Self .IsClassOrMixIn )
+  
+  if ( Self .IsUseCaseControllerImp ) then
+  begin
+   .joinWithLambded>
+   ( 
+    //Self .ImplementsEx
+    Self .ClassImplements
+    .filter> .IsUseCaseController 
+   )
+   (
+    .Properties 
+    .filter> ( .Name 'Ref' SWAP EndsStr )
+    .filter> ( .MethodType GarantModel::IvcmViewAreaControllerRef .IsSameModelElement )
+   )
+  end // ( Self .IsUseCaseControllerImp )
  )
  >>> Result
 ; // ImplementedEx
@@ -2922,6 +3020,7 @@ CONST opModifyIteratorF 3
 CONST opModifyTest 4
 CONST opModifyExecute 5
 CONST opModifyGetState 6
+CONST opModifyArea 7
 
 INTEGER elem_func OpModify
  Self 'OpModify' opModifyNone .ElemMember >>> Result
@@ -2960,6 +3059,10 @@ BOOLEAN elem_func IsExecutor
 BOOLEAN elem_func IsGetState
  Self .OpModify opModifyGetState == >>> Result
 ; // IsGetState
+
+BOOLEAN elem_func IsAreaGetter
+ Self .OpModify opModifyArea == >>> Result
+; // IsAreaGetter
 
 BOOLEAN elem_func IsInternalOperation
  Self .IsStereotype st_InternalOperation::Operation 
@@ -3028,6 +3131,43 @@ BOOLEAN elem_func FirstParamIsViewAreaController
  ; // RULES
  >>> Result
 ; // FirstParamIsViewAreaController
+
+elem_iterator PropertyKeys
+ RULES
+  ( Self .Parent .IsTestClass )
+   (
+    [ Self .Parent .EffectiveType .SelfParam ]
+    .join>
+    ( Self .Attributes )
+   )
+  DEFAULT 
+   ( Self .Attributes )
+ ; // RULES  
+ .filter> ( .IsControlPrim ! )
+ .filter> ( .IsStereotype st_after::Attribute ! )
+ >>> Result
+; // PropertyKeys
+
+BOOLEAN elem_func IsReadonlyProperty
+ Self .IsStereotype st_readonly::Attribute >>> Result
+; // IsReadonlyProperty
+
+BOOLEAN elem_func IsProperty
+ Cached:
+ (
+  RULES
+   ( Self .IsStereotype st_property::Attribute )
+    true
+   ( Self .IsReadonlyProperty )
+    true
+   ( Self .IsWriteonlyProperty )
+    true
+   DEFAULT
+    false 
+  ; // RULES
+ )
+ >>> Result
+; // IsProperty
 
 ARRAY elem_func MethodParameters
  Cached:
@@ -3156,28 +3296,14 @@ ARRAY elem_func MethodParameters
     ; // ( Self .IsMethod )
    ( Self .IsFunction )
     ( Self .FirstOperation .Parameters )
+   ( Self .IsProperty )
+    ( Self .PropertyKeys )
    DEFAULT 
     ( Self .Parameters )
   ; // RULES
  )
  >>> Result
 ; // MethodParameters
-
-elem_iterator PropertyKeys
- RULES
-  ( Self .Parent .IsTestClass )
-   (
-    [ Self .Parent .EffectiveType .SelfParam ]
-    .join>
-    ( Self .Attributes )
-   )
-  DEFAULT 
-   ( Self .Attributes )
- ; // RULES  
- .filter> ( .IsControlPrim ! )
- .filter> ( .IsStereotype st_after::Attribute ! )
- >>> Result
-; // PropertyKeys
 
 ARRAY FUNCTION .With()>
   OUTABLE IN aValue
@@ -3503,27 +3629,6 @@ ModelElement elem_func ImplementorOrParent
  >>> Result
 ; // ImplementorOrParent
 
-BOOLEAN elem_func IsReadonlyProperty
- Self .IsStereotype st_readonly::Attribute >>> Result
-; // IsReadonlyProperty
-
-BOOLEAN elem_func IsProperty
- Cached:
- (
-  RULES
-   ( Self .IsStereotype st_property::Attribute )
-    true
-   ( Self .IsReadonlyProperty )
-    true
-   ( Self .IsWriteonlyProperty )
-    true
-   DEFAULT
-    false 
-  ; // RULES
- )
- >>> Result
-; // IsProperty
-
 INTERFACE elem_func InterfaceLinkField
  Cached:
  (
@@ -3800,6 +3905,18 @@ BOOLEAN elem_func IsAreaAttr
  >>> Result
 ; // IsAreaAttr
 
+BOOLEAN elem_func IsVCMArea
+ RULES
+  ( Self .IsArea )
+   true
+  ( Self .IsAreaAttr ) 
+   true
+  DEFAULT
+   false
+ ; // RULES
+ >>> Result
+; // IsVCMArea
+
 BOOLEAN elem_func IsVCMAreaRef
  RULES
   ( Self .IsArea )
@@ -3813,7 +3930,14 @@ BOOLEAN elem_func IsVCMAreaRef
 ; // IsVCMAreaRef
 
 BOOLEAN elem_func IsVCMAreaLink
- Self .IsVCMAreaRef !
+ RULES
+  ( Self .IsArea )
+   ( Self .UPisTrue "is reference" ! )
+  ( Self .IsAreaAttr ) 
+   ( Self .LinkType lt_ref != )
+  DEFAULT
+   false
+ ; // RULES
  >>> Result
 ; // IsVCMAreaLink
 
@@ -4021,8 +4145,9 @@ elem_iterator Properties
       aMade -> "ifdef" := ( aRef .GetUP "ifdef" )
       aMade -> "ifndef" := ( aRef .GetUP "ifndef" )
       aMade ->^ cGetterVarUserCodeName ^:= cEmptyUserCode
-      aMade .AddMethodWithParams: cGetterImplementationUserCodeName () ( 
-       [ ' !!! недоделано !!!' ]
+      aMade .AddMethodWithParams: cGetterImplementationUserCodeName aMade ( 
+        IN aMade
+       [ ' Result := SetData.' aMade .Name ';' ]
       ) // aMade .AddMethodWithParams: cGetterImplementationUserCodeName
      ) // ... MakeProperty:  
     ) // .join> ToArray: 
@@ -4128,6 +4253,7 @@ elem_iterator Fields
   .filter> ( .IsStereotype st_switch::Attribute ! )
   .filter> ( .IsStereotype st_impurity_param::Attribute ! )
   .filter> ( .IsStereotype st_static::Attribute ! )
+  .filter> ( .IsStereotype st_link::Attribute ! )
   >>> l_Fields
   
   if ( Self .CanMapPropertiesToFields ) then
@@ -4160,6 +4286,32 @@ elem_iterator Fields
     .joinWithLambded> ( Self .ImplementsEx ) .ToArray: .InterfaceLinkField
    end // ( Self .IsAutoHelper )
   end // ( Self .IsStaticObject )
+  
+  if ( Self .IsUseCaseControllerImp ) then
+  begin
+   Self .ImplementedEx 
+   .filter> .IsVCMAreaLink
+   .for> (
+     IN aProp
+    VAR l_Name 
+    [ 'f_' aProp .Name ] strings:Cat >>> l_Name
+    if ( l_Fields l_Name .HasModelElementWithName ! ) then
+    begin 
+     .join> ToArray: (
+      l_Name
+      GarantModel::IvcmViewAreaControllerRef
+      MakeField: ( 
+        IN aMade
+       aMade -> LinkType := lt_ref 
+       aMade -> Visibility := PrivateAccess
+       aMade -> %SUM := ( [ 'Поле для области вывода ' aProp .Name ] strings:Cat ) 
+       aMade -> "ifdef" := ( aProp .GetUP "ifdef" )
+       aMade -> "ifndef" := ( aProp .GetUP "ifndef" )
+      ) // MakeField:
+     ) // .join> ToArray: 
+    end // ( l_Fields l_Name .HasModelElementWithName ! )
+   ) // .for>
+  end // ( Self .IsUseCaseControllerImp )
  )
  >>> Result
 ; // Fields
@@ -4215,8 +4367,6 @@ elem_iterator InnerGlobalVars
  .joinWithLambded> ( Self .OperationsEx ) call.me
  >>> Result
 ; // InnerGlobalVars
-
-FORWARD .ChildrenEx
 
 elem_iterator GlobalVars
  RULES
@@ -4746,15 +4896,17 @@ BOOLEAN elem_func IsVCMApplication
 
 STRING elem_func MethodUserCodeModifier
  RULES
-  ( Self .IsSetter ) then
+  ( Self .IsAreaGetter )
+   'area'
+  ( Self .IsSetter )
    'set'
-  ( Self .IsProperty ) then
+  ( Self .IsProperty )
    'get'
-  ( Self .IsTester ) then
+  ( Self .IsTester )
    'test'
-  ( Self .IsExecutor ) then
+  ( Self .IsExecutor )
    'exec'
-  ( Self .IsGetState ) then
+  ( Self .IsGetState )
    'getstate'
   DEFAULT
    '' 
@@ -5783,6 +5935,16 @@ BOOLEAN elem_func NeedAfterCreate
  >>> Result
 ; // NeedAfterCreate
 
+ARRAY FUNCTION HookOut:
+  ^ IN aLambda
+ [] >>> Result
+ TF g_ToOut (
+   @ ( IN aValue aValue .AddToArray: Result ) >>> g_ToOut 
+  aLambda DO
+ ) // TF g_ToOut
+ false >>> g_NeedOutLn
+; // HookOut:
+
 elem_proc UserCode:
  ^ IN aSuffix
  ^ IN aCode
@@ -6426,7 +6588,175 @@ elem_proc UserCode:
          'a' l_Self .SelfName cDot l_Op .Name l_Op .ParametersList ';' 
         ] .Out 
        )
-    
+   (
+    ( Self .Name 'FillStrings' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'Helper' l_Implementor .Name EndsStr )
+   )
+     Pair:
+     ( [ 'var' \n ' ' 'l_Index: ' l_Implementor .SpelledFor .MainImplements .TypeName ';' ] .Out )
+     ( 
+      [ 
+	' aStrings.Clear;' \n
+	' for l_Index := Low(l_Index) to High(l_Index) do' \n
+        '  aStrings.Add(' l_Implementor .SpelledFor .Name '[l_Index].AsCStr);' 
+      ] .Out
+     )
+   (
+    ( Self .Name 'DisplayNameToValue' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'Helper' l_Implementor .Name EndsStr )
+   )
+     Pair:
+     ( [ 'var' \n ' ' 'l_Index: ' l_Implementor .SpelledFor .MainImplements .TypeName ';' ] .Out )
+     ( 
+      [ 
+	' for l_Index := Low(l_Index) to High(l_Index) do' \n
+        '  if l3Same(aDisplayName, ' l_Implementor .SpelledFor .Name '[l_Index].AsCStr) then' \n
+	'  begin' \n
+	'   Result := l_Index;' \n
+	'   Exit;' \n
+	'  end;//l3Same..' \n
+        ' raise Exception.CreateFmt(''Display name "%s" not found in map "' l_Implementor .SpelledFor .Name '"'', [l3Str(aDisplayName)]);'
+      ] .Out
+     )
+   (
+    ( Self .Name 'MapID' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'ImplPrim' l_Implementor .Name EndsStr )
+   )
+     Code:
+     (
+      [ 
+       ' l3FillChar(Result, SizeOf(Result));' \n
+       ' Assert(false);'
+      ] .Out
+     )  
+   (
+    ( Self .Name 'GetDisplayNames' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'ImplPrim' l_Implementor .Name EndsStr )
+   )
+     Code:
+     (
+      [ 
+       ' ' l_Implementor .SpelledFor .Name 'Helper' '.FillStrings(aList);'
+      ] .Out
+     )  
+   (
+    ( Self .Name 'MapSize' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'ImplPrim' l_Implementor .Name EndsStr )
+   )
+     Code:
+     (
+      [ 
+       ' Result := Ord(High(' l_Implementor .SpelledFor .MainImplements .TypeName ')) - Ord(Low(' l_Implementor .SpelledFor .MainImplements .TypeName '));'
+      ] .Out
+     )  
+   (
+    ( Self .Name 'DisplayNameToValue' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'ImplPrim' l_Implementor .Name EndsStr )
+   )
+     Code:
+     (
+      [ 
+       ' Result := Ord(' l_Implementor .SpelledFor .Name 'Helper' '.DisplayNameToValue(aDisplayName));'
+      ] .Out
+     )  
+   (
+    ( Self .Name 'ValueToDisplayName' == )
+    AND ( l_Implementor .IsSummoned )
+    AND ( 'ImplPrim' l_Implementor .Name EndsStr )
+   )
+     Code:
+     (
+      [ 
+        ' Assert(aValue >= Ord(Low(' l_Implementor .SpelledFor .MainImplements .TypeName ')));' \n
+        ' Assert(aValue <= Ord(High(' l_Implementor .SpelledFor .MainImplements .TypeName ')));' \n
+        ' Result := ' l_Implementor .SpelledFor .Name '[' l_Implementor .SpelledFor .MainImplements .TypeName '(aValue)].AsCStr;'
+      ] .Out
+     )  
+   (  
+    ( Self GarantModel::vcmFormSetDataSource.ClearAreas .IsSameModelElement )
+    AND ( Self .OpKind opkind_Overridden == )
+    AND ( l_Implementor .IsUseCaseControllerImp )
+   ) 
+    Code:
+    ( [ 
+       l_Implementor .ImplementedEx
+       .filter> .IsVCMArea
+       .for> (
+         IN anArea
+        [
+         if ( anArea .IsVCMAreaRef ) then
+         begin
+          ' ' 'pm_Get' anArea .Name 'Ref'
+         end // ( anArea .IsVCMAreaRef )
+         else
+         begin
+          ' if (f_' anArea .Name ' <> nil) then'
+          ' f_' anArea .Name
+         end // ( anArea .IsVCMAreaRef )
+         '.Referred := nil;' \n
+        ] 
+       ) // .for>
+       ' inherited;'
+      ] .Out 
+    ) // Code: 
+   (
+    ( Self .IsVCMArea ) 
+    AND ( Self .OpKind opkind_Implemented == )
+    AND ( l_Implementor .IsUseCaseControllerImp )
+    AND ( Self .IsAreaGetter ! )
+   ) 
+    Pair:
+    AsMethod
+    ( [
+       if ( Self .IsVCMAreaRef ) then
+       begin
+        ' with ' 'pm_Get' Self .Name 'Ref' ' do' \n
+        ' begin' \n
+        '  if IsEmpty' \n
+        HookOut: ( 
+         Indented: 
+          Indented: 
+           ( Self '_need' @ '// - условие создания ViewArea' .MethodUserCode )
+        ) // HookOut:
+        '   then' \n
+        '    ' 'Referred := ' 'DoGet_' Self .Name Self .ParametersList ';' \n
+        '  Result := ' Self .MethodType .TypeName '(' 'Referred' ');' \n
+        ' end;// with ' 'pm_Get' Self .Name 'Ref'
+       end // ( Self .IsVCMAreaRef )
+       else
+       begin
+        ' if (f_' Self .Name ' = nil) then' \n
+        ' begin' \n
+        '  f_' Self .Name ' := TvcmViewAreaControllerRef.Make;' \n
+        HookOut: ( 
+         Indented: 
+          Indented: 
+           ( Self '_init' @ '// - код инициализации ссылки на ViewArea' .MethodUserCode )
+        ) // HookOut:
+        ' end;//' 'f_' Self .Name ' = nil' \n
+        if ( Self .MethodParameters .NotEmpty ) then
+        begin
+         ' if (f_' Self .Name '.NeedMake = vcm_nmNo) and ' Self .MethodParameters .FirstElement .Name ' then' \n
+         '  f_' Self .Name '.NeedMake := vcm_nmYes;' \n
+        end // ( Self .MethodParameters .NotEmpty )
+        ' if f_' Self .Name '.IsEmpty' \n
+        HookOut: ( 
+         Indented: 
+          Indented: 
+           ( Self '_need' @ '// - условие создания ViewArea' .MethodUserCode )
+        ) // HookOut:
+        '  then' \n
+        '   f_' Self .Name '.Referred := ' 'DoGet_' Self .Name Self .ParametersList ';' \n
+        ' Result := ' Self .MethodType .TypeName '(' 'f_' Self .Name '.Referred' ');'
+       end // ( Self .IsVCMAreaRef )
+      ] .Out 
+    ) // Pair:
    ( 
     'ResNameGetter' Self .Name EndsStr 
     AND ( Self .IsSimpleClass ) 
@@ -7497,7 +7827,7 @@ elem_iterator ConstantsEx
         aConstants -> "elements prefix" := ( [ 'str_' Self .GetUP "elements prefix" ] strings:Cat )
         aConstants -> Attributes := [
          Self .Attributes
-         .join> ( Self .Children )
+         .join> ( Self .ChildrenEx )
          .for> (
            IN anItem
            
@@ -7519,11 +7849,21 @@ elem_iterator ConstantsEx
            Result '\\' '\' string:Replace >>> Result
           ; // ItemValue
           
-          [ 'str_' Self .GetUP 'extprop:pas:ElementPrefix' anItem .Name ] strings:Cat
+          VAR l_Name
+          [ 
+           Self .GetUP 'extprop:pas:ElementPrefix' 
+           if ( anItem .IsChoice ) then
+           begin
+            Self .Parent .Name
+            '_Choice_'
+           end // ( anItem .IsChoice )
+           anItem .Name 
+          ] strings:Cat >>> l_Name
+          [ 'str_' l_Name ] strings:Cat
           [ '('
             'rS : -1;'
             ' rLocalized : false;' 
-            ' rKey : ' cQuote [ Self .GetUP 'extprop:pas:ElementPrefix' anItem .Name ] strings:Cat cQuote ';'
+            ' rKey : ' cQuote l_Name cQuote ';'
             ' rValue : ' ItemValue
             ')' ] strings:Cat
           MakeConstant: (
@@ -7611,6 +7951,42 @@ elem_iterator ConstantsEx
        ; // RULES
      ; // RULES
     end // ( Self .IsTypedef )
+   ( Self .IsVCMFormDefinition )
+    begin
+     VAR l_PublishedForms
+     [] >>> l_PublishedForms
+     Self .ImplementorsEx
+     .filter> .IsVCMForm
+     .for> (
+       IN aForm
+      VAR l_ConstantsName
+      [ aForm .Name 'IDs' ] strings:Cat >>> l_ConstantsName
+      if ( l_Constants l_ConstantsName .HasModelElementWithName ! ) then
+      begin
+       VAR l_Name
+       [ 'fm_' aForm .TypeName 'T' .CutPrefix ] strings:Cat >>> l_Name
+       if ( l_Name .AddToArray?: l_PublishedForms ) then
+       begin
+        .join> ToArray: (
+         l_ConstantsName MakeConstants: (
+           IN aConstants
+          aConstants -> Visibility := PublicAccess
+          aConstants -> Attributes := [
+           l_Name
+           [ '(rFormID : (rName : ' cQuote aForm .TypeName 'T' .CutPrefix cQuote '; rID : 0); rFactory : nil)' ] strings:Cat
+           MakeConstant: (
+             IN aConstant
+            aConstant -> Visibility := PublicAccess 
+            aConstant -> %SUM := ( [ 'Идентификатор формы ' aForm .TypeName ] strings:Cat )
+            aConstant -> Target := GarantModel::TvcmFormDescriptor
+           ) // MakeConstant: 
+          ] // aConstants -> Attributes
+         ) // l_ConstantsName MakeConstants: 
+        ) // .join> ToArray:  
+       end // ( l_Name .AddToArray?: l_PublishedForms )
+      end // ( l_Constants l_ConstantsName .HasModelElementWithName ! )   
+     ) // .for>
+    end // ( Self .IsVCMFormDefinition )
    ( Self .IsUserType )
     begin
      VAR l_ConstantsName
@@ -7831,6 +8207,8 @@ elem_iterator NeededElementsFromInheritsOrImplements
 elem_iterator AttributesAndOperationsNeededElements
  Self .AttributesAndOperations
  .join> ( Self .Properties )
+ .join> ( Self .Fields )
+ array:CopyWithoutDuplicates
  .OperationsNeededElements
  >>> Result
 ; // AttributesAndOperationsNeededElements
@@ -7872,16 +8250,6 @@ BOOLEAN FUNCTION .HasModelElement
  >>> Result
 ; // .HasModelElement
 
-ARRAY FUNCTION HookOut:
-  ^ IN aLambda
- [] >>> Result
- TF g_ToOut (
-   @ ( IN aValue aValue .AddToArray: Result ) >>> g_ToOut 
-  aLambda DO
- ) // TF g_ToOut
- false >>> g_NeedOutLn
-; // HookOut:
-
 BOOLEAN elem_func NeedsInitEntities
  Self .UPisTrue 'extprop:NeedsInitEntities'
  >>> Result
@@ -7892,11 +8260,16 @@ BOOLEAN elem_func HasAnyVCMController
  >>> Result
 ; // HasAnyVCMController
 
+elem_iterator UserTypes
+ Self .ChildrenEx
+ .filter> .IsUserType
+ >>> Result
+; // UserTypes
+
 BOOLEAN elem_func NeedsMakeControls
  Cached:
  (
-  Self .ChildrenEx
-  .filter> .IsUserType
+  Self .UserTypes
   .join> (
    Self .OwnControls
   ) // .join>
@@ -7961,6 +8334,15 @@ elem: AsExecuteDo:
  ) // Self .DecorateMethodAndDo:
 ; // AsExecuteDo:
 
+elem: AsAreaDo:
+  ^ IN aLambda
+ Self .DecorateMethodAndDo: ( 
+   IN aMethod
+  aMethod -> OpModify := opModifyArea
+  aMethod aLambda DO 
+ ) // Self .DecorateMethodAndDo:
+; // AsAreaDo:
+
 elem: AsTestDo:
   ^ IN aLambda
  Self .DecorateMethodAndDo: ( 
@@ -7982,8 +8364,7 @@ elem: AsGetStateDo:
 elem_iterator AllUserTypes
  Cached:
  (
-  Self .ChildrenEx
-  .filter> .IsUserType
+  Self .UserTypes
   .joinWithLambded> ( Self .InheritsEx ) call.me
   .joinWithLambded> ( Self .ImplementsEx ) call.me
  )
@@ -8605,8 +8986,7 @@ elem_iterator OverriddenEx
         IN aForm
        [ 
         ' inherited;'
-        aForm .ChildrenEx
-        .filter> .IsUserType
+        aForm .UserTypes
         .for> (
           IN aUserType
          [ \n ' with AddUsertype(' aUserType .Name 'Name,' \n ]
@@ -8808,6 +9188,17 @@ elem_iterator OverriddenEx
     ) // .join> ToArray:
    end // MakeControls
   end // ( Self .IsVCMForm )
+  
+  if ( Self .IsUseCaseControllerImp ) then
+  begin
+   if ( Self .ImplementedEx .filter> .IsVCMArea .NotEmpty ) then
+   begin   
+    if ( l_Overridden GarantModel::vcmFormSetDataSource.ClearAreas .HasModelElement ! ) then
+    begin     
+     .join> ToArray: ( GarantModel::vcmFormSetDataSource.ClearAreas .OverrideMethod )
+    end // ( l_Overridden GarantModel::vcmFormSetDataSource.ClearAreas .HasModelElement ! )
+   end // ( Self .ImplementedEx .filter> .IsVCMArea .NotEmpty )
+  end // ( Self .IsUseCaseControllerImp )
  ) 
  >>> Result
 ; // OverriddenEx
@@ -9141,9 +9532,55 @@ elem_iterator OperationsUsed
  >>> Result
 ; // OperationsUsed
 
+ModelElement elem_func SetType
+ Cached:
+ (
+  Self .ImplementsEx
+  .filter> .IsUseCaseController
+  .FirstElement >>> Result
+  if ( Result .IsNil ) then
+  begin
+   Self .InheritsEx
+   .filter> .IsUseCaseControllerImp
+   .filter> ( DROP Result .IsNil )
+   .for> (
+     IN aG
+    aG .ImplementsEx
+    .filter> .IsUseCaseController
+    .FirstElement >>> Result
+   ) // .for>
+  end // ( Result .IsNil )
+  Result
+ )
+ >>> Result
+; // SetType
+
 elem_iterator MixInValues
- Self .Attributes
- .filter> ( .IsStereotype st_impurity_value::Attribute )
+ Cached:
+ (
+  Self .Attributes
+  .filter> ( .IsStereotype st_impurity_value::Attribute )
+  
+  if ( Self .IsUseCaseControllerImp ) then
+  begin
+   if ( Self .Abstraction at_abstract != ) then
+   begin
+    VAR l_MixInValues
+    DUP >>> l_MixInValues
+    if ( l_MixInValues 'SetType' .HasModelElementWithName ! ) then
+    begin
+     VAR l_SetType
+     Self .SetType >>> l_SetType
+     if ( l_SetType .NotIsNil ) then
+     begin
+      .join> ToArray: (
+       'SetType' l_SetType MakeField
+      ) // .join> ToArray:
+     end // ( l_SetType .NotIsNil )
+    end // ( l_MixInValues 'SetType' .HasModelElementWithName ! )
+   end // ( Self .Abstraction at_abstract != )
+  end // ( Self .IsUseCaseControllerImp )
+ ) 
  >>> Result
 ; // MixInValues
 
@@ -9372,7 +9809,7 @@ elem_iterator Used
   .joinWithLambded>
   ( Self .UsesInDependencies
     .filter> .IsVCMCustomForm )
-  ( .ChildrenEx .filter> .IsUserType )  
+  ( .UserTypes )
   
   if ( Self .IsVCMCustomForm ) then
   begin
@@ -9382,8 +9819,18 @@ elem_iterator Used
     .join> ToArray: GarantModel::SysUtils
    end // ( Self .HasAnyVCMController )
   end // ( Self .IsVCMCustomForm )
+  
+  if ( Self .IsUseCaseControllerImp ) then
+  begin
+   if ( Self .ImplementedEx .filter> .IsVCMArea .NotEmpty ) then
+   begin   
+    .join> ToArray: GarantModel::TvcmViewAreaControllerRef
+   end // ( Self .ImplementedEx .filter> .IsVCMArea .NotEmpty )
+  end // ( Self .IsUseCaseControllerImp )
+  
+  .join> ( Self .UsedElements )
+  array:CopyWithoutDuplicates
  )
- .join> ( Self .UsedElements )
  >>> Result
 ; // Used
 
@@ -9479,12 +9926,6 @@ elem_iterator ImplUses
    .join> ( Self .ChildrenWithOwnFile )
   end // ( Self .IsTarget )
   
-//  if ( Self .IsVCMCustomForm ) then
-//  begin
-//   .join> ( Self .ChildrenWithOwnFile )
-//  end // ( Self .IsVCMCustomForm )
-// - это в Used
-  
   if ( Self .IsVCMFormsPack ) then
   begin
    .join> ( Self .ChildrenWithOwnFile )
@@ -9496,10 +9937,6 @@ elem_iterator ImplUses
    begin
     .join> ToArray: GarantModel::StdRes
    end // ( Self .Abstraction at_final != )
-//   .joinWithLambded> ( Self .OwnControls ) ( .ImplementsEx .filter> .IsVCMOperations )
-//   .join> ( Self .OverriddenEx .filter> .IsVCMOperation )
-//   .join> ( Self .ImplementedEx .filter> .IsVCMOperation )
-// - это в Used
   end // ( Self .IsVCMForm )
   
   if ( Self .IsVCMFormSetFactory ) then
@@ -10025,6 +10462,8 @@ INTEGER elem_func MethodAbstraction
 
 STRING elem_func MethodNamePrefix
  RULES
+  ( Self .IsAreaGetter )
+   'DoGet_'
   ( Self .IsSetter )
    begin
     RULES
@@ -10446,6 +10885,14 @@ elem_proc MethodInterfaceEx
     if ( Self .IsInternalOperation ) then
      NormalCall
    ) // ( Self .IsVCMOperationPrim )
+  ( Self .IsVCMArea )
+   begin
+    CallAsGetter
+    if ( g_Implementor .NotIsNil ) then
+    begin
+     ( Self .AsAreaDo: ( aPrefix aOverload aOfObject aBody .MethodInterfacePrim ) )
+    end // ( g_Implementor .NotIsNil )
+   end // ( Self .IsVCMArea )
   ( Self .IsReadonlyProperty )
    CallAsGetter
   ( Self .IsWriteonlyProperty ) 
@@ -10704,7 +11151,8 @@ BOOLEAN elem_func UseNewGen
    ( Self .IsGuiControl )
     true
    ( Self .IsUseCaseControllerImp )
-    ( Self .Parent call.me ) 
+    true
+    //( Self .Parent call.me ) 
    ( Self .IsViewAreaControllerImp )
     ( Self .Parent call.me )
    ( Self .IsVCMControls )

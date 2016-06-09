@@ -143,3 +143,48 @@ PROCEDURE OutLn
   OutLnToFile
  true >>> g_NeedOutLn
 ; // OutLn
+
+PROCEDURE .ProcessOut:
+  STRING IN aFileName
+  ^ IN aLambda
+ TF g_OutFile (
+  TF g_NeedOutLn (
+   aFileName File:OpenWrite >>> g_OutFile
+   TRY
+    aLambda DO
+   FINALLY
+    nil >>> g_OutFile
+   END // TRY..FINALLY
+  ) // TF g_NeedOutLn
+ ) // TF g_OutFile 
+; // .ProcessOut:
+
+elem_proc OutWordLink
+  STRING IN aDictFileName
+ [ 
+  'WL' ' ' 
+  cQuote 'ME_' Self .UID cQuote 
+  ' ' 
+  cQuote aDictFileName cQuote 
+  ' // ' Self .Name
+ ] .Out
+; // OutWordLink
+
+PROCEDURE OutSeq:
+  ^ IN aLambda
+ 'Seq: (' .Out
+ Indented: (
+  aLambda DO
+ ) // Indented:
+ ') // Seq:' .Out
+; // OutSeq:
+
+PROCEDURE .OutWord:
+  STRING IN aName
+  ^ IN aLambda
+ [ ': ' aName ] .Out
+ Indented: (
+  aLambda DO
+ ) // Indented:
+ [ '; // ' aName ] .Out
+; // .OutWord:

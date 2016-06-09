@@ -140,6 +140,7 @@ WordAlias GarantModel::TvcmZoneType ME_4992F763038E
 WordAlias GarantModel::TvcmEffectiveUserType ME_4992F9230369
 WordAlias GarantModel::IvcmFormDataSource ME_47EB900B0216
 WordAlias GarantModel::IvcmEntity ME_4991AD08005B
+WordAlias GarantModel::TvcmFormDescriptor ME_4FFC30A800DF
 
 USES
  467BAB7F021E.pas.ms.script // vcmExternalInterfaces
@@ -320,6 +321,11 @@ WordAlias GarantModel::TvcmModule ME_4AB33E14004E
 WordAlias GarantModel::vcmData ME_4B16B85D03A1
 
 WordAlias GarantModel::vcmBase ME_47F25BC801DB
+
+WordAlias GarantModel::vcmFormSetDataSource ME_47F37723017A
+WordAlias GarantModel::vcmFormSetDataSource.ClearAreas ME_4938F7E702B7
+
+WordAlias GarantModel::TvcmViewAreaControllerRef ME_4982B69803AD
 
 USES
  5130776E01BE.pas.ms.script // DUnitKeyWordsSupport
