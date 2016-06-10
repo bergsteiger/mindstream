@@ -8767,6 +8767,14 @@ elem_iterator OverriddenEx
         .join> ToArray: ( GarantModel::TtfwRegisterableWord.GetWordNameForRegister .OverrideMethod )
        end // ( l_Overridden GarantModel::TtfwRegisterableWord.GetWordNameForRegister .HasModelElement )
       end // ( Self GarantModel::TtfwRegisterableWord .InheritsFromOrSomeAncestorImplements ) 
+      
+      if ( Self GarantModel::TtfwModuleOperationWord .InheritsFromOrSomeAncestorImplements ) then
+      begin
+       if ( l_Overridden GarantModel::TtfwModuleOperationWord.GetModuleOperationCode .HasModelElement ! ) then
+       begin     
+        .join> ToArray: ( GarantModel::TtfwModuleOperationWord.GetModuleOperationCode .OverrideMethod )
+       end // ( l_Overridden GarantModel::TtfwModuleOperationWord.GetModuleOperationCode .HasModelElement )
+      end // ( Self GarantModel::TtfwModuleOperationWord .InheritsFromOrSomeAncestorImplements ) 
      end // ( Self .Abstraction at_abstract != )
     end // ( Self .IsMixIn ! )
 
@@ -9827,6 +9835,14 @@ elem_iterator Used
     .join> ToArray: GarantModel::TvcmViewAreaControllerRef
    end // ( Self .ImplementedEx .filter> .IsVCMArea .NotEmpty )
   end // ( Self .IsUseCaseControllerImp )
+  
+  if ( Self .IsScriptKeyword ) then
+  begin
+   if ( Self GarantModel::TtfwModuleOperationWord .InheritsFromOrSomeAncestorImplements ) then
+   begin
+    .join> ToArray: GarantModel::StdRes
+   end // ( Self GarantModel::TtfwModuleOperationWord .InheritsFromOrSomeAncestorImplements )
+  end // ( Self .IsScriptKeyword )
   
   .join> ( Self .UsedElements )
   array:CopyWithoutDuplicates
