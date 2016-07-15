@@ -243,33 +243,41 @@ ANY elem_func ElemMemberPrim
   
  TtfwWord VAR l_FieldVar
  
- Self %% aMemberName >>> l_FieldVar
- 
- if ( l_FieldVar NotValid ) then
+/*{ Self %% ( aMemberName '`' Cat ) >>> l_FieldVar
+ if ( l_FieldVar NotValid ! ) then
  begin
-  Self %% 'Original' >>> l_FieldVar
+  l_FieldVar DO >>> Result
+ end // ( l_FieldVar NotValid ! )
+ else}*/
+ begin
+  Self %% aMemberName >>> l_FieldVar
+  
   if ( l_FieldVar NotValid ) then
   begin
-   aDefaultValue >>> Result
+   Self %% 'Original' >>> l_FieldVar
+   if ( l_FieldVar NotValid ) then
+   begin
+    aDefaultValue >>> Result
+   end // l_FieldVar NotValid
+   else
+   begin
+    TtfwWord VAR l_Original
+    l_FieldVar DO >>> l_Original
+    if ( l_Original IsNil ) then
+    begin
+     aDefaultValue >>> Result
+    end // l_Original IsNil
+    else
+    begin
+     l_Original aMemberName aDefaultValue call.me >>> Result
+    end // l_Original IsNil
+   end // l_FieldVar NotValid
   end // l_FieldVar NotValid
   else
   begin
-   TtfwWord VAR l_Original
-   l_FieldVar DO >>> l_Original
-   if ( l_Original IsNil ) then
-   begin
-    aDefaultValue >>> Result
-   end // l_Original IsNil
-   else
-   begin
-    l_Original aMemberName aDefaultValue call.me >>> Result
-   end // l_Original IsNil
+   l_FieldVar DO >>> Result
   end // l_FieldVar NotValid
- end // l_FieldVar NotValid
- else
- begin
-  l_FieldVar DO >>> Result
- end // l_FieldVar NotValid
+ end // ( l_FieldVar NotValid ! )
 ; // ElemMemberPrim
 
 ANY elem_func ElemMember

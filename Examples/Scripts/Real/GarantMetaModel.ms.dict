@@ -73,3 +73,70 @@ BOOLEAN elem_func IsGuiControl
  Self .IsStereotype st_GuiControl
  >>> Result
 ; //IsGuiControl
+
+BOOLEAN elem_func IsImplements
+ Self .IsStereotype st_implements::Dependency 
+ >>> Result
+; // IsImplements
+
+BOOLEAN elem_func IsVCMFormSetFactory
+ Self .IsStereotype st_VCMFormSetFactory 
+ >>> Result
+; // IsVCMFormSetFactory
+
+BOOLEAN elem_func IsFormSetFactory
+ Self .IsStereotype st_FormSetFactory 
+ >>> Result
+; // IsFormSetFactory
+
+BOOLEAN elem_func IsVCMFormsPack
+ Self .IsStereotype st_VCMFormsPack 
+ >>> Result
+; // IsVCMFormsPack
+
+BOOLEAN elem_func IsModuleOperationPrim
+ Self .IsStereotype st_ModuleOperationPrim
+ >>> Result
+; // IsModuleOperationPrim
+
+BOOLEAN elem_func IsFormFactory
+ Self .IsStereotype st_FormFactory
+ >>> Result
+; // IsFormFactory
+
+BOOLEAN elem_func IsVCMFormZone
+ Self .IsStereotype st_VCMFormZone
+ >>> Result
+; // IsVCMFormZone
+
+BOOLEAN elem_func IsVCMZone
+ Self .IsStereotype st_VCMZone
+ >>> Result
+; // IsVCMZone
+
+BOOLEAN elem_func IsVCMApplication
+ Self .IsStereotype st_VCMApplication
+ >>> Result
+; // IsVCMApplication
+
+BOOLEAN elem_func IsVCMTestApplication
+ Self .IsStereotype st_VCMTestApplication
+ >>> Result
+; // IsVCMTestApplication
+
+BOOLEAN elem_func IsTagTable
+ Self .IsStereotype st_TagTable 
+ >>> Result
+; // IsTagTable
+
+BOOLEAN elem_func IsEVD
+ Self .IsStereotype st_EVD
+ >>> Result
+; // IsEVD
+
+BOOLEAN elem_func IsInterfaceFactory
+ Self .IsStereotype st_InterfaceFactory
+ >>> Result
+; // IsInterfaceFactory
+
+

@@ -43,7 +43,7 @@ TtfwWord FUNCTION LoadWord
     l_Code script:CompileStringAndProcess DO
    EXCEPT
     current:exception:Message .
-    [ 'Возможно элемент ' aWordName ' удалён' ] strings:Cat .
+    [ 'Возможно элемент ' aWordName ' : ' aDictName ' удалён' ] strings:Cat .
     true >>> l_WasException
     nil >>> Result
    END
@@ -55,8 +55,14 @@ TtfwWord FUNCTION LoadWord
   
   if ( l_WasException ! ) then
   begin
-   >>> Result
-   Result pop:Word:Name aWordName == ?ASSURE [ 'Вернулось неверное слово ' Result pop:Word:Name ' вместо ' aWordName ]
+   TRY
+    >>> Result
+    Result pop:Word:Name aWordName == ?ASSURE [ 'Вернулось неверное слово ' Result pop:Word:Name ' вместо ' aWordName ]
+   EXCEPT
+    current:exception:Message .
+    [ 'Возможно элемент ' aWordName ' : ' aDictName ' удалён' ] strings:Cat .
+    nil >>> Result
+   END 
   end // l_WasException !
   l_VAR ^:= Result
  end // l_VAR IsNil !
@@ -64,10 +70,37 @@ TtfwWord FUNCTION LoadWord
 
 WordAlias LW LoadWord
 
+USES
+ CompileTimeVar.ms.dict
+;
+
+CompileTime-VAR g_TransformWord nil
+
+PROCEDURE TransformWord
+  TtfwWord IN aWord
+ if ( g_TransformWord IsNil ! ) then
+ begin
+  aWord g_TransformWord DO
+ end // ( g_TransformWord IsNil ! )
+; // TransformWord
+
 TtfwWord FUNCTION WordLink
   Literal IN aWordName
   Literal IN aDictName
- aWordName |N aDictName |N LoadWord >>> Result
+ aWordName |N aDictName |N LoadWord 
+ >>> Result
+ Result TransformWord
 ; // WordLink
 
+TtfwWord FUNCTION HardWordLink
+  ^ IN aWord
+ //aWord DO
+ //aWord |^@
+ aWord |^
+ >>> Result
+ Result TransformWord
+; // HardWordLink
+
 WordAlias WL WordLink
+
+WordAlias HWL HardWordLink

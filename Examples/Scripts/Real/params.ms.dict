@@ -18,13 +18,6 @@ WordAlias REF ^@
 WordAlias in IN
  %REMARK 'Описатель входного параметра (справа или слева)'
 
-USES
- Literal.ms.dict
-;
-
-EXPORTS
- Literal.ms.dict
-
 MACRO LVALUE
  Literal IN aName
  %SUMMARY 'Параметр слева, который передаётся по ссылке. И из которого можно не только читать, но и в который потенциально можно писать. Если он не Read-Only.' ;

@@ -188,3 +188,18 @@ PROCEDURE .OutWord:
  ) // Indented:
  [ '; // ' aName ] .Out
 ; // .OutWord:
+
+USES
+ arrays.ms.dict
+;
+
+ARRAY FUNCTION HookOut:
+  ^ IN aLambda
+ [] >>> Result
+ TF g_ToOut (
+   @ ( IN aValue aValue .AddToArray: Result ) >>> g_ToOut 
+  aLambda DO
+ ) // TF g_ToOut
+ false >>> g_NeedOutLn
+; // HookOut:
+

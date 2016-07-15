@@ -92,6 +92,7 @@ USES
 WordAlias GarantModel::l3CoreObjects ME_47913B47006E
 
 WordAlias GarantModel::l3UnknownPrim ME_47913F4E02E0
+WordAlias GarantModel::l3UnknownPrim.InitFields ME_47A042E100E2
 WordAlias GarantModel::l3UnknownPrim.ClearFields ME_5000565C019C
 
 WordAlias GarantModel::l3Base ME_4773D64E036C
@@ -151,6 +152,9 @@ WordAlias GarantModel::IvcmTestParamsPrim ME_4683E07E004B
 WordAlias GarantModel::IvcmExecuteParamsPrim ME_4683E1AD0047
 WordAlias GarantModel::IvcmExecuteParams ME_47F2108E028C
 WordAlias GarantModel::TvcmOperationStateIndex ME_4683F4D501E9
+
+WordAlias GarantModel::TvcmMOPID ME_4683CF84010A
+WordAlias GarantModel::TvcmOPID ME_4683CF3401F5
 
 USES
  499EAAE502A8.pas.ms.script // vcmUserControls
@@ -310,6 +314,9 @@ USES
  47B9727603BE.pas.ms.script // FormSets
 ;
 
+WordAlias GarantModel::TvcmFormSetFactoryPrim ME_4FFE84F00388
+WordAlias GarantModel::TvcmFormSetFactoryPrim.GetInstance ME_4FFE854A009B
+
 WordAlias GarantModel::TvcmFormSetFactory ME_47B97312006D
 
 USES
@@ -317,6 +324,7 @@ USES
 ;
 
 WordAlias GarantModel::TvcmModule ME_4AB33E14004E
+WordAlias GarantModel::TvcmModule.GetEntityForms ME_577A5A440158
 
 WordAlias GarantModel::vcmData ME_4B16B85D03A1
 
@@ -326,6 +334,10 @@ WordAlias GarantModel::vcmFormSetDataSource ME_47F37723017A
 WordAlias GarantModel::vcmFormSetDataSource.ClearAreas ME_4938F7E702B7
 
 WordAlias GarantModel::TvcmViewAreaControllerRef ME_4982B69803AD
+
+WordAlias GarantModel::vcmFormDataSourcePrimWithFlexUseCaseControllerType ME_5017EAF4027D
+WordAlias GarantModel::vcmFormDataSourcePrimWithFlexUseCaseControllerType.InitRefs ME_49786D4E034D
+WordAlias GarantModel::vcmFormDataSourcePrimWithFlexUseCaseControllerType.ClearRefs ME_49786D6A01E3
 
 USES
  5130776E01BE.pas.ms.script // DUnitKeyWordsSupport
@@ -501,4 +513,26 @@ USES
 WordAlias GarantModel::Tl3StringIDEx ME_4B3B3728004C
 WordAlias GarantModel::Pl3StringIDEx ME_4B3B49B40262
 WordAlias GarantModel::Tl3MessageID ME_4E01D1E002AE
+
+USES
+ 50883A2E00B3.pas.ms.script // Application
+;
+
+WordAlias GarantModel::TvcmApplication ME_4AB22E140136
+
+USES
+ 57851B200290.pas.ms.script // Application
+;
+
+WordAlias GarantModel::TvcmOperationsForRegister ME_57851B4B01F9
+WordAlias GarantModel::TvcmOperationForRegister ME_57851C14006F
+
+WordAlias GarantModel::TvcmOperationStateForRegister ME_578614F1007E
+
+USES
+ 578653AB0077.pas.ms.script // Modules
+;
+
+WordAlias GarantModel::TvcmModulesForRegister ME_5786541F0012
+WordAlias GarantModel::TvcmModuleOperationsForRegister ME_5787730D03D7
 
