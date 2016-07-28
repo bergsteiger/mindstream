@@ -386,7 +386,7 @@ USES
  CONST Class class_Class
  : Stereotype st_UtilityPack ;
  
- CONST "ifndef" 'NoVCL'
+ CONST "ifndef" 'NoVCL,XE'
 ref; // GarantModel::ControlResizeBugFix
 
 : GarantModel::l3IntfUses

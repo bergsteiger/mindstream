@@ -112,6 +112,19 @@ USES
  axiom:WordBox
 ;
 
+ModelElement elem_func WeakRef
+ %SUMMARY
+  'Возвращает СЛАБУЮ ссылку на элемент.'
+ ;
+ RULES
+  ( Self IsIntf )
+   ( Self pop:WordBox:Boxed )
+  DEFAULT
+   Self
+ ; // RULES
+ >>> Result
+; // WeakRef
+
 STRING elem_func WordName
  RULES
   ( Self IsIntf )
@@ -141,6 +154,9 @@ STRING elem_func WordName
  end // ( Result IsNil )
 ; // WordName
 
+ARRAY CompileTime-VAR g_CachedInterfacesAutoreleasePool []
+%REMARK 'Интерфейсные элементы, которые надо будет почистить'
+
 : DoCache
   ModelElement IN aCacheWhere
   STRING IN aKey
@@ -159,14 +175,14 @@ STRING elem_func WordName
   aLambda DO
  end // aCacheWhere IsString
  else
-/*(* 
+/*(*
  if ( aCacheWhere IsIntf ) then
  begin
   aLambda DO
  end // aCacheWhere IsIntf
  else
-*)*/ 
- begin 
+*)*/
+ begin
   ModelElement VAR l_CacheWhere
   VAR l_IsIntf
   false >>> l_IsIntf
@@ -299,9 +315,9 @@ ANY elem_func ElemMember
 
 elem_iterator ElemList
   STRING IN aMemberName
- Self aMemberName [nil] /*[empty]*/ DoCache
+ Self aMemberName [empty] DoCache
  (
-  Self aMemberName [nil] /*[empty]*/ .ElemMember 
+  Self aMemberName [empty] .ElemMember 
  )
  >>> Result 
 ; // ElemList
@@ -339,6 +355,10 @@ elem_iterator Dependencies
 elem_iterator UsedElements
  Self 'UsedElements' .ElemList >>> Result
 ; // UsedElements
+
+elem_iterator ImplementedElements
+ Self 'ImplementedElements' .ElemList >>> Result
+; // ImplementedElements
 
 elem_iterator Depends
  Self 'Depends' .ElemList >>> Result

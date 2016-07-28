@@ -3,40 +3,8 @@ UNIT Lulin.locked.ms.dict
 ARRAY FUNCTION Lulin.locked
  %SUMMARY 'Ёлементы модели не законченные Ћюлиным ј. и временно не герерирующиес€ в целевой код' ;
  [
-  // UtilityPack
-  '4F0C0B6801C7' // DragData cnActiveState = [dsActive, dsPaused];
-  '4B2A6D4303A9' // KTestRunner проблемы с TTimeInfoList с предварительным описанием RTestResultsPlace = class of TTestResultsPlace;
-  '483C0AEA0186' // atGblAdapterWorker [Error] atGblAdapterWorker.pas(132): Declaration of 'Fire' differs from declaration in interface 'IControlledChangeNotifier'
-  '483AD11C02A1' // atQueryExecutor [Error] atQueryExecutor.pas(82): Undeclared identifier: 'FinishProcess'
-  
-  // Impurity
-  '48FDA9D500E4' // nsNodeNotifierImplementation [Error] nsNodeNotifierImplementation.imp.pas(39): Undeclared identifier: 'ChangeChildrenCount'
-  '47EB3E2202E6' // dBaseDocument function _dBaseDocument_.pm_GetdsDocumentRef: IvcmFormDataSourceRef;
-  
-  // InternalInterfaces
-  '4678209200A6' // nevBase nev_plThis = TnevParaLevel(0);
-  
   // Interfaces
-  '467C0CAA02AB' // l3InternalInterfaces function Hl3Canvas.pxAverageCharWidth: Integer;
-  '47C5207602D1' // nevTools InevParaInternal = interface(InevPara)
-  '4720862F0238' // m3StorageInterfaces m3_saRead = Tm3StoreAccess(STGM_READ or STGM_SHARE_EXCLUSIVE);
-  '4720831F012D' // m3DBInterfaces m3_defDocPart = m3_dsMain;
-  '4A9F98B901A5' // BaseSearchInterfaces ns_sseAll = [ns_sseContext, ns_sseNeedShowWindow, ns_sseOpenKind, ns_sseActiveClass, ns_sseSearchArea];
-  
-  // SimpleClass
-  '473C4F1E01A1' // Tl3VirtualCanvas if (DCFlag = ev_dcfLinked) then [Error] l3VirtualCanvas.pas(168): Undeclared identifier: 'ev_dcfLinked'
-  'A8C41C353B7D' // TstDocumentShowChangesInfoItem [Error] stDocumentShowChangesInfoItem.pas(41): Illegal character in input file: '!' ($21)
-  '4D4011460346' // TnsContentsListForFiltering [Error] nsContentsListForFiltering.pas(38): Declaration of 'Item' differs from declaration in interface 'IListForFiltering'
-  '4DEFC812022F' // Tl3EventedRecListView [Error] l3EventedRecListView.pas(25): Declaration of 'CompareRecs' differs from previous declaration надо PItemType разрулить
-  '4926AE3900B9' // TdeListSet [Error] deListSet.pas(49): Undeclared identifier: 'pm_GetListSynchroViewForm'
-  'DF1A3014EEBC' // TstevStylesPrintAndExportFontSizeItem [Error] stevStylesPrintAndExportFontSizeItem.pas(38): Illegal character in input file: '!' ($21)
-  '4CED3DF702F9' // TnsNativeCommentPara [Error] nsNativeCommentPara.pas(22): Undeclared identifier: 'CommentParaTagClass'
-  '4CEFD73403E4' // TnsLeafParaDecorationsHolder [Error] nsLeafParaDecorationsHolder.pas(19): Undeclared identifier: 'LeafParaDecorationsHolderTagClass'
-  '4EDCFD4D037C' // TnsListWarningGenerator [Error] nsListWarningGenerator.pas(94): Undeclared identifier: 'remListFiltered'
-  '98CD882A435E' // TstMainMenuChangeableMainMenuTypeItem [Error] stMainMenuChangeableMainMenuTypeItem.pas(41): Illegal character in input file: '!' ($21)
-  '4DDD0D92039C' // TnsChangesBetweenEditionsDocumentContainer [Error] nsChangesBetweenEditionsDocumentContainer.pas(274): Undeclared identifier: 'Tk2Type'
-  '4B683B57028D' // TatChatWorker [Error] atChatWorker.pas(347): Undeclared identifier: 'aNotify'
-  '467FCCB101CF' // TnsTagNodePrim [Error] nsTagNodePrim.pas(380): Undeclared identifier: 'IDocumentTextProvider'
+  '578F8F6C0050' // nevViewInterfaces - HnevView
  ]
  >>> Result
 ; // Lulin.locked

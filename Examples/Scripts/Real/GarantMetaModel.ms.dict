@@ -39,6 +39,11 @@ BOOLEAN elem_func IsMethod
  >>> Result
 ; // IsMethod
 
+BOOLEAN elem_func IsFacetMethod
+ Self .IsStereotype st_facetmethod
+ >>> Result
+; // IsFacetMethod
+
 BOOLEAN elem_func IsVCMOperations
  Self .IsStereotype st_VCMOperations 
  >>> Result
@@ -80,7 +85,7 @@ BOOLEAN elem_func IsImplements
 ; // IsImplements
 
 BOOLEAN elem_func IsVCMFormSetFactory
- Self .IsStereotype st_VCMFormSetFactory 
+ Self .IsStereotype st_VCMFormSetFactory
  >>> Result
 ; // IsVCMFormSetFactory
 
@@ -125,7 +130,7 @@ BOOLEAN elem_func IsVCMTestApplication
 ; // IsVCMTestApplication
 
 BOOLEAN elem_func IsTagTable
- Self .IsStereotype st_TagTable 
+ Self .IsStereotype st_TagTable
  >>> Result
 ; // IsTagTable
 
@@ -139,4 +144,44 @@ BOOLEAN elem_func IsInterfaceFactory
  >>> Result
 ; // IsInterfaceFactory
 
+BOOLEAN elem_func IsVCMModuleContract
+ Self .IsStereotype st_VCMModuleContract
+ >>> Result
+; // IsVCMModuleContract
+
+BOOLEAN elem_func IsServiceImplementation
+ Self .IsStereotype st_ServiceImplementation
+ >>> Result
+; // IsServiceImplementation
+
+BOOLEAN elem_func IsService
+ Self .IsStereotype st_Service
+ >>> Result
+; // IsService
+
+USES
+ classRelations.ms.dict
+;
+
+: st_VCMModuleContractImplementation Inherits ( st_ServiceImplementation )
+ CONST UID '51608214-1DEE-4129-A830-54EA7CBF601A'
+ CONST Name 'VCMModuleContractImplementation'
+ CONST Stereotype 'MDAClass'
+ @SELF
+; // st_VCMModuleContractImplementation
+
+BOOLEAN elem_func IsVCMModuleContractImplementation
+ Self .IsStereotype st_VCMModuleContractImplementation
+ >>> Result
+; // IsVCMModuleContractImplementation
+
+BOOLEAN elem_func IsIni
+ Self .IsStereotype st_ini::Operation
+ >>> Result
+; // IsIni
+
+BOOLEAN elem_func IsFini
+ Self .IsStereotype st_fini::Operation
+ >>> Result
+; // IsFini
 

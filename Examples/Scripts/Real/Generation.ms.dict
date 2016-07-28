@@ -54,6 +54,44 @@ USES
  IsNil.ms.dict
 ;
 
+USES
+ axiom:WordBox
+;
+
+TtfwKeyWord FUNCTION AddMethodWithParams
+  TtfwWord IN Self
+  TtfwWord IN aCode
+  STRING IN aName
+  TtfwWord IN aParams
+ aName Self pop:NewWordDefinitor:CheckWord >>> Result
+
+ if ( Result pop:KeyWord:Word IsNil ) then
+ begin
+  VAR P
+  CompiledProcedure:Create >>> P
+
+  [ aParams DO ] .for> (
+    IN aValue
+   aValue
+   if ( aValue IsIntf ) then
+    .WeakRef
+   P pop:Compiler:AddCodePartValue
+  ) // [ aParams DO ] .for>
+  aCode P pop:Compiler:AddCodePart
+  P Result pop:KeyWord:SetWord
+
+  P pop:Word:DecRef
+ end // ( W pop:KeyWord:Word IsNil )
+; // AddMethodWithParams
+
+PROCEDURE .AddMethodWithParams:
+  TtfwWord IN Self
+  ^ IN aName
+  ^ IN aParams
+  ^ IN aCode
+ Self aCode aName DO aParams AddMethodWithParams DROP
+; // .AddMethodWithParams:
+
 TtfwWord FUNCTION .FindMemberRecur
   STRING IN aName
   TtfwWord IN aGen
@@ -402,23 +440,6 @@ WordAlias [[ [
 WordAlias ]] ]
 %REMARK 'Заканчивает определение константного массива. Пока просто мапируется на неконстантный.'
 
-USES
- axiom:WordBox
-;
-
-ModelElement elem_func WeakRef
- %SUMMARY 
-  'Возвращает СЛАБУЮ ссылку на элемент.'
- ;
- RULES
-  ( Self IsIntf )
-   ( Self pop:WordBox:Boxed )
-  DEFAULT
-   Self 
- ; // RULES
- >>> Result
-; // WeakRef
-
 ARRAY elem_func CachedElementToArray
  Cached:
  (
@@ -588,16 +609,10 @@ BOOLEAN elem_func IsUtilityPack
 
 BOOLEAN elem_func UseNewGenExcluded
  RULES
-  //( Self .IsControllerInterfaces )
+  //( Self GarantModel::vcmData .InheritsFrom )
   // true
-  ( Self GarantModel::vcmData .InheritsFrom )
-   true
-  ( Self GarantModel::TddComboBoxConfigItem .InheritsFrom )
-   true
-  ( Self GarantModel::Tl3ProtoObjectForTie ?== )
-   false
-  ( Self GarantModel::Tl3ProtoObjectForTie .InheritsFrom )
-   true
+  //( Self GarantModel::TddComboBoxConfigItem .InheritsFrom )
+  // true
   DEFAULT
    begin
     if ( g_UseNewGenExcluded .IsNil ) then
@@ -637,21 +652,23 @@ STRING elem_func CustomFinalFileName
  if ( Result .IsNotNil ) then
  begin
   if aForCopy then
+  begin
    if ( Self .UseNewGenExcluded ) then
    begin
     VAR l_Path
     VAR l_Name
     Result sysutils:ExtractFilePath >>> l_Path
     Result sysutils:ExtractFileName >>> l_Name
-    
+
     l_Name .CutFinished
     >>> l_Name
     cNotCompleted l_Name Cat
     >>> l_Name
-    
+
     l_Path l_Name Cat >>> Result
    end // (Self .UseNewGenExcluded )
- end // ( Result .IsNotNil )  
+  end // aForCopy
+ end // ( Result .IsNotNil )
 ; // CustomFinalFileName
 
 STRING elem_func FinalFileName
@@ -659,14 +676,13 @@ STRING elem_func FinalFileName
  >>> Result
 ; // FinalFileName
 
-STRING CompileTime-VAR g_TempFileName ''
 STRING CompileTime-VAR g_RealFileName ''
 STRING CompileTime-VAR g_FinalFileName ''
 STRING CompileTime-VAR g_FinalFileNameForUC ''
-BOOLEAN CompileTime-VAR g_UCRead false
-ModelElement CompileTime-VAR g_CurrentGeneratedElement nil
+ARRAY CompileTime-VAR g_UCRead nil
 
 CONST cGenScriptsFolder 'W:\common\GenScripts\'
+CONST cTempGenScriptsFolder 'C:\Temp\GenScripts\'
 
 BOOLEAN elem_func CanCopyToFinalFile
  false >>> Result
@@ -682,6 +698,316 @@ PROCEDURE DoDeleteFile
  aFileName DeleteFile DROP
 ; // DoDeleteFile
 
+CONST cUserCodePrefix 'uc:'
+
+CONST cUCStart '//#UC START# *'
+CONST cUCEnd '//#UC END# *'
+
+CONST cPalka '|'
+
+STRING elem_func ElementUCPrefix
+ [ cUserCodePrefix Self .LUID cPalka ] strings:Cat
+ >>> Result
+; // ElementUCPrefix
+
+^@ operator .uc->
+  ^@ IN Self
+  ^ IN aName
+ g_CurrentGenerator ->^ ( [ Self DO .ElementUCPrefix aName DO ] strings:Cat )
+ >>> Result
+; // .uc->
+
+^@ operator .extuc->
+  ^@ IN Self
+  ^L IN aName
+ g_CurrentGenerator ->^ ( [ Self DO .ElementUCPrefix Self DO .LUID '_ext:' aName |N ] strings:Cat )
+ >>> Result
+; // .extuc->
+
+STRING operator .ucString
+  IN Self
+ RULES
+  ( Self IsArray )
+   ( Self .FirstElement )
+  ( Self IsString )
+   Self
+  DEFAULT
+   ''
+ ; // RULES
+ >>> Result
+; // .ucString
+
+^@ operator .gen->
+ ^@ IN Self
+ ^L IN aName
+
+ Self ->^ ( [ g_CurrentGenerator .WordName ':' aName |N ] strings:Cat )
+ >>> Result
+; // .gen->
+
+elem_proc ReadUCFromFile:
+  ^ IN aFileName
+ STRING VAR l_FileName
+ aFileName DO >>> l_FileName
+ if ( l_FileName sysutils:FileExists ) then
+ begin
+  FILE VAR l_In
+  l_FileName TryOpen: File:OpenRead >>> l_In
+  TRY
+   VAR l_UCOpened
+   ARRAY VAR l_Accumulated
+   STRING VAR l_Key
+
+   false >>> l_UCOpened
+   l_In File:ReadLines (
+     IN aStr
+
+    VAR l_Pos
+
+    : Has
+     string:Pos >>> l_Pos
+     l_Pos -1 !=
+    ; // Has
+
+    RULES 
+     ( aStr cUCStart Has )
+      ( 
+       l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' l_FileName ' строка:' aStr ]
+       true >>> l_UCOpened
+       aStr string:Trim >>> aStr
+       [] >>> l_Accumulated
+       
+       aStr >>> l_Key
+       '*' string:SplitTo! l_Key DROP
+       
+      )
+     ( aStr cUCEnd Has )
+      ( 
+       l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' l_FileName ' строка:' aStr  ]
+       false >>> l_UCOpened
+       
+       VAR l_Head
+       if ( l_Pos > 0 ) then
+       begin
+        l_Pos 0 aStr string:Substring >>> l_Head
+        if ( l_Head string:TrimLeft .IsNotNil ) then
+        begin
+         l_Head .AddToArray: l_Accumulated
+
+         aStr string:Len l_Pos -
+         l_Pos
+         aStr
+         string:Substring >>> aStr
+        end // ( l_Head .IsNotNil )
+       end // ( l_Pos > 0 )
+
+       aStr string:Trim >>> aStr
+
+       g_CurrentGenerator ->^ l_Key ^:= l_Accumulated
+       Self .uc-> l_Key := l_Accumulated
+       // - сохраняем пользовательские секции в текущий генерируемый элемент
+       
+       nil >>> l_Accumulated
+      )
+     DEFAULT
+      (
+       l_UCOpened ? ( 
+        aStr .AddToArray: l_Accumulated
+       ) // l_UCOpened ?
+      ) 
+    ; // RULES  
+   ) // l_In File:ReadLines
+  FINALLY
+   nil >>> l_In
+  END // TRY..FINALLY
+ end // ( l_FileName sysutils:FileExists )
+; // ReadUCFromFile
+
+CONST cUCFileExt '.uc.txt'
+
+STRING elem_func UCFileName
+ //g_RealFileName cUCFileExt Cat
+ [
+  cGenScriptsFolder
+  [ Self .WordName .? Ext cUCFileExt ] strings:Cat
+ ] cPathSep strings:CatSep
+ >>> Result
+; // UCFileName
+
+STRING function .ChangeFilePath
+  STRING IN aFileName
+  STRING IN aPath
+ [ aPath aFileName sysutils:ExtractFileName ] cPathSep strings:CatSep
+ >>> Result
+; // .ChangeFilePath
+
+elem_proc SaveUserCode
+ STRING VAR l_RealFileName
+ Self .UCFileName >>> l_RealFileName
+
+ STRING VAR l_CurrentGeneratedElementPrefix
+ Self .ElementUCPrefix >>> l_CurrentGeneratedElementPrefix
+
+ STRING VAR l_TempFileName
+ l_RealFileName cTempGenScriptsFolder .ChangeFilePath >>> l_TempFileName
+ FILE VAR l_Out
+ l_TempFileName MakePathAndOpenWrite >>> l_Out
+ TRY
+  g_CurrentGenerator MembersIterator 
+  .filter> ( .WordName l_CurrentGeneratedElementPrefix SWAP StartsStr )
+  .for> (
+    IN anItem
+   VAR l_Value
+   anItem DO >>> l_Value
+   if (
+       ( l_Value IsArray )
+       OR ( l_Value IsString )
+      ) then
+   begin
+    STRING VAR l_Key
+    anItem .WordName cPalka string:Split >>> l_Key DROP
+
+    cUCStart l_Out File:WriteStr
+    l_Key l_Out File:WriteWStrLn
+
+    if ( l_Value IsString ) then
+    begin
+     ( l_Value l_Out File:WriteWStrLn )
+    end // ( l_Value IsString )
+    else
+    begin
+     l_Value .for> ( l_Out File:WriteWStrLn )
+    end // ( l_Value IsString )
+
+    cUCEnd l_Out File:WriteStr
+    l_Key l_Out File:WriteWStrLn
+   end // ( l_Value IsArray )
+  ) // g_CurrentGenerator MembersIterator
+ FINALLY
+  nil >>> l_Out
+ END // TRY..FINALLY
+ l_RealFileName l_TempFileName false CopyChangedFile
+  
+ if ( l_RealFileName FileSize 0 == ) then
+ begin
+  l_RealFileName false DoDeleteFile
+ end // ( l_RealFileName FileSize 0 == )
+  
+; // SaveUserCode
+
+elem_proc LoadUserCode
+ if ( Self .gen-> UCRead true ?!= ) then
+ begin
+  Self .gen-> UCRead := true
+
+  Self .ReadUCFromFile: ( Self .UCFileName )
+
+  VAR l_PrevFile
+  Self .extuc-> FileName .ucString >>> l_PrevFile
+
+  if ( l_PrevFile g_FinalFileNameForUC SameText ! ) then
+  begin
+   Self .ReadUCFromFile: l_PrevFile
+  end // ( l_PrevFile g_FinalFileNameForUC SameText ! )
+  else
+  begin
+   Self .ReadUCFromFile: g_FinalFileNameForUC
+  end // ( l_PrevFile IsString )
+
+  Self .SaveUserCode
+ end //( Self .gen-> UCRead true ?!= )
+; // LoadUserCode
+
+STRING CompileTime-VAR g_TempFileName ''
+
+elem_proc FlushFiles
+ VAR l_FileToWrite
+ '' >>> l_FileToWrite
+
+ if (
+     ( g_FinalFileName .IsNotNil )
+     AND ( Self .? .CanCopyToFinalFile )
+    ) then
+ begin
+  g_FinalFileName >>> l_FileToWrite
+  if ( g_RealFileName sysutils:FileExists ) then
+  begin
+   g_RealFileName false DoDeleteFile
+  end // ( g_RealFileName sysutils:FileExists )
+ end // ( g_FinalFileName .IsNotNil )
+ else
+ begin
+  g_RealFileName >>> l_FileToWrite
+  g_RealFileName g_TempFileName false CopyChangedFile
+ end // ( g_FinalFileName .IsNotNil )
+
+ Self .LoadUserCode
+ Self .extuc-> ParentFileName := nil
+ STRING VAR l_FileToDelete
+ Self .extuc-> FileName .ucString >>> l_FileToDelete
+ if ( l_FileToDelete l_FileToWrite SameText ! ) then
+ begin
+  Self .extuc-> FileName := l_FileToWrite
+  Self .SaveUserCode
+  if ( l_FileToDelete sysutils:FileExists ) then
+  begin
+   l_FileToDelete true DoDeleteFile
+  end // ( l_FileToDelete sysutils:FileExists )
+ end // ( l_FileToDelete l_FileToWrite SameText ! )
+
+ g_UCRead .for> (
+   IN anElement
+  anElement .extuc-> ParentFileName := l_FileToWrite
+  anElement .SaveUserCode
+ ) // g_UCRead .for>
+
+ if ( g_FinalFileName .IsNotNil ) then
+ begin
+  if ( Self .? .CanCopyToFinalFile ) then
+  begin
+   g_FinalFileName g_TempFileName true CopyChangedFile
+
+   VAR l_Path
+   VAR l_Name
+         
+   g_FinalFileName sysutils:ExtractFilePath >>> l_Path
+   g_FinalFileName sysutils:ExtractFileName >>> l_Name
+         
+   VAR l_NameToDelete
+   VAR l_FileToDelete
+         
+   if ( cNotCompleted l_Name StartsStr ! ) then
+   begin
+    l_Name cNotFinished .CutPrefix >>> l_NameToDelete
+    [ l_Path cNotCompleted l_NameToDelete ] strings:Cat >>> l_FileToDelete
+    if ( l_FileToDelete g_FinalFileName SameText ! ) then
+    begin
+     if ( l_FileToDelete sysutils:FileExists ) then
+     begin
+      l_FileToDelete true DoDeleteFile
+     end // ( l_FileToDelete sysutils:FileExists )
+    end // ( l_FileToDelete g_FinalFileName SameText ! )
+   end // ( cNotCompleted l_Name StartsStr ! )
+         
+   if ( cNotFinished l_Name StartsStr ! ) then
+   begin
+    l_Name cNotCompleted .CutPrefix >>> l_NameToDelete
+    [ l_Path cNotFinished l_NameToDelete ] strings:Cat >>> l_FileToDelete
+    if ( l_FileToDelete g_FinalFileName SameText ! ) then
+    begin
+     if ( l_FileToDelete sysutils:FileExists ) then
+     begin
+      l_FileToDelete true DoDeleteFile
+     end // ( l_FileToDelete sysutils:FileExists )
+    end // ( l_FileToDelete g_FinalFileName SameText ! )
+   end // ( cNotFinished l_Name StartsStr ! )
+
+  end // ( Self .? .CanCopyToFinalFile )
+ end // ( g_FinalFileName .IsNotNil )
+; // FlushFiles
+
+ModelElement CompileTime-VAR g_CurrentGeneratedElement nil
+
 elem_proc GenerateWordToFileWith:
  ^ IN aLambda
  
@@ -691,7 +1017,7 @@ elem_proc GenerateWordToFileWith:
   [ Self .WordName .? Ext ] strings:Cat >>> l_FileName
  
   STRING VAR l_TempPath
-  'C:\Temp\GenScripts\' >>> l_TempPath
+  cTempGenScriptsFolder >>> l_TempPath
   l_TempPath ForceDirectories
   
   STRING VAR l_RealPath
@@ -711,61 +1037,19 @@ elem_proc GenerateWordToFileWith:
       TF g_FinalFileNameForUC (
        Self .FinalFileName >>> g_FinalFileName
        Self false .CustomFinalFileName >>> g_FinalFileNameForUC
-       TF g_OutFile (
-        g_TempFileName MakePathAndOpenWrite >>> g_OutFile
-        TF g_UCRead (
-         TF g_NeedOutLn (
-          TF g_CurrentGeneratedElement (
+       TF g_UCRead (
+        [] >>> g_UCRead
+        TF g_CurrentGeneratedElement (
+         TF g_OutFile (
+          g_TempFileName MakePathAndOpenWrite >>> g_OutFile
+          TF g_NeedOutLn (
            Self >>> g_CurrentGeneratedElement
            Self aLambda DO
-          )
-         ) // TF g_NeedOutLn
-        ) // TF g_UCRead
-       ) // TF g_OutFile
-       g_RealFileName g_TempFileName false CopyChangedFile
-       if ( g_FinalFileName .IsNotNil ) then
-       begin
-        if ( Self .? .CanCopyToFinalFile ) then
-        begin
-         g_FinalFileName g_TempFileName true CopyChangedFile
-         
-         VAR l_Path
-         VAR l_Name
-         
-         g_FinalFileName sysutils:ExtractFilePath >>> l_Path
-         g_FinalFileName sysutils:ExtractFileName >>> l_Name
-         
-         VAR l_NameToDelete
-         VAR l_FileToDelete
-         
-         if ( cNotCompleted l_Name StartsStr ! ) then
-         begin
-          l_Name cNotFinished .CutPrefix >>> l_NameToDelete
-          [ l_Path cNotCompleted l_NameToDelete ] strings:Cat >>> l_FileToDelete
-          if ( l_FileToDelete g_FinalFileName SameText ! ) then
-          begin
-           if ( l_FileToDelete sysutils:FileExists ) then
-           begin
-            l_FileToDelete true DoDeleteFile
-           end // ( l_FileToDelete sysutils:FileExists )
-          end // ( l_FileToDelete g_FinalFileName SameText ! )
-         end // ( cNotCompleted l_Name StartsStr ! )
-         
-         if ( cNotFinished l_Name StartsStr ! ) then
-         begin
-          l_Name cNotCompleted .CutPrefix >>> l_NameToDelete
-          [ l_Path cNotFinished l_NameToDelete ] strings:Cat >>> l_FileToDelete
-          if ( l_FileToDelete g_FinalFileName SameText ! ) then
-          begin
-           if ( l_FileToDelete sysutils:FileExists ) then
-           begin
-            l_FileToDelete true DoDeleteFile
-           end // ( l_FileToDelete sysutils:FileExists )
-          end // ( l_FileToDelete g_FinalFileName SameText ! )
-         end // ( cNotFinished l_Name StartsStr ! )
-         
-        end // ( Self .? .CanCopyToFinalFile )
-       end // ( g_FinalFileName .IsNotNil )
+          ) // TF g_NeedOutLn
+         ) // TF g_OutFile
+         Self .FlushFiles
+        ) // TF g_CurrentGeneratedElement
+       ) // TF g_UCRead
       ) // TF g_FinalFileNameForUC
      ) // TF g_FinalFileName
     end // g_TempFileName .TextNotInArray: g_GeneratedFiles
@@ -791,16 +1075,6 @@ elem_proc DeleteWordFile
    end // ( g_RealFileName sysutils:FileExists )
   ) // TF g_RealFileName 
 ; // DeleteWordFile
-
-BOOLEAN elem_func IsServiceImplementation
- Self .IsStereotype st_ServiceImplementation 
- >>> Result
-; // IsServiceImplementation
-
-BOOLEAN elem_func IsService
- Self .IsStereotype st_Service 
- >>> Result
-; // IsService
 
 BOOLEAN elem_func IsTestCase
  Self .IsStereotype st_TestCase 
@@ -1685,6 +1959,11 @@ INTERFACE FUNCTION MakeParam:
   if ( aType .IsNotNil ) then
   begin
    l_Param -> Target := aType
+//   l_Param -> Target := ( aType .WeakRef )
+/*{   if ( aType IsIntf ) then
+   begin
+    [ aName ' : ' aType .Name ] strings:Cat Msg
+   end // ( aType IsIntf )}*/
   end // ( aType .IsNotNil )
   
   l_Param aLambda DO
@@ -1905,6 +2184,7 @@ elem_iterator ImplementsInDependencies
   Self .Dependencies 
   .filter> .IsImplements
   .mapToTarget>
+  .join> ( Self .ImplementedElements )
   array:Copy
  ) 
  >>> Result
@@ -2011,7 +2291,10 @@ elem_iterator ChildrenExPrim
       aMade -> %SUM := ( [ 'Интерфейс сервиса ' Self .Name ] strings:Cat ) 
       aMade -> Parent := ( Self .WeakRef )
       aMade -> Visibility := PublicAccess
-      aMade -> Implements := [ l_MixIn ]
+      if ( l_MixIn .NotIsNil ) then
+      begin
+       aMade -> Implements := [ l_MixIn ]
+      end // ( l_MixIn .NotIsNil )
      ) // MakeFacet:
     ) // l_Children .join> ToArray:
     >>> l_Children
@@ -2295,7 +2578,7 @@ elem: OutRecall
   ) 
    begin
     Self aLambda DO
-   end // ( Self .IsModuleOperationPrim )
+   end // ( Self .IsFormSetFactory )
   ( Self .IsVCMApplication )
    begin
     Self .Children .for> ( aLambda call.me )
@@ -2308,8 +2591,6 @@ CONST cNeedsToBeImplemented ' !!! Needs to be implemented !!!'
 CONST cImplementationUserCodeSuffix '_impl'
 CONST cVarUserCodeSuffix '_var'
 CONST cEmptyUserCode #1
-
-CONST cUserCodePrefix 'uc:'
 
 STRING FUNCTION cImplementationUserCodeName
  cUserCodePrefix cImplementationUserCodeSuffix Cat >>> Result
@@ -2402,6 +2683,8 @@ ARRAY elem_func ParametersList
  )
  >>> Result
 ; // ParametersList
+
+FORWARD .OperationsEx
 
 elem_iterator OperationsEx
  Cached:
@@ -2655,41 +2938,45 @@ elem_iterator OperationsEx
     aModule .Name >>> l_ModuleName
 
     elem_proc DoModule
-     Self .Operations
+     Self .OperationsEx
+     //Self .Operations
      .filter> .IsModuleOperationPrim
      .for> (
        IN anOp
-      VAR l_Name
-      VAR l_Type
-      [ 'mod_opcode_' l_ModuleName '_' anOp .Name ] strings:Cat >>> l_Name
-      GarantModel::TvcmMOPID >>> l_Type
-      if ( l_Operations l_Name .HasModelElementWithName ! ) then
+      if ( anOp .Parent .IsVCMModuleContract ! ) then
       begin
-       l_Operations
-       .join> ToArray: (
-        l_Name
-        l_Type
-        MakeFunction: (
-          IN aMade
-         aMade -> Visibility := PublicAccess
-         aMade -> Stereotype := st_static::Operation
-         aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
-         aMade .AddMethodWithParams: cImplementationUserCodeName ( anOp l_ModuleName ) (
-           IN anOp
-           IN aModuleName
-          VAR l_Name
-          [ 'g_module_opcode_' aModuleName '_' anOp .Name ] strings:Cat >>> l_Name
-          [
-           ' Result := ' l_Name ';' \n
-           ' Assert((Result.rMoID > 0) AND (Result.rOpID > 0));'
-          ]
-         ) // aMade .AddMethodWithParams: cImplementationUserCodeName anOp
+       VAR l_Name
+       VAR l_Type
+       [ 'mod_opcode_' l_ModuleName '_' anOp .Name ] strings:Cat >>> l_Name
+       GarantModel::TvcmMOPID >>> l_Type
+       if ( l_Operations l_Name .HasModelElementWithName ! ) then
+       begin
+        l_Operations
+        .join> ToArray: (
+         l_Name
+         l_Type
+         MakeFunction: (
+           IN aMade
+          aMade -> Visibility := PublicAccess
+          aMade -> Stereotype := st_static::Operation
+          aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
+          aMade .AddMethodWithParams: cImplementationUserCodeName ( anOp l_ModuleName ) (
+            IN anOp
+            IN aModuleName
+           VAR l_Name
+           [ 'g_module_opcode_' aModuleName '_' anOp .Name ] strings:Cat >>> l_Name
+           [
+            ' Result := ' l_Name ';' \n
+            ' Assert((Result.rMoID > 0) AND (Result.rOpID > 0));'
+           ]
+          ) // aMade .AddMethodWithParams: cImplementationUserCodeName anOp
 
-        ) // MakeFunction:
-       ) //.join> ToArray:
-       array:Copy
-       >>> l_Operations
-      end // ( l_Operations l_Name .HasModelElementWithName ! )
+         ) // MakeFunction:
+        ) //.join> ToArray:
+        array:Copy
+        >>> l_Operations
+       end // ( l_Operations l_Name .HasModelElementWithName ! )
+      end // ( anOp .Parent .IsVCMModuleContract ! )
      ) // .for>
      Self .InheritsEx .for> call.me
     ; // DoModule
@@ -2735,7 +3022,22 @@ elem_iterator OperationsEx
    l_Operations
   end // ( Self .IsVCMApplication )
 
+  if ( Self .IsVCMFormsPack ) then
+  begin
+   >>> l_Operations
+   Self .ImplementsInDependencies
+   .filter> .IsVCMModuleContract
+   .for> (
+     IN aService
+    l_Operations
+    .join> ( aService call.me .filter> .IsModuleOperationPrim )
+    >>> l_Operations
+   ) // .for>
+   l_Operations
+  end // ( Self .IsVCMFormsPack )
+  
   if ( Self .IsPureMixIn ) then
+  // - это заготовочка для сервисов
   begin
    >>> l_Operations
    l_Operations
@@ -2768,6 +3070,8 @@ BOOLEAN elem_func IsClassImplementable
  Cached:
  (
   RULES
+   ( Self .IsNil )
+    false
    ( Self .IsPureMixIn )
     false
    ( Self .IsMixIn )
@@ -3227,6 +3531,17 @@ STRING elem_func UIDforUserCode
    ; // RULES
   ( Self .IsMethodAndImplementsIterator )
    ( Self .MainImplements .LUID )
+  (
+   ( Self .IsFacetMethod )
+   AND ( Self .GetUP "OriginalStereotype" .NotIsNil )
+   AND ( Self .Speller .NotIsNil )
+  )
+   ( Self .Speller .LUID )
+  (
+   ( Self .IsVCMModuleContractImplementation )
+   AND ( Self .Parent .NotIsNil )
+  )
+   ( Self .Parent .LUID ) 
   DEFAULT
    ( Self .LUID )
  ; // RULES
@@ -3340,21 +3655,24 @@ ModelElement elem_func IteratorAction
      ) // MakeFunction: 
     end // DEFAULT
   ; // RULES  
- ) >>> Result
+ )
+ >>> Result
 ; // IteratorAction
 
 INTERFACE elem_func ActionParamPrim
  Cached:
  (
   'anAction' Self MakeParam
- ) >>> Result
+ )
+ >>> Result
 ; // ActionParamPrim
 
 INTERFACE elem_func ActionParam
  Cached:
  (
   Self .IteratorAction .ActionParamPrim
- ) >>> Result
+ )
+ >>> Result
 ; // ActionParam
 
 ModelElement elem_func IteratorStub
@@ -3396,7 +3714,8 @@ ModelElement elem_func IteratorStub
      ) // MakeFunction: 
     end // DEFAULT
   ; // RULES  
- ) >>> Result
+ )
+ >>> Result
 ; // IteratorStub
 
 BOOLEAN elem_func IsInParam
@@ -3602,14 +3921,114 @@ BOOLEAN elem_func IsProperty
  >>> Result
 ; // IsProperty
 
+BOOLEAN elem_func IsWideString
+ Cached:
+ (
+  RULES
+   ( Self .Name 'a-string' == )
+    false
+   ( Self .Name 'a-wstring' == )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // IsWideString
+
+BOOLEAN elem_func IsString
+ Cached:
+ (
+  RULES
+   ( Self .Name 'a-string' == )
+    true
+   ( Self .IsWideString )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // IsString
+
+BOOLEAN elem_func IsUntyped
+ Self .Name 'void' == >>> Result
+; // IsUntyped
+
+BOOLEAN elem_func IsManaged
+ Cached:
+ (
+  RULES
+   ( Self .IsRecord )
+    true
+   ( Self .IsUnion )
+    true
+   ( Self .IsArray )
+    true
+   ( Self .IsInterface )
+    true
+   ( Self .IsTypedef )
+    RULES
+     ( Self .IsPointer )
+      false
+     DEFAULT
+      ( Self .MainAncestor call.me )
+    ; // RULES  
+   ( Self .IsMixInParamType )
+    true
+   ( Self .IsString )
+    true
+   ( Self .IsUntyped )
+    true
+   DEFAULT
+    false
+  ; // RULES
+ )
+ >>> Result
+; // IsManaged
+
+WordAlias .NeedsResultVarInTie .IsManaged
+
 ARRAY elem_func MethodParameters
  Cached:
  (
   RULES
+   ( Self .InTie )
+    RULES
+     ( Self .Target .NeedsResultVarInTie )
+      (
+        Self .Parameters
+        .join> ToArray: (
+         'aRet'
+         nil //Self .Target
+         MakeParam: (
+           IN aMade
+          aMade -> Stereotype := st_out
+          aMade -> %SUM := ( Self .Target .TypeName )
+         ) // MakeParam:
+        ) // .join> ToArray:
+      )
+     DEFAULT
+      ( Self .Parameters )
+    ; // RULES
    (
     ( Self .IsVCMOperationPrim )
     OR ( Self .IsModuleOperationPrim )
-   ) 
+   )
     RULES
      ( Self .IsTester )
       ( GarantModel::IvcmTestParamsPrim .ParamsParam .ToArray )
@@ -3671,7 +4090,7 @@ ARRAY elem_func MethodParameters
      end // ( Self .IsMakeSingleChild )
      else
      begin
-      .join> [ 
+      .join> [
        'aParams' GarantModel::IvcmMakeParams MakeParam: (
          IN aMade
         aMade -> 'extprop:pas:Value' := 'nil' 
@@ -3741,152 +4160,132 @@ ARRAY elem_func MethodParameters
  >>> Result
 ; // MethodParameters
 
-CONST cUCStart '//#UC START# *'
-CONST cUCEnd '//#UC END# *'
+BOOLEAN elem_func IsMethodLike
+ Cached:
+ (
+  RULES
+   ( Self .IsElementProxy )
+    false
+   ( Self .IsClassOrMixIn )
+    false
+   ( Self .IsRecord )
+    false
+   ( Self .IsUtilityPack )
+    false
+   ( Self .IsTarget )
+    false
+   ( Self .IsIni )
+    false
+   ( Self .IsFini )
+    false
+   ( Self .IsInterfaces )
+    false
+   ( Self .IsVCMFormZone )
+    false
+   ( Self .IsVCMZone )
+    false
+   DEFAULT
+    true
+  ; // RULES
+ )
+ >>> Result
+; // IsMethodLike
 
-PROCEDURE ReadUCFromFile
-  STRING IN aFileName
-  STRING IN aCurrentGeneratedElementPrefix
- if ( aFileName sysutils:FileExists ) then
- begin
-  FILE VAR l_In
-  aFileName TryOpen: File:OpenRead >>> l_In
-  TRY
-   VAR l_UCOpened
-   ARRAY VAR l_Accumulated
-   STRING VAR l_Key
-   
-   false >>> l_UCOpened
-   l_In File:ReadLines (
-     IN aStr
-     
-    VAR l_Pos
-    
-    : Has
-     string:Pos >>> l_Pos
-     l_Pos -1 !=
-    ; // Has
-     
-    RULES 
-     ( aStr cUCStart Has )
-      ( 
-       l_UCOpened ! ?ASSURE [ 'Секция кода уже открыта. Файл: ' aFileName ' строка:' aStr ]
-       true >>> l_UCOpened
-       aStr string:Trim >>> aStr
-       [] >>> l_Accumulated
-       
-       aStr >>> l_Key
-       '*' string:SplitTo! l_Key DROP
-       
-      )
-     ( aStr cUCEnd Has )
-      ( 
-       l_UCOpened ?ASSURE [ 'Секция кода не открыта. Файл: ' aFileName ' строка:' aStr  ]
-       false >>> l_UCOpened
-       
-       VAR l_Head
-       if ( l_Pos > 0 ) then
-       begin
-        l_Pos 0 aStr string:Substring >>> l_Head
-        if ( l_Head string:TrimLeft .IsNotNil ) then
-        begin
-         l_Head .AddToArray: l_Accumulated
-         
-         aStr string:Len l_Pos - 
-         l_Pos 
-         aStr 
-         string:Substring >>> aStr
-        end // ( l_Head .IsNotNil )
-       end // ( l_Pos > 0 )
-       
-       aStr string:Trim >>> aStr
-       
-       g_CurrentGenerator ->^ l_Key ^:= l_Accumulated
-       g_CurrentGenerator ->^ ( aCurrentGeneratedElementPrefix l_Key Cat ) ^:= l_Accumulated
-       
-       nil >>> l_Accumulated
-      )
-     DEFAULT
-      (
-       l_UCOpened ? ( 
-        aStr .AddToArray: l_Accumulated
-       ) // l_UCOpened ?
-      ) 
-    ; // RULES  
-   ) // l_In File:ReadLines
-  FINALLY
-   nil >>> l_In
-  END // TRY..FINALLY
- end // ( aFileName sysutils:FileExists )
-; // ReadUCFromFile
+BOOLEAN elem_func NeedWriteUCToParent
+ Cached:
+ (
+  RULES
+   ( Self .IsMethodLike )
+    true
+   ( Self .IsIni )
+    true
+   ( Self .IsFini )
+    true
+/*{   ( Self .IsRecord )
+    true
+   ( Self .IsVCMFormZone )
+    true
+   ( Self .IsVCMZone )
+    true}*/
+   DEFAULT
+    false 
+  ; // RULES
+ )
+ >>> Result
+; // NeedWriteUCToParent
 
-CONST cPalka '|'
+ModelElement elem_func ImplementorOrParent
+ //Cached:
+ (
+  g_Implementor >>> Result
+  
+  if ( Result .IsNil ) then
+  begin
+   Self .Parent >>> Result
+  end // ( Result .IsNil )
+  Result
+ )
+ >>> Result
+; // ImplementorOrParent
 
 elem_proc OutUserCode:
   STRING IN aKey
   ^ IN aOutExisting
   ^ IN aOutNew
-  
- BOOLEAN VAR l_Found
- false >>> l_Found
- 
- if ( g_UCRead ! ) then
- begin
-  true >>> g_UCRead
-  STRING VAR l_TempFileName
-  g_TempFileName '.uc.txt' Cat >>> l_TempFileName 
-  STRING VAR l_RealFileName
-  g_RealFileName '.uc.txt' Cat >>> l_RealFileName
-  
-  STRING VAR l_CurrentGeneratedElementPrefix
-  [ cUserCodePrefix g_CurrentGeneratedElement .LUID cPalka ] strings:Cat >>> l_CurrentGeneratedElementPrefix
-  
-  l_RealFileName l_CurrentGeneratedElementPrefix ReadUCFromFile
-  g_FinalFileNameForUC l_CurrentGeneratedElementPrefix ReadUCFromFile
 
-  FILE VAR l_Out
-  l_TempFileName MakePathAndOpenWrite >>> l_Out
-  TRY
-   g_CurrentGenerator MembersIterator 
-   .filter> ( .WordName l_CurrentGeneratedElementPrefix SWAP StartsStr )
-   .for> (
-     IN anItem
-    STRING VAR l_Key 
-    anItem .WordName cPalka string:Split >>> l_Key DROP
-    
-    cUCStart l_Out File:WriteStr
-    l_Key l_Out File:WriteWStrLn
-    
-    anItem DO .for> ( l_Out File:WriteWStrLn )
-     
-    cUCEnd l_Out File:WriteStr
-    l_Key l_Out File:WriteWStrLn
-     
-   ) // g_CurrentGenerator MembersIterator
-  FINALLY
-   nil >>> l_Out
-  END // TRY..FINALLY
-  l_RealFileName l_TempFileName false CopyChangedFile
-  
-  if ( l_RealFileName FileSize 0 == ) then
-  begin
-   l_RealFileName false DoDeleteFile
-  end // ( l_RealFileName FileSize 0 == )
-  
- end //( g_UCRead ! ) 
+ g_CurrentGeneratedElement .LoadUserCode
+ VAR l_Field
+ g_CurrentGenerator %% aKey >>> l_Field
  
- l_Found ! ? (
-  VAR l_Field
-  g_CurrentGenerator %% aKey >>> l_Field
+ VAR l_InnerChild
+ nil >>> l_InnerChild
+ if ( Self g_CurrentGeneratedElement .IsSameModelElement ! ) then
+ begin
+  Self >>> l_InnerChild
+  if ( l_InnerChild .NeedWriteUCToParent ) then
+  begin
+   l_InnerChild .ImplementorOrParent >>> l_InnerChild
+  end // ( l_InnerChild .NeedWriteUCToParent )
+  if ( l_InnerChild g_CurrentGeneratedElement .IsSameModelElement ) then
+  begin
+   nil >>> l_InnerChild
+  end // ( Self g_CurrentGeneratedElement .IsSameModelElement )
+  if ( l_InnerChild .NotIsNil ) then
+  begin
+   if ( l_InnerChild .LUID .IsNil ) then
+   begin
+    nil >>> l_InnerChild
+   end // ( l_InnerChild .LUID .IsNil )
+  end // ( l_InnerChild .NotIsNil )
   if ( l_Field .IsNil ) then
   begin
-   aKey aOutNew DO
+   if ( l_InnerChild .NotIsNil ) then
+   begin
+    if ( l_InnerChild .gen-> UCRead true ?!= ) then
+    begin
+     l_InnerChild .gen-> UCRead := true
+     l_InnerChild .ReadUCFromFile: ( l_InnerChild .UCFileName )
+     g_CurrentGenerator %% aKey >>> l_Field
+    end // ( l_InnerChild .gen-> UCRead true ?!= )
+   end // ( l_InnerChild .NotIsNil )
   end // ( l_Field .IsNil )
-  else
+ end // l_InnerChild
+
+ if ( l_Field .IsNil ) then
+ begin
+  aKey aOutNew DO
+ end // ( l_Field .IsNil )
+ else
+ begin
+  VAR l_Value
+  l_Field DO >>> l_Value
+  if ( l_InnerChild .NotIsNil ) then
   begin
-   aKey l_Field DO aOutExisting DO
-  end // ( l_Field .IsNil )
- ) // l_Found ! ?
+   l_InnerChild .uc-> aKey := l_Value
+   l_InnerChild .AddToArray?: g_UCRead DROP
+  end // ( l_InnerChild .NotIsNil )
+  aKey l_Value aOutExisting DO
+ end // ( l_Field .IsNil )
 ; // OutUserCode:
 
 elem_proc DefaultUserCodePrim:
@@ -3911,19 +4310,19 @@ elem_proc DefaultUserCodePrim:
   VAR l_Field
   nil >>> l_Field 
   
-  if ( aSuffix .NotIsNil ) then
+/*{  if ( aSuffix .NotIsNil ) then
   begin
    // - вообще говоря тут затычка для переноса слов скрипта в новый генератор
    if ( [ l_KeyStart cUnderline l_KeyStart ] strings:Cat aKey StartsStr ) then
    // - проверяем, что это слово скрипта у которого родитель поменял UID
    // - тут ещё надо KeywordObjectToOperate проверять
    begin
-    g_CurrentGenerator MembersIterator 
+    g_CurrentGenerator MembersIterator
     .filter> ( .WordName l_KeyStart SWAP StartsStr )
     .filter> ( .WordName aSuffix '*' Cat SWAP EndsStr )
     .FirstElement >>> l_Field
    end
-  end // ( aSuffix .NotIsNil )
+  end // ( aSuffix .NotIsNil )}*/
   
   if ( l_Field .IsNil ) then
   begin
@@ -3934,7 +4333,6 @@ elem_proc DefaultUserCodePrim:
    [ cUCStart aKey ] .Out
    l_Field DO .for> ( ToOut \n ToOut )
    [ cUCEnd aKey ] .Out
-   //l_Field .WordName Msg
   end // ( l_Field .IsNil )
  ) // Self aKey .OutUserCode:
 ; // DefaultUserCodePrim:
@@ -3948,7 +4346,7 @@ elem_proc DefaultUserCode
   [ cUCStart aKey ] .Out
   [ aCode DO ] .Out
   [ cUCEnd aKey ] .Out
- ) // Self aKey .OutUserCode:
+ ) // Self aKey .DefaultUserCodePrim:
 ; // DefaultUserCode
 
 elem_proc PredefinedUserCode:
@@ -3959,7 +4357,7 @@ elem_proc PredefinedUserCode:
  Self aSuffix aKey .DefaultUserCodePrim: (
    IN aKey
   [ aCode DO ] aOutLambda DO
- ) // Self aKey .OutUserCode:
+ ) // Self aKey .DefaultUserCodePrim:
 ; // PredefinedUserCode:
 
 elem_proc PredefinedMethodUserCode:
@@ -3986,20 +4384,6 @@ elem_proc PredefinedMethodUserCodeWithoutVar:
  Self aSuffix aKey aCode .PredefinedMethodUserCode: () ( aImplCode DO ) 
 ; // PredefinedMethodUserCodeWithoutVar:
   
-ModelElement elem_func ImplementorOrParent
- //Cached:
- (
-  g_Implementor >>> Result
-  
-  if ( Result .IsNil ) then
-  begin
-   Self .Parent >>> Result
-  end // ( Result .IsNil )
-  Result
- )
- >>> Result
-; // ImplementorOrParent
-
 INTERFACE elem_func InterfaceLinkField
  Cached:
  (
@@ -4644,6 +5028,12 @@ BOOLEAN elem_func CanMapPropertiesToFields
  >>> Result
 ; // CanMapPropertiesToFields
 
+BOOLEAN elem_func TreatAsRecord
+ ( Self .IsStaticObject )
+ AND ( Self .UPisTrue "not treat as record for XE4" ! )
+ >>> Result
+; // TreatAsRecord
+
 elem_iterator Fields
  Cached:
  (
@@ -4682,6 +5072,25 @@ elem_iterator Fields
   
   if ( Self .IsStaticObject ) then
   begin
+   if ( Self .TreatAsRecord ) then
+   begin
+    VAR l_Ancestor
+    Self .MainAncestor >>> l_Ancestor
+    if ( l_Ancestor .NotIsNil ) then
+    begin
+     >>> l_Fields
+     ToArray: (
+      'r' l_Ancestor .TypeName Cat
+      l_Ancestor
+      MakeField: (
+        IN aMade
+       aMade -> Visibility := PublicAccess
+       aMade -> "ifdef" := 'XE4'
+      ) // MakeField:
+     ) // ToArray:
+     .join> l_Fields
+    end // ( l_Ancestor .NotIsNil )
+   end // ( Self .TreatAsRecord )
    if ( Self .IsAutoHelper ) then
    begin
     .joinWithLambded> ( Self .ImplementsEx ) .ToArray: .InterfaceLinkField
@@ -4751,7 +5160,9 @@ INTERFACE elem_func InstanceField
    if ( Self .HasFactory ) then
     GarantModel::Pointer
    else
-    Self 
+   begin
+    Self .WeakRef
+   end // ( Self .HasFactory )
   MakeField: ( 
     IN aMade
    aMade -> %SUM := ( 'Экземпляр синглетона ' l_TypeName Cat )
@@ -4795,13 +5206,13 @@ elem_iterator GlobalVars
      end // ( Self .IsSingleton )
      .join> ( Self .InnerGlobalVars )
 
-     if ( Self .IsVCMFormsPack ) then
+     if ( Self .IsVCMModuleContract ) then
      begin
       if ( Self .Abstraction at_final == ) then
       begin
        VAR l_Vars
        VAR l_ModuleName
-       Self .Name >>> l_ModuleName
+       Self .Name 'T' .CutPrefix >>> l_ModuleName
 
        elem_proc AddModuleOperationToVars
         Self .OperationsEx
@@ -4810,7 +5221,7 @@ elem_iterator GlobalVars
           IN anOp
          VAR l_Name
          VAR l_Type
-         [ 'g_module_opcode_' l_ModuleName '_' anOp .Name ] strings:Cat >>> l_Name
+         [ 'mod_opcode_' l_ModuleName '_' anOp .Name ] strings:Cat >>> l_Name
          GarantModel::TvcmMOPID >>> l_Type
          if ( l_Vars l_Name .HasModelElementWithName ! ) then
          begin
@@ -4826,6 +5237,50 @@ elem_iterator GlobalVars
           ) //.join> ToArray:
           >>> l_Vars
          end // ( l_Vars l_Name .HasModelElementWithName ! )
+        ) // .for>
+        //Self .InheritsEx .for> call.me
+       ; // AddModuleOperationToVars
+
+       >>> l_Vars
+       Self .AddModuleOperationToVars
+       l_Vars
+      end // ( Self .Abstraction at_final == )
+     end // ( Self .IsVCMModuleContract )
+
+     if ( Self .IsVCMFormsPack ) then
+     begin
+      if ( Self .Abstraction at_final == ) then
+      begin
+       VAR l_Vars
+       VAR l_ModuleName
+       Self .Name >>> l_ModuleName
+
+       elem_proc AddModuleOperationToVars
+        Self .OperationsEx
+        .filter> .IsModuleOperationPrim
+        .for> (
+          IN anOp
+         if ( anOp .Parent .IsVCMModuleContract ! ) then
+         begin
+          VAR l_Name
+          VAR l_Type
+          [ 'g_module_opcode_' l_ModuleName '_' anOp .Name ] strings:Cat >>> l_Name
+          GarantModel::TvcmMOPID >>> l_Type
+          if ( l_Vars l_Name .HasModelElementWithName ! ) then
+          begin
+           l_Vars
+           .join> ToArray: (
+            l_Name
+            l_Type
+            MakeField: (
+              IN aMade
+             aMade -> Visibility := PublicAccess
+             aMade -> 'extprop:pas:Value' := '(rMoID : -1; rOpID : -1)'
+            ) // MakeField:
+           ) //.join> ToArray:
+           >>> l_Vars
+          end // ( l_Vars l_Name .HasModelElementWithName ! )
+         end // ( anOp .Parent .IsVCMModuleContract ! )
         ) // .for>
         Self .InheritsEx .for> call.me
        ; // AddModuleOperationToVars
@@ -4908,86 +5363,6 @@ elem_iterator GlobalVars
  ) 
  >>> Result
 ; // GlobalVars
-
-BOOLEAN elem_func IsWideString
- Cached:
- (
-  RULES
-   ( Self .Name 'a-string' == )
-    false
-   ( Self .Name 'a-wstring' == )
-    true
-   ( Self .IsTypedef )
-    RULES
-     ( Self .IsPointer )
-      false
-     DEFAULT
-      ( Self .MainAncestor call.me )
-    ; // RULES  
-   DEFAULT
-    false
-  ; // RULES
- )
- >>> Result
-; // IsWideString
-
-BOOLEAN elem_func IsString
- Cached:
- (
-  RULES
-   ( Self .Name 'a-string' == )
-    true
-   ( Self .IsWideString )
-    true
-   ( Self .IsTypedef )
-    RULES
-     ( Self .IsPointer )
-      false
-     DEFAULT
-      ( Self .MainAncestor call.me )
-    ; // RULES  
-   DEFAULT
-    false
-  ; // RULES
- )
- >>> Result
-; // IsString
-
-BOOLEAN elem_func IsUntyped
- Self .Name 'void' == >>> Result
-; // IsUntyped
-
-BOOLEAN elem_func IsManaged
- Cached:
- (
-  RULES
-   ( Self .IsRecord )
-    true
-   ( Self .IsUnion )
-    true
-   ( Self .IsArray )
-    true
-   ( Self .IsInterface )
-    true
-   ( Self .IsTypedef )
-    RULES
-     ( Self .IsPointer )
-      false
-     DEFAULT
-      ( Self .MainAncestor call.me )
-    ; // RULES  
-   ( Self .IsMixInParamType )
-    true
-   ( Self .IsString )
-    true
-   ( Self .IsUntyped )
-    true
-   DEFAULT
-    false
-  ; // RULES
- )
- >>> Result
-; // IsManaged
 
 BOOLEAN elem_func IsConstants
  Self .IsStereotype st_Constants 
@@ -5426,7 +5801,7 @@ elem_proc MethodUserCode
       cUnderline 
       if ( Self .IsLocalMethod ! ) then
       begin
-       l_Implementor .LUID
+       l_Implementor .UIDforUserCode
       end // ( Self .IsLocalMethod ! )
       l_Key 
      ] strings:Cat >>> l_Key
@@ -5609,14 +5984,6 @@ elem_proc MethodUserCode
    )
  ; // RULES 
 ; // MethodUserCode
-
-BOOLEAN elem_func IsIni
- Self .IsStereotype st_ini::Operation >>> Result
-; // IsIni
-
-BOOLEAN elem_func IsFini
- Self .IsStereotype st_fini::Operation >>> Result
-; // IsFini
 
 elem: IfDefBrace:
   ^ IN aLambda
@@ -6107,6 +6474,8 @@ ModelElement elem_func MethodType
     RULES
      ( Self .Target .TypeName 'Boolean' == )
       GarantModel::ByteBool
+     ( Self .Target .NeedsResultVarInTie )
+      nil
      DEFAULT
       ( Self .Target )
     ; // RULES
@@ -6116,6 +6485,8 @@ ModelElement elem_func MethodType
     ( Self .IsFactory )
     AND ( Self .Parent .IsVCMForm )
    )  
+    GarantModel::IvcmEntityForm
+   ( Self .GetUP "OriginalStereotype" 'FormFactory' ?== )
     GarantModel::IvcmEntityForm
    ( Self .IsInternalOperation )
     RULES
@@ -6426,8 +6797,10 @@ elem_proc UserCode:
  aSuffix DO >>> l_Key
  
  VAR l_Code
- Self 
-  [ cUserCodePrefix Self .MethodUserCodeModifier l_Key ] strings:Cat 
+ VAR l_Modifier
+ Self .MethodUserCodeModifier >>> l_Modifier
+ Self
+  [ cUserCodePrefix l_Modifier l_Key ] strings:Cat 
   .GetUserCode >>> l_Code
  
  if ( l_Code .IsValueValid ) then
@@ -7307,29 +7680,115 @@ elem_proc UserCode:
      DEFAULT
       () 
     ; // RULES
-   ( Self .IsElementProxy )
-    AsDefault
-   ( Self .IsClassOrMixIn )
-    AsDefault
-   ( Self .IsRecord )
-    AsDefault
-   ( Self .IsUtilityPack )
-    AsDefault
-   ( Self .IsTarget )
-    AsDefault
-   ( Self .IsIni )
-    AsDefault
-   ( Self .IsFini )
-    AsDefault
-   ( Self .IsInterfaces )
-    AsDefault
-   ( Self .IsVCMFormZone )
-    AsDefault
-   ( Self .IsVCMZone )
-    AsDefault
-   DEFAULT
+   (
+    ( Self .IsSummoned )
+    (
+     AND ( l_Implementor GarantModel::vcmData .InheritsFrom )
+     AND ( Self .GetUP 'extprop:CASTER' .NotIsNil )
+    ) 
+    OR ( Self .Documentation 'Форма синхронного просмотра' == )
+   )
+    Code:
+     RULES
+       ( l_Modifier 'get' == )
+        RULES
+         ( Self .Target GarantModel::IvcmFormDataSourceRef .IsSameModelElement )
+          ( [ ' ' 'Result' ' := '
+              'vcmCheckAndMake('
+              'f_' Self .Name
+              if ( Self .GetUP 'extprop:CASTER' .UPisTrue "required" ) then
+              begin
+               ', vcm_nmYes'
+              end // ( Self .GetUP 'extprop:CASTER' .UPisTrue "required" )
+              ')' ';'
+            ] .Out )
+         DEFAULT
+          ( [ ' ' 'Result' ' := ' 'f_' Self .Name ';' ] .Out )
+        ; // RULES
+       ( l_Modifier 'set' == )
+        ( [ ' ' 'f_' Self .Name ' := ' 'aValue' ';' ] .Out )
+      DEFAULT
+       AsMethod
+     ; // RULES
+   (
+    ( Self .IsSummoned )
+    AND ( Self .IsConstructor )
+    AND ( l_Implementor GarantModel::TddComboBoxConfigItem .InheritsFrom )
+   )
+    Pair:
+     (
+      [
+       'var' \n
+       ' l_Value : TddConfigValue;'
+      ] .Out
+     )
+     (
+      [
+       ' l3FillChar(l_Value, SizeOf(l_Value));' \n
+       ' l_Value.Kind := '
+       if ( l_Implementor .Speller .UPisTrue 'extprop:IsBool' ) then
+        'dd_vkBoolean'
+       else
+        'dd_vkInteger'
+       ';' \n
+       ' '
+       if ( l_Implementor .Speller .UPisTrue 'extprop:IsBool' ) then
+        'l_Value.AsBoolean'
+       else
+        'l_Value.AsInteger'
+       ' := ' 'dv_'
+       l_Implementor .SpelledFor .Name '_'
+       l_Implementor .Speller .GetUP "CodeName"
+       ';' \n
+       ' inherited Create('
+       'pi_'
+       l_Implementor .SpelledFor .Name '_'
+       l_Implementor .Speller .GetUP "CodeName" ',' \n
+       '  '
+       'str_'
+       //l_Implementor .SpelledFor .Name '_'
+       l_Implementor .Speller .GetUP "CodeName" '.AsStr' ',' \n
+       '  ' 'l_Value, '
+       'T' l_Implementor .Speller .GetUP "CodeName" 'ValuesMapImpl.Make, '
+       'aMasterItem'
+       ')' ';'
+      ] .Out
+     )
+   (
+    ( Self .IsSummoned )
+    AND ( Self .IsFacetMethod )
+    AND ( l_Implementor .IsVCMModuleContract )
+   )
+    Code:
+     (
+      [
+       ' if (f_Alien <> nil) then' \n
+       '  '
+       if ( Self .MethodType .NotIsNil ) then
+       begin
+        'Result := '
+       end // ( Self .MethodType .NotIsNil )
+       'f_Alien.' Self .MethodName Self .ParametersList
+       if ( Self .MethodType .NotIsNil ) then
+       begin
+        \n
+        ' else' \n
+        ' begin' \n
+        if ( Self .MethodType .IsManaged ) then
+        begin
+         '  Finalize(Result);' \n
+        end // ( Self .MethodType .IsManaged )
+        '  System.FillChar(Result, SizeOf(Result), 0);' \n
+        ' end'
+       end // ( Self .MethodType .NotIsNil )
+       ';'
+      ] .Out
+     )
+   ( Self .IsMethodLike )
     AsMethod
-  ; // RULES 
+   DEFAULT
+    AsDefault
+  ; // RULES
  end // ( l_Code .IsValueValid ) 
 ; // UserCode:
 
@@ -7609,7 +8068,6 @@ elem_iterator ChildrenEx
      ARRAY IN anOps
      ModelElement IN aKeywordSelf
     anOps 
-    //.filter> ( .Name Msg true )
     .map> ( aKeywordSelf Self .ClassForKeywordImplementation )
     .filter> ( l_Children SWAP .Name .HasModelElementWithName ! )
     .for> (
@@ -8178,10 +8636,6 @@ elem_iterator ChildrenEx
            '  end;//with l_Params' \n
            ' end;//aTarget <> nil'
           ] // aFunc ->^ cImplementationUserCodeName
-//          aFunc -> UsedElements := (
-//           aFunc -> UsedElements
-//           .join> ToArray: GarantModel::StdRes
-//          ) // aFunc -> UsedElements
          ) // MakeCallPrim:
         ; // MakeCall
         GarantModel::IvcmEntity 'у сущности' MakeCall
@@ -8251,10 +8705,6 @@ elem_iterator ChildrenEx
            '  vcmDispatcher.EntityOperationBroadcast(opcode_' anEntity .Name '_' anOperation .Name ', l_Params);' \n
            ' end//vcmDispatcher <> nil'
           ] // aFunc ->^ cImplementationUserCodeName
-//          aFunc -> UsedElements := (
-//           aFunc -> UsedElements
-//           .join> ToArray: GarantModel::StdRes
-//          ) // aFunc -> UsedElements
          ) // MakeCallPrimPrim:
         end
        ] // aMade -> Operations :=
@@ -8272,6 +8722,28 @@ elem_iterator ChildrenEx
   .filter> ( l_Children SWAP .IteratorAction .Name .HasModelElementWithName ! )
   ) ( .ToArray: .IteratorAction )
   
+  if ( Self .IsVCMFormsPack ) then
+  begin
+   Self .ImplementsInDependencies
+   .filter> .IsVCMModuleContract
+   .for> (
+     IN aService
+    .join> ToArray: (
+     aService .Name 'Impl' Cat
+     GarantModel::Tl3ProtoObject
+     MakeClass: (
+       IN aMade
+      //aMade -> UID := ( Self .LUID )
+      aMade -> UID := ( [ Self .LUID '_' aService .LUID '_Impl' ] strings:Cat )
+      aMade -> Stereotype := st_VCMModuleContractImplementation
+      aMade -> Parent := ( Self .WeakRef )
+      aMade -> Visibility := PrivateAccess
+      aMade -> ImplementedElements := [ aService ]
+     ) // MakeClass:
+    ) // .join> ToArray:
+   ) // .for>
+  end // ( Self .IsVCMFormsPack )
+
   array:Copy
  )
  >>> Result
@@ -9417,7 +9889,6 @@ elem_iterator OverriddenEx
          .NotEmpty 
         ) then
      begin
-      //Self .Name Msg
       .join> ToArray: ( GarantModel::TtfwWordPrim.DoDoIt .OverrideMethod )
      end // .filter> ( GarantModel::TtfwRegisterableWord .IsSameModelElement )
     end // ( l_HasDoIt ! )
@@ -10067,11 +10538,6 @@ elem_iterator IntfUses
     // - вообще это надо только для Internal операций
    end // ( Self .Abstraction at_final != )
    
-   if ( Self .IsMixIn ! ) then
-   begin
-    //.join> ToArray: ( Self .DefaultAncestor )
-    .join> ToArray: ( Self .MainAncestorThatNotMixIn )
-   end // ( Self .IsMixIn ! )
    if ( Self .Abstraction at_final == ) then
    begin
     if ( Self .IsVCMForm ) then
@@ -10101,8 +10567,18 @@ elem_iterator IntfUses
    .join> ToArray: GarantModel::vcmExternalInterfaces
    .join> ToArray: GarantModel::TvcmModule
   end // ( Self .IsVCMFormsPack )
-  
- ) 
+
+  if ( Self .IsClassOrMixIn ) then
+  begin
+   if ( Self .IsMixIn ! ) then
+   begin
+    if ( Self .MainAncestorThatNotMixIn .NotIsNil ) then
+    begin
+     .join> ToArray: ( Self .MainAncestorThatNotMixIn )
+    end // ( Self .MainAncestorThatNotMixIn .NotIsNil )
+   end // ( Self .IsMixIn ! )
+  end // ( Self .IsClassOrMixIn )
+ )
  >>> Result
 ; // IntfUses
 
@@ -10173,7 +10649,7 @@ elem_iterator GlobalOperationsPrim
     ) 
    ( Self .IsUtilityPack )
     ( Self .OperationsEx )
-   ( Self .IsClassOrMixIn ) 
+   ( Self .IsClassOrMixIn )
     (
      if ( Self .IsSingleton ) then
      begin
@@ -10554,6 +11030,17 @@ elem_iterator Used
    begin
     .join> ToArray: GarantModel::vcmInterfaces
    end // ( Self .NeedsMakeControls )
+
+/*{   if ( Self .Parent .IsVCMFormsPack ) then
+   begin
+    Self .Parent .ImplementsInDependencies
+    .filter> .IsVCMModuleContract
+    .for> (
+      IN aService
+     .join> ToArray: aService
+    ) // .for>
+   end // ( Self .Parent .IsVCMFormsPack )}*/
+   
   end // ( Self .IsVCMCustomForm )
   
   .joinWithLambded>
@@ -10589,8 +11076,8 @@ elem_iterator Used
   if ( Self .IsVCMApplication ) then
   begin
    Self @ (
-     IN anOp
-    .join> ToArray: anOp
+     IN aPack
+    .join> ToArray: aPack
    ) .IterateVCMFormsPacksFromApplication
    Self @ (
      IN anOp
@@ -10610,6 +11097,15 @@ elem_iterator Used
    begin
     .join> ToArray: GarantModel::TvcmModulesForRegister
     .join> ToArray: GarantModel::TvcmModuleOperationsForRegister
+    Self @ (
+      IN aPack
+     aPack .OperationsEx
+     .filter> .IsModuleOperationPrim
+     .for> (
+       IN anOp
+      .join> ToArray: anOp
+     ) // .for>
+    ) .IterateVCMFormsPacksFromApplication
    end // ( Self .Abstraction at_final == )
   end // ( Self .IsVCMFormsPack )
 
@@ -11826,7 +12322,7 @@ INTERFACE elem_func InstanceMethod
  (
   VAR l_TypeName
   Self .TypeName >>> l_TypeName
-  'Instance' Self MakeFunction: (
+  'Instance' Self .WeakRef MakeFunction: (
     IN aMade
    aMade -> Stereotype := st_static::Operation
    aMade -> %SUM := ( 'Метод получения экземпляра синглетона ' l_TypeName Cat )
@@ -11879,6 +12375,7 @@ INTERFACE elem_func FakeMethod
    aMade -> Abstraction := at_virtual
    aMade ->^ cVarUserCodeName ^:= cEmptyUserCode
    aMade ->^ cImplementationUserCodeName ^:= ' Assert(false);'
+   aMade -> "ifndef" := 'XE4'
   )
  )
  >>> Result
@@ -12045,7 +12542,7 @@ elem_iterator AllOperationsForOverload
    ( Self .IsInterface )
     ( Self .InterfaceOperationsTotal )
    ( Self .IsStaticObject )
-    ( 
+    (
       Self .OperationsEx
       .filter> ( .IsStaticConstructor ! )
       .join> ( Self .ImplementedEx )
@@ -12079,6 +12576,12 @@ elem_iterator AllOperationsForOverload
       .filter> ( .IsServiceIterator ! ) 
       .filter> ( .IsIni ! )
       .filter> ( .IsFini ! )
+
+      if ( Self .IsVCMModuleContract ) then
+      begin
+       .filter> ( .IsFormSetFactory ! )
+       .filter> ( .IsModuleOperationPrim ! )
+      end // ( Self .IsVCMModuleContract )
       
       (
        VAR l_VCMOperations
@@ -12332,8 +12835,12 @@ PROCEDURE .ByVisibility>
  false >>> l_WasOut 
  'private' >>> l_Separator
  anArray .filter> ( aFilter DO PrivateAccess == ) .for> DoOut
- false >>> l_WasOut 
- 'protected' >>> l_Separator
+ false >>> l_WasOut
+ if ( g_Implementor .TreatAsRecord ) then
+  '{$IfDef XE4}private{$Else}protected{$EndIf}'
+ else
+  'protected'
+ >>> l_Separator
  anArray .filter> ( aFilter DO ProtectedAccess == ) .for> DoOut
  false >>> l_WasOut 
  'public' >>> l_Separator
@@ -12525,7 +13032,12 @@ ModelElement elem_func TagClass
  ;
  Cached:
  (
-  Self .TypeName 'Class' Cat nil MakeClass
+  Self .TypeName 'Class' Cat
+  nil
+  MakeClass: (
+    IN aMade
+   aMade -> Parent := ( Self .Parent .WeakRef ) 
+  ) // MakeClass:
  ) 
  >>> Result
 ; // TagClass
@@ -12971,7 +13483,17 @@ elem_proc OutStaticObject
 
    Self .UPisTrue "packed" ? 'packed '
 
-   'object' Self .MainAncestor .TypeName .With() 
+   if ( Self .TreatAsRecord ) then
+   begin
+    '{$IfDef XE4}record{$Else}object'
+   end // ( Self .TreatAsRecord )
+   else
+   begin
+    'object'
+   end // ( Self .TreatAsRecord )
+   Self .MainAncestor .TypeName .With()
+   if ( Self .TreatAsRecord ) then
+    '{$EndIf}'
   ] .Out
   
   Self .OutDocumentation
@@ -13889,6 +14411,26 @@ elem_iterator LocalVars
  >>> Result
 ; // LocalVars
 
+BOOLEAN elem_func NeedsFactoryBrackets
+ RULES
+  (
+   ( Self .IsFormSetFactory )
+   AND ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! )
+  )
+   true
+  (
+   //( g_Implementor .IsVCMFormsPack )
+   ( g_Implementor .IsServiceImplementation )
+   AND ( Self .GetUP "OriginalStereotype" .NotIsNil )
+   AND ( Self .Speller .UPisTrue "NO_FACTORY_BRACKECTS" ! )
+  )
+   true
+  DEFAULT
+   false 
+ ; // RULES
+ >>> Result
+; // NeedsFactoryBrackets
+
 elem_proc MethodBody
  if ( Self .UPisTrue 'extprop:isAsm' ) then
  begin
@@ -13927,28 +14469,22 @@ elem_proc MethodBody
     ) // TF g_MethodParentPrefix
    end // ( Self .IsIteratorF ! )
    
-   if ( Self .IsFormSetFactory ) then
+   if ( Self .NeedsFactoryBrackets ) then
    begin
-    if ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! ) then
-    begin
-     'var' .Out
-     ' __WasEnter : Boolean;' .Out
-    end // ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! )
-   end // ( Self .IsFormSetFactory )
+    'var' .Out
+    ' __WasEnter : Boolean;' .Out
+   end // ( Self .NeedsFactoryBrackets )
     
    Self .UserCode: cVarUserCodeSuffix ()
   end // ( Self .IsControlPrim ! )
   
   'begin' .Out
   
-  if ( Self .IsFormSetFactory ) then
+  if ( Self .NeedsFactoryBrackets ) then
   begin
-   if ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! ) then
-   begin
-    ' __WasEnter := vcmEnterFactory;' .Out
-    ' try' .Out
-   end // ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! )
-  end // ( Self .IsFormSetFactory )
+   ' __WasEnter := vcmEnterFactory;' .Out
+   ' try' .Out
+  end // ( Self .NeedsFactoryBrackets )
   
   VAR l_WasOut
   false >>> l_WasOut
@@ -14053,16 +14589,13 @@ elem_proc MethodBody
    Self .UserCode: cImplementationUserCodeSuffix cNeedsToBeImplemented
   end // ( l_WasOut ! )
  
-  if ( Self .IsFormSetFactory ) then
+  if ( Self .NeedsFactoryBrackets ) then
   begin
-   if ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! ) then
-   begin
-    ' finally' .Out
-    '  if __WasEnter then' .Out
-    '   vcmLeaveFactory;' .Out
-    ' end;//try..finally' .Out
-   end // ( Self .UPisTrue "NO_FACTORY_BRACKECTS" ! )
-  end // ( Self .IsFormSetFactory )
+   ' finally' .Out
+   '  if __WasEnter then' .Out
+   '   vcmLeaveFactory;' .Out
+   ' end;//try..finally' .Out
+  end // ( Self .NeedsFactoryBrackets )
  end // ( Self .UPisTrue 'extprop:isAsm' )
   
  [ 'end;//' g_MethodParentPrefix Self .MethodNamePrefix Self .MethodName ] .Out
@@ -14653,7 +15186,7 @@ elem_iterator IniOperations
             aMade ->^ cUserCodePrefix ^:= [ cSpace l_TypeName '.RegisterInEngine;' ]
            ) // MakeIniProcedure:
           ) // .join>
-        end // ( l_IniOperations GarantModel::l3UnknownPrim.ClearFields .HasModelElement )
+        end // ( l_IniOperations 'Ini_Reg' .HasModelElementWithName ! )
        end // ( l_IniOperations 'Ini_Reg' .HasModelElementWithName ! )
       end // ( Self .Abstraction at_abstract != )
      end // ( Self .IsMixIn ! )
@@ -14883,7 +15416,17 @@ elem_iterator IniOperations
             cQuote anOp .Name cQuote  ', '
             cQuote anOp .Documentation cQuote ', '
             anOp .UPisTrue "no prefix" ', '
-            'g_module_opcode_' l_ModuleName '_' anOp .Name
+            if ( anOp .Parent .IsVCMModuleContract ) then
+            begin
+             'mod_opcode_'
+             anOp .Parent .Name 'T' .CutPrefix
+            end // ( anOp .Parent .IsVCMModuleContract )
+            else
+            begin
+             'g_module_opcode_'
+             l_ModuleName
+            end // ( anOp .Parent .IsVCMModuleContract )
+            '_' anOp .Name
             ')'
             ')'
             ';'
@@ -15272,29 +15815,39 @@ STRING elem_func ProjectUnitPath
     '' >>> l_Path
    end // ( l_Path 'NotFinished\Borland\Delphi\Rtl\Sys' string:Pos -1 != )
   end // ( l_Path .IsNotNil )
-  
+
   if ( l_Path .IsNotNil ) then
   begin
    l_Path cNotFinished '' string:Replace >>> l_Path
    l_Path cNotCompleted '' string:Replace >>> l_Path
    l_Path 'NotFinished\' '' string:Replace >>> l_Path
   end // ( l_Path .IsNotNil )
-  l_Path 
- ) 
+  l_Path
+ )
  >>> Result
 ; // ProjectUnitPath
 
 STRING elem_func ProjectUnitName
  Self .UnitName
- 
+
  VAR l_Path
  Self .ProjectUnitPath >>> l_Path
- 
+
  if ( l_Path .IsNotNil ) then
  begin
-  [ ' in ' cQuote l_Path cQuote ] strings:Cat Cat
+  VAR l_NeedsIfDef
+  ( l_Path '\Borland\Delphi\' string:Pos -1 != )
+  OR ( l_Path '\JEDI\' string:Pos -1 != )
+  >>> l_NeedsIfDef
+  [
+   if l_NeedsIfDef then
+    ' {$IfNDef XE4}'
+   ' in ' cQuote l_Path cQuote
+   if l_NeedsIfDef then
+    ' {$EndIf}'
+  ] strings:Cat Cat
  end // ( l_Path .IsNotNil )
- 
+
  >>> Result
 ; // ProjectUnitName
 
@@ -15773,14 +16326,6 @@ elem_generator rc.script
  CONST Ext '.rc.script'
 
  BOOLEAN elem_func CanCopyToFinalFile
-  /*{
-  RULES
-   ( Self .NeedsWordsAliases ! )
-    true
-   DEFAULT
-    false
-  ; // RULES
-  }*/
   true >>> Result
  ; // CanCopyToFinalFile
  
@@ -15953,11 +16498,10 @@ elem_proc call.generators.in.list
 ; // call.generators.in.list
 
 elem_proc TransformWord
- //Self .Name Msg
 ; // TransformWord
 
 elem_proc DoTransformWord
- RULES
+/*{ RULES
   ( Self .MDAClass class_Dependency == )
    ()
   ( Self .MDAClass class_Parameter == )
@@ -15967,13 +16511,13 @@ elem_proc DoTransformWord
     Self -> WasTransformed := true
     Self .TransformWord
    end // ( Self %% '#Transformed' NotValid )
- ; // RULES 
+ ; // RULES}*/ 
 ; // DoTransformWord
 
 elem_proc Generate
  g_GeneratedFiles .IsNil ?FAIL 'Массив g_GeneratedFiles не инициализирован'
  g_GeneratedElements .IsNil ?FAIL 'Массив g_GeneratedElements не инициализирован'
- 
+
  TF g_TransformWord (
   @ .DoTransformWord >>> g_TransformWord
   Self .DoTransformWord
