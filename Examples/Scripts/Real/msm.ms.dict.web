@@ -1,0 +1,826 @@
+UNIT msm.ms.dict
+
+USES
+ core.ms.dict
+;
+
+USES
+ ModelElementsDefinition.ms.dict
+;
+
+USES
+ ElementsRTTI.ms.dict
+;
+
+USES
+ GarantMetaModel.ms.dict
+;
+
+USES
+ IsNil.ms.dict
+;
+
+USES
+ arrays.ms.dict
+;
+
+elem_iterator NullList
+ [empty] &gt;&gt;&gt; Result
+; // NullList
+
+WordAlias ._NullList .NullList
+
+elem_iterator SelfList
+ [ Self ] &gt;&gt;&gt; Result
+; // SelfList
+
+WordAlias ._SelfList .SelfList
+
+elem_iterator Inner
+ Cached:
+ (
+  Self .Children
+  .join&gt; ( Self .Constants )
+  .join&gt; ( Self .Attributes )
+  .join&gt; ( Self .Operations )
+  .join&gt; ( Self .Dependencies )
+  .join&gt; ( Self .Parameters )
+ ) 
+ &gt;&gt;&gt; Result
+; // Inner
+
+USES
+ FirstElement.ms.dict
+;
+
+STRING elem_func UpText
+ Self .NameInModel &gt;&gt;&gt; Result
+ if ( Result .IsNil ) then
+ begin
+  Self .WordName &gt;&gt;&gt; Result
+ end // ( Result .IsNil )
+ if ( Self .IsUP ) then
+ begin
+  VAR l_Value
+  [ Self DO ]
+  .map&gt; (
+    IN aValue
+   RULES 
+    ( aValue IsObj )
+     ( aValue .Name )
+    DEFAULT
+     ( aValue ToPrintable )
+   ; // RULES 
+  ) 
+  .FirstElement &gt;&gt;&gt; l_Value
+  [ Result ' = ' l_Value ] strings:Cat &gt;&gt;&gt; Result 
+ end // ( Self .IsUP )
+; // UpText
+
+STRING elem_func LinkName
+ '' &gt;&gt;&gt; Result
+ VAR l_St
+ Self .Stereotype &gt;&gt;&gt; l_St
+ if (
+     ( l_St .NotIsNil )
+     AND ( l_St .NameInModel .NotIsNil )
+    ) then
+ begin
+  [ '&lt;&lt;' l_St .NameInModel '::' string:Split DROP '&gt;&gt;' ] strings:Cat &gt;&gt;&gt; Result
+ end // ( l_St .NotIsNil )
+ if ( Self .NameInModel .NotIsNil ) then
+ begin
+  [ Result Self .NameInModel ] ' ' strings:CatSep &gt;&gt;&gt; Result
+ end // ( Self .NameInModel .NotIsNil )
+; // LinkName
+
+STRING elem_func StereotypeName
+ Cached:
+ (
+  VAR l_St
+  Self .Stereotype &gt;&gt;&gt; l_St
+  if (
+      ( l_St .NotIsNil )
+      AND ( l_St .NameInModel .NotIsNil )
+     ) then
+  begin
+   [ '&lt;&lt;' l_St .NameInModel '&gt;&gt;' ] strings:Cat
+  end // ( l_St .NotIsNil )
+  else
+  begin
+   [ '[[' Self .MDAClassString ']]' ] strings:Cat
+   // '&lt;&lt;default&gt;&gt;'
+  end
+ )
+ &gt;&gt;&gt; Result
+; // StereotypeName
+
+STRING elem_func NameNotEmpty
+ Cached:
+ (
+  Self .NameInModel
+  &gt;&gt;&gt; Result
+ 
+  if ( Result .IsNil ) then
+  begin
+   '(unnamed)' &gt;&gt;&gt; Result
+  end // ( Result .IsNil )
+  Result
+ )
+ &gt;&gt;&gt; Result
+; // NameNotEmpty
+
+STRING elem_func NameWithStereo
+ Cached:
+ (
+  Self .NameNotEmpty &gt;&gt;&gt; Result
+ 
+  VAR l_St
+  Self .StereotypeName &gt;&gt;&gt; l_St
+  if ( l_St .NotIsNil ) then
+  begin
+   [ l_St ' ' Result ] strings:Cat &gt;&gt;&gt; Result
+  end // ( l_St .NotIsNil )
+  
+  Result
+ )
+ &gt;&gt;&gt; Result 
+; // NameWithStereo
+
+STRING elem_func ValueString
+ '' &gt;&gt;&gt; Result
+ VAR l_Value
+ Self .GetUP 'Value' &gt;&gt;&gt; l_Value
+
+ if ( l_Value .IsValueValid ) then
+ begin
+  l_Value ToPrintable &gt;&gt;&gt; Result
+ end // ( l_Value .IsValueValid )
+; // ValueString
+
+USES
+ CountIt.ms.dict
+;
+
+ModelElement elem_func FirstOperation
+ Cached:
+ (
+  Self .Operations
+  .filter&gt; ( .IsLocalMethod ! )
+  .FirstElement
+ )
+ &gt;&gt;&gt; Result
+; // FirstOperation
+
+elem_iterator MethodParameters
+ Cached:
+ (
+  RULES
+   ( Self .IsMethod )
+    ( Self .FirstOperation .Parameters )
+   ( Self .IsFunction )
+    ( Self .FirstOperation .Parameters )
+   DEFAULT
+    ( Self .Parameters )
+  ; // RULES
+ )
+ &gt;&gt;&gt; Result
+; // MethodParameters
+
+USES
+ ElemMemberPrim.ms.dict
+;
+
+ModelElement elem_func MethodTarget
+ Cached:
+ (
+  RULES
+   ( Self .IsMethod )
+    ( Self .FirstOperation .Target )
+   ( Self .IsFunction )
+    ( Self .FirstOperation .Target )
+   ( Self .IsViewLink )
+    RULES
+     ( Self .Target .IsNil )
+      ( Self .To )
+     DEFAULT
+      ( Self .Target )
+    ; // RULES
+   DEFAULT
+    ( Self .Target )
+  ; // RULES
+ ) 
+ &gt;&gt;&gt; Result
+; // MethodTarget
+
+STRING elem_func ParametersString
+ '' &gt;&gt;&gt; Result
+ VAR l_P
+ VAR l_Open
+ VAR l_Close
+ if ( Self .MDAClass class_Attribute == ) then
+ begin
+  Self .Attributes &gt;&gt;&gt; l_P
+  '[' &gt;&gt;&gt; l_Open
+  ']' &gt;&gt;&gt; l_Close
+ end // ( Self .MDAClass class_Attribute == )
+ else
+ begin
+  Self .MethodParameters &gt;&gt;&gt; l_P
+  '(' &gt;&gt;&gt; l_Open
+  ')' &gt;&gt;&gt; l_Close
+ end // ( Self .MDAClass class_Attribute == )
+ if ( l_P .NotEmpty ) then
+ begin
+  [
+   VAR l_WasParam
+   false &gt;&gt;&gt; l_WasParam
+   l_Open
+   l_P .for&gt; (
+     IN aParam
+    if l_WasParam then
+     ', '
+    VAR l_St
+    aParam .Stereotype &gt;&gt;&gt; l_St
+    if ( l_St .NotIsNil ) then
+    begin
+     if ( l_St .NameInModel 'in' != ) then
+     begin
+      l_St .NameInModel ' '
+     end // ( l_St .NameInModel 'in' != )
+    end // ( l_St .NotIsNil )
+    aParam .NameInModel
+    VAR l_T
+    aParam .Target &gt;&gt;&gt; l_T
+    VAR l_N
+    if ( l_T .IsNil ) then
+    begin
+     'void' &gt;&gt;&gt; l_N
+    end // ( l_T .IsNil )
+    else
+    begin
+     l_T .NameInModel &gt;&gt;&gt; l_N
+    end // ( l_T .IsNil )
+    ': ' l_N
+    VAR l_V
+    aParam .ValueString &gt;&gt;&gt; l_V
+    if ( l_V .NotIsNil ) then
+    begin
+     ' = ' l_V
+    end // ( l_V .NotIsNil )
+    true &gt;&gt;&gt; l_WasParam
+   ) //l_P .for&gt;
+   l_Close
+  ] strings:Cat &gt;&gt;&gt; Result
+ end // l_P .NotEmpty
+; // ParametersString
+
+STRING elem_func Signature
+ Cached:
+ (
+  [ Self .NameNotEmpty Self .ParametersString ] strings:Cat &gt;&gt;&gt; Result
+  
+  if ( Self .IsViewLink ) then
+  begin
+   if ( Self .From .NotIsNil ) then
+   begin
+    [ Result ' ' Self .From .NameInModel ] strings:Cat &gt;&gt;&gt; Result
+   end // ( Self .From .NotIsNil )
+   if ( Self .To .NotIsNil ) then
+   begin
+    [ Result ' -&gt; ' Self .To .NameInModel ] strings:Cat &gt;&gt;&gt; Result
+   end // ( Self .To .NotIsNil )
+  end // ( Self .IsViewLink )
+  else
+  begin
+   VAR l_T
+   Self .MethodTarget &gt;&gt;&gt; l_T
+   
+   if ( l_T .NotIsNil ) then
+   begin
+    VAR l_Name
+    l_T .NameInModel &gt;&gt;&gt; l_Name
+    if ( l_Name .IsNil ) then
+    begin
+     'void' &gt;&gt;&gt; l_Name
+    end // ( l_Name .IsNil )
+    [ Result ': ' l_Name ] strings:Cat &gt;&gt;&gt; Result
+   end // ( l_T .NotIsNil )
+  end // ( Self .IsViewLink )
+  
+  Result
+ )
+ &gt;&gt;&gt; Result
+; // NameNotEmpty
+
+STRING elem_func NameWithStereoAndTarget
+ Cached:
+ (
+  [ Self .StereotypeName Self .Signature ] ' ' strings:CatSep
+ )
+ &gt;&gt;&gt; Result 
+; // NameWithStereoAndTarget
+
+STRING elem_func NameWithStereoAndTargetAndValue
+ Cached:
+ (
+  Self .NameWithStereoAndTarget
+  &gt;&gt;&gt; Result
+ 
+  VAR l_Value
+  Self .ValueString &gt;&gt;&gt; l_Value
+  if ( l_Value .NotIsNil ) then
+  begin
+   [ Result ' = ' l_Value  ] strings:Cat &gt;&gt;&gt; Result
+  end // ( l_Value .NotIsNil )
+  Result
+ )
+ &gt;&gt;&gt; Result 
+; // NameWithStereoAndTargetAndValue
+
+STRING elem_func NameWithStereoAndTargetAndValueAndDoc
+ Self .NameWithStereoAndTargetAndValue &gt;&gt;&gt; Result
+ VAR l_D
+ Self .Documentation &gt;&gt;&gt; l_D
+ if ( l_D .NotIsNil ) then
+ begin
+  [ Result #10 ' - ' l_D ] strings:Cat &gt;&gt;&gt; Result
+ end // ( l_D .NotIsNil )
+; // NameWithStereoAndTargetAndValueAndDoc
+
+STRING elem_func DocumentationNotEmpty
+ Self .Documentation &gt;&gt;&gt; Result
+ if ( Result .IsNil ) then
+ begin
+  'Элемент не документирован' &gt;&gt;&gt; Result
+ end // ( Result .IsNil )
+; // DocumentationNotEmpty
+
+BOOLEAN elem_func IsFinished
+ Self .GetUP "finished" false ?!=
+ &gt;&gt;&gt; Result
+; // IsFinished
+
+WordAlias .DefaultShortText .NameWithStereo
+//WordAlias .DefaultText .Name
+//WordAlias .DefaultSearchText .Name
+WordAlias .DefaultSearchText .NameInModel
+WordAlias .DefaultText .NameWithStereoAndTargetAndValue
+WordAlias .DefaultFullText .DefaultText
+WordAlias .DefaultTextAndDoc .NameWithStereoAndTargetAndValueAndDoc
+
+USES
+ CompileTimeVar.ms.dict
+;
+
+USES
+ Log.ms.dict
+;
+
+BOOLEAN CompileTime-VAR g_NeedTerminate false
+
+PROCEDURE TerminateLoadInner
+ true &gt;&gt;&gt; g_NeedTerminate
+ Log: 'Terminate Request'
+; // TerminateLoadInner
+
+FORWARD .MainDiagram
+
+elem_proc LoadChildInfo
+ if ( g_NeedTerminate ! ) then
+ begin
+  Self .Stereotype DROP
+  Self .NameWithStereo DROP
+  Self .DefaultText DROP
+  Self .Parent DROP
+  Self .IsSummoned DROP
+  Self .MainDiagram DROP
+  
+  Self .Depends DROP
+  Self .Inherits DROP
+  Self .Implements DROP
+  
+  //Self .Implemented DROP
+  //Self .Overridden DROP
+  //Self .Dependencies DROP
+  //Self .UpList DROP
+  //Self .DocumentationNotEmpty DROP
+  Self .Inner DROP
+ end // ( g_NeedTerminate ! )
+; // LoadChildInfo
+
+elem_proc LoadInnerPrim
+ if ( g_NeedTerminate ! ) then
+ begin
+  Self .LoadChildInfo
+  Self .Inner .for&gt; (
+   if g_NeedTerminate then
+   begin
+    DROP
+   end // g_NeedTerminate
+   else
+   begin
+    call.me
+   end // g_NeedTerminate
+  ) // Self .Children .for&gt;
+ end // ( g_NeedTerminate ! )
+; // LoadInnerPrim
+
+BOOLEAN elem_func LoadLevel
+ true &gt;&gt;&gt; Result
+ if ( g_NeedTerminate ! ) then
+ begin
+  Self .LoadChildInfo
+/*{  Self .Inner .for&gt; (
+   if g_NeedTerminate then
+   begin
+    DROP
+   end // g_NeedTerminate
+   else
+   begin
+    .LoadChildInfo
+   end // g_NeedTerminate
+  ) // Self .Children .for&gt;}*/
+ end // ( g_NeedTerminate ! )
+; // LoadLevel
+
+BOOLEAN elem_func LoadInner
+ Log: 'Loading'
+ true &gt;&gt;&gt; Result
+ Self .LoadInnerPrim
+ if g_NeedTerminate then
+ begin
+  Log: 'Terminated'
+ end // g_NeedTerminate
+ else
+ begin
+  Log: 'Loaded'
+ end // g_NeedTerminate
+; // LoadInner
+
+USES
+ axiom:TColor
+;
+
+INTEGER elem_func msm:View:ForeColor
+ RULES
+  ( Self .IsProject )
+   TColor::clGreen
+  ( Self .IsUnit )
+   TColor::clGreen
+  ( Self .IsExeTarget )
+   TColor::clGreen
+  ( Self .IsLibrary )
+   TColor::clBlue
+  ( Self .IsInterfaces )
+   TColor::clNavy
+  ( Self .IsStereotype st_Facet )
+   TColor::clNavy
+  ( Self .IsStereotype st_Interface )
+   TColor::clNavy
+  ( Self .IsMixIn )
+   TColor::clFuchsia
+   //TColor::clMoneyGreen
+   //TColor::clLime
+  ( Self .IsSimpleClass )
+   TColor::clGreen
+  ( Self .IsUtilityPack )
+   TColor::clRed
+  ( Self .IsMixInMirror )
+   TColor::clAqua
+  ( Self .IsEnum )
+   TColor::clOlive
+  ( Self .IsTypedef )
+   TColor::clMedGray
+  DEFAULT
+   TColor::clDefault
+ ; // RULES
+ &gt;&gt;&gt; Result
+; // msm:View:ForeColor
+
+USES
+ WordsRTTI.ms.dict
+;
+
+INTEGER elem_func msm:View:BackColor
+
+ INTEGER elem_func StereotypeBackColor
+  Cached:
+  (
+   VAR l_Color
+   Self .GetUP "visualization bg color" &gt;&gt;&gt; l_Color
+   RULES
+    ( l_Color IsInt )
+     l_Color
+    DEFAULT
+     begin 
+      Self .StereotypeInModel .GetUP "visualization bg color" &gt;&gt;&gt; l_Color
+      RULES
+       ( l_Color IsInt )
+        l_Color
+       DEFAULT
+        begin
+         TColor::clDefault &gt;&gt;&gt; l_Color
+         Self .Inherited.Words .for&gt; (
+           IN anAncestor
+          VAR l_AncestorColor 
+          anAncestor call.me &gt;&gt;&gt; l_AncestorColor
+          RULES
+           (
+            ( l_AncestorColor IsInt )
+            AND ( l_AncestorColor TColor::clDefault != )
+           ) 
+            ( 
+             l_AncestorColor &gt;&gt;&gt; l_Color 
+             BREAK-ITERATOR
+            )
+          ; // RULES
+         ) // Self .Inherited.Words .for&gt;
+         l_Color
+        end // DEFAULT
+      ; // RULES
+     end // DEFAULT
+   ; // RULES  
+  )
+  &gt;&gt;&gt; Result
+ ; // StereotypeBackColor
+ 
+ VAR l_Color
+ Self .Stereotype .StereotypeBackColor &gt;&gt;&gt; l_Color
+ RULES
+  ( l_Color IsInt )
+   RULES
+    ( l_Color TColor::clDefault == )
+     ( Self .msm:View:ForeColor )
+    DEFAULT
+     l_Color
+   ; // RULES
+  DEFAULT 
+   ( Self .msm:View:ForeColor )
+ ; // RESULT  
+ &gt;&gt;&gt; Result
+; // msm:View:BackColor
+
+STRING elem_func msm:View:LabelName
+
+ STRING elem_func StereotypeLabelName
+  Cached:
+  (
+   VAR l_Label
+   Self .GetUP "personal label" &gt;&gt;&gt; l_Label
+   RULES
+    ( l_Label .NotIsNil )
+     l_Label
+    DEFAULT
+     begin 
+      Self .StereotypeInModel .GetUP "personal label" &gt;&gt;&gt; l_Label
+      RULES
+       ( l_Label .NotIsNil )
+        l_Label
+       DEFAULT
+        begin
+         '' &gt;&gt;&gt; l_Label
+         Self .Inherited.Words .for&gt; (
+           IN anAncestor
+          VAR l_AncestorLabel 
+          anAncestor call.me &gt;&gt;&gt; l_AncestorLabel
+          RULES
+           ( l_AncestorLabel .NotIsNil )
+            ( 
+             l_AncestorLabel &gt;&gt;&gt; l_Label
+             BREAK-ITERATOR
+            )
+          ; // RULES
+         ) // Self .Inherited.Words .for&gt;
+         l_Label
+        end // DEFAULT
+      ; // RULES
+     end // DEFAULT
+   ; // RULES  
+  )
+  &gt;&gt;&gt; Result
+ ; // StereotypeLabelName
+ 
+ VAR l_Label
+ Self .Stereotype .StereotypeLabelName &gt;&gt;&gt; l_Label
+ RULES
+  ( l_Label .NotIsNil )
+   l_Label
+  ( Self .IsUseCase )
+   'code_use_case'
+  ( Self .MDAClass class_Operation == ) 
+   'code_method'
+  ( Self .MDAClass class_Attribute == ) 
+   'code_attr'
+  ( Self .MDAClass class_Parameter == ) 
+   'code_param'
+  ( Self .MDAClass class_Dependency == ) 
+   'code_mda_dependency'
+  ( Self .MDAClass class_Inherits == ) 
+   'code_mda_dependency'
+  ( Self .MDAClass class_Implements == ) 
+   'code_mda_dependency'
+  ( Self .MDAClass class_Depends == ) 
+   'code_dep'
+  DEFAULT 
+   ''
+ ; // RESULT  
+ &gt;&gt;&gt; Result
+; // msm:View:LabelName
+
+STRING elem_func msm:View:ImageFileName
+ Self .msm:View:LabelName &gt;&gt;&gt; Result
+ if ( Result .NotIsNil ) then
+ begin
+  [ 'W:\MDProcess\MDAGenerator\other\images\' Result '.gif' ] strings:Cat &gt;&gt;&gt; Result
+ end // ( Result .NotIsNil )
+; // msm:View:ImageFileName
+
+BOOLEAN elem_func IsCategory
+ Self .MDAClass class_Category ==
+ &gt;&gt;&gt; Result
+; // IsCategory
+
+BOOLEAN elem_func IsAttribute
+ Self .MDAClass class_Attribute ==
+ &gt;&gt;&gt; Result
+; // IsAttribute
+
+BOOLEAN elem_func IsAbstract
+ Self .Abstraction at_abstract ==
+ &gt;&gt;&gt; Result
+; // IsAbstract
+
+BOOLEAN elem_func IsFinal
+ Self .Abstraction at_final ==
+ &gt;&gt;&gt; Result
+; // IsFinal
+
+USES
+ axiom:TPenStyle
+;
+
+INTEGER elem_func msm:View:LinkLineStyle
+ Cached:
+ (
+  RULES
+   ( Self .IsAttribute )
+    TPenStyle::psSolid
+   ( Self .MDAClass class_Inherits ?== )
+    TPenStyle::psSolid
+   ( Self .MDAClass class_Implements ?== )
+    TPenStyle::psDash
+   ( Self .LinkViewType 'Inherits' ?== )
+    TPenStyle::psSolid
+   ( Self .LinkViewType 'Implements' ?== )
+    TPenStyle::psDash
+   DEFAULT
+    TPenStyle::psDash
+  ; // RULES  
+ )
+ &gt;&gt;&gt; Result
+; // msm:View:LinkLineStyle
+
+INTEGER elem_func msm:View:LinkLineColor
+ Cached:
+ (
+  RULES
+   ( Self .IsAttribute )
+    TColor::clBlack
+   ( Self .MDAClass class_Inherits ?== )
+    TColor::clBlack
+   ( Self .MDAClass class_Implements ?== )
+    TColor::clBlack
+   ( Self .LinkViewType 'Inherits' ?== )
+    TColor::clBlack
+   ( Self .LinkViewType 'Implements' ?== )
+    TColor::clBlack
+   DEFAULT
+    TColor::clDefault
+  ; // RULES  
+ )
+ &gt;&gt;&gt; Result
+; // msm:View:LinkLineColor
+
+BOOLEAN elem_func msm:View:LinkArrowIsPolygon
+ Cached:
+ (
+  RULES
+   ( Self .IsAttribute )
+    false
+   ( Self .MDAClass class_Inherits ?== )
+    true
+   ( Self .MDAClass class_Implements ?== )
+    true
+   ( Self .LinkViewType 'Inherits' ?== )
+    true
+   ( Self .LinkViewType 'Implements' ?== )
+    true
+   DEFAULT
+    false
+  ; // RULES  
+ )
+ &gt;&gt;&gt; Result
+; // msm:View:LinkArrowIsPolygon
+
+USES
+ LoadOnDemand.ms.dict
+;
+
+USES
+ CutSuffix.ms.dict
+;
+
+USES
+ CutPrefix.ms.dict
+;
+
+INTEGER elem_func X
+ Self 'X' 0 .ElemMember &gt;&gt;&gt; Result
+; // X
+
+INTEGER elem_func Y
+ Self 'Y' 0 .ElemMember &gt;&gt;&gt; Result
+; // Y
+
+INTEGER elem_func Width
+ Self 'Width' 120 .ElemMember &gt;&gt;&gt; Result
+; // Width
+
+INTEGER elem_func Height
+ Self 'Height' 100 .ElemMember &gt;&gt;&gt; Result
+; // Height
+
+WordAlias .msm:View:X .X
+WordAlias .msm:View:Y .Y
+WordAlias .msm:View:Width .Width
+WordAlias .msm:View:Height .Height
+
+WordAlias .msm:View:From .From
+WordAlias .msm:View:To .To
+
+elem_iterator Diagrams
+ Self 'Diagrams' .ElemList &gt;&gt;&gt; Result
+; // Diagrams
+
+elem_iterator Views
+ Self 'Views' .ElemList &gt;&gt;&gt; Result
+; // Views
+
+elem_iterator msm:Diagrams
+ VAR l_Name
+ Self .WordName '_view' .CutSuffix &gt;&gt;&gt; l_Name
+ VAR l_DictName
+ l_Name 'ME_' .CutPrefix &gt;&gt;&gt; l_DictName
+ l_DictName '.ms.diagram.script' Cat &gt;&gt;&gt; l_DictName
+ l_Name '_diagrams' Cat &gt;&gt;&gt; l_Name
+ WL l_Name l_DictName
+ .Diagrams
+ &gt;&gt;&gt; Result
+; // msm:Diagrams
+
+elem_iterator MainDiagram
+ Self .msm:Diagrams 
+ .FirstElement
+ .Views
+ &gt;&gt;&gt; Result
+; // MainDiagram
+
+BOOLEAN elem_func HasMainDiagram
+ Self .MainDiagram .NotIsNil
+ &gt;&gt;&gt; Result
+; // HasMainDiagram
+
+USES
+ DictionaryByName.ms.dict
+;
+
+ModelElement FUNCTION .WordByDictionaryPath
+  IN aPath
+ aPath DictionaryAndMainWordByName
+ &gt;&gt;&gt; Result // - возвращаем слово 
+ DROP // - выкидываем словарь
+; // .WordByDictionaryPath
+
+EXPORTS
+ arrays.ms.dict
+ 
+EXPORTS
+ ElementsRTTI.ms.dict
+ 
+USES
+ CheckValue.ms.dict
+;
+ 
+EXPORTS
+ CheckValue.ms.dict
+
+EXPORTS
+ GarantMetaModel.ms.dict
+ 
+USES
+ ElemMemberPrim.ms.dict
+;
+ 
+EXPORTS
+ ElemMemberPrim.ms.dict
