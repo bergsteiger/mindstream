@@ -9,8 +9,50 @@ implementation
 uses
  System.SysUtils
  , System.Classes
+ , System.Generics.Collections
  , WinApi.Windows
  ;
+
+type
+ Tl3SpiedObjects = class(TList<Pointer>)
+ end;//Tl3SpiedObjects
+
+ Tl3ObjectsSpy = class(Tl3SpiedObjects)
+  strict private
+   class var g_Instance: Tl3ObjectsSpy;
+  public
+   class procedure LogNew(anObject: TObject);
+   class procedure LogFree(anObject: TObject);
+   class procedure HookClasses;
+   class procedure CheckUnfreed;
+ end;//Tl3ObjectsSpy
+
+class procedure Tl3ObjectsSpy.LogNew(anObject: TObject);
+begin
+ if (g_Instance = nil) then
+  g_Instance := Tl3ObjectsSpy.Create;
+ g_Instance.Add(anObject);
+end;
+
+class procedure Tl3ObjectsSpy.LogFree(anObject: TObject);
+begin
+ if (g_Instance <> nil) then
+  g_Instance.Remove(anObject);
+end;
+
+procedure DoHookClasses; forward;
+
+class procedure Tl3ObjectsSpy.HookClasses;
+begin
+ DoHookClasses;
+end;
+
+class procedure Tl3ObjectsSpy.CheckUnfreed;
+begin
+ if (g_Instance <> nil) then
+  if (g_Instance.Count > 0) then
+   WriteLn(g_Instance.Count);
+end;
 
 type
  PMem = PAnsiChar;
@@ -27,12 +69,12 @@ end;
 
 procedure LogNew(anObject: TObject);
 begin
- WriteLn('New: ' + anObject.ClassName);
+ Tl3ObjectsSpy.LogNew(anObject);
 end;
 
 procedure LogFree(anObject: TObject);
 begin
- WriteLn('Free: ' + anObject.ClassName);
+ Tl3ObjectsSpy.LogFree(anObject);
 end;
 
 type
@@ -141,7 +183,7 @@ begin
  end;//l_Class <> nil
 end;
 
-procedure HookClasses;
+procedure DoHookClasses;
 begin
  HookClass(TObject);
  HookClass(TStream);
@@ -158,7 +200,7 @@ var
  l_IO : TInterfacedObject;
  l_T : TThread;
 begin
- HookClasses;
+ //HookClasses;
  l_O := TObject.Create;
  FreeAndNil(l_O);
 
@@ -173,5 +215,8 @@ begin
 end;
 
 initialization
- HookClasses;
+ Tl3ObjectsSpy.HookClasses;
+finalization
+ Tl3ObjectsSpy.CheckUnfreed;
 end.
+

@@ -14,7 +14,7 @@ begin
   try
     { TODO -oUser -cConsole Main : Insert code here }
     l3ObjectsSpy.Test;
-    ReadLn;
+    //ReadLn;
   except
     on E: Exception do
       Writeln(E.ClassName, ': ', E.Message);
