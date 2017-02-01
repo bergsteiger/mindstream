@@ -1,7 +1,5 @@
 program RefCount;
 
-{$APPTYPE CONSOLE}
-
 {$R *.res}
 
 uses
@@ -12,7 +10,6 @@ uses
 
 begin
   try
-    { TODO -oUser -cConsole Main : Insert code here }
     l3ObjectsSpy.Test;
     //ReadLn;
   except
