@@ -193,14 +193,29 @@ begin
  //HookClass(TExternalThread);
 end;
 
+type
+ TA = class(TObject)
+  public
+   constructor Create;
+ end;
+
+constructor TA.Create;
+begin
+ inherited Create;
+end;
+
 procedure Test;
 var
  l_O : TObject;
  l_S : TStream;
  l_IO : TInterfacedObject;
  l_T : TThread;
+ l_A : TA;
 begin
  //HookClasses;
+ l_A := TA.Create;
+ FreeAndNil(l_A);
+
  l_O := TObject.Create;
  FreeAndNil(l_O);
 
